@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "",
+    "text": "## Chapter 1: The Big Picture\n1. A newly described vertebrate species is found in a remote jungle. Given that vertebrates make up roughly 3.5% of described eukaryotic species (Fig. 1.1), and there are ~2 million described species, calculate how many vertebrate species were already known prior to this discovery.\n2. Human numbers are projected to level off at 10.5 billion by 2100. If we dropped fertility to replacement levels today, why wouldn’t the population stop growing immediately? Use the concept of population momentum to explain.\n3. The baseline extinction rate is estimated at 2 E/MSY (extinctions per million species per year). If there are 10,000 species of birds, how many would you expect to go extinct in a single century under “normal” deep-time conditions?\n4. Current extinction rates are estimated to be 10–30 times higher than the background rate. Using the 2 E/MSY baseline, calculate the current range of extinctions per million species per year."
+  },
+  {
+    "objectID": "index.html#chapter-2-gaining-reliable-knowledge",
+    "href": "index.html#chapter-2-gaining-reliable-knowledge",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 2: Gaining Reliable Knowledge",
+    "text": "Chapter 2: Gaining Reliable Knowledge\n1. A sample of 16 army cutworm moths was collected from a mountain top in Yellowstone National Park. The mean length of the sampled moths is 50 mm, and the sample variance is 4 mm. a. If the true mean length of the whole population is 20 mm and the true population variance is 15 mm, draw a target like one of those in Fig 2.1 that would depict the accuracy and precision of your sample of 16 moths relative to the true population metrics. b. What would happen to our estimated standard error (SE) if we increased the sample size? i.e., does the SE increase, decrease or stay the same? c. What would happen to the standard deviation (SD) if the sample size increased? i.e., does the SD increase, decrease or stay the same?\n2. In the context of endangered species monitoring (Table 2.1), describe Type I and Type II errors and identify their conservation consequences in this context."
+  },
+  {
+    "objectID": "index.html#chapter-3-genetic-concepts-and-tools",
+    "href": "index.html#chapter-3-genetic-concepts-and-tools",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 3: Genetic Concepts and Tools",
+    "text": "Chapter 3: Genetic Concepts and Tools\n1. At a single locus in an endangered finch, there are three alleles with frequencies $p$, $q$, and $r$. Calculate the expected heterozygosity under Hardy-Weinberg equilibrium.\n2. A population of beetles has two alleles for color. The dominant allele is $A$ and the recessive allele is $a$. In a sample of 1,000 beetles, 160 display the recessive phenotype. Assuming the population is in Hardy–Weinberg equilibrium, what are the frequencies of the $A$ and $a$ alleles, and what proportion of the population is expected to be heterozygous? (Show your work)\n3. Explain why mtDNA is often more useful than nuclear DNA for species identification from small or degraded samples like a single hair found in the woods.\n4. Looking at the example of forensic application using microsatellite DNA in Figure 3.2, which deer, a, b, or c, did the antler tissue sample came from?"
+  },
+  {
+    "objectID": "index.html#chapter-4-estimating-population-size-and-vital-rates",
+    "href": "index.html#chapter-4-estimating-population-size-and-vital-rates",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 4: Estimating Population Size and Vital Rates",
+    "text": "Chapter 4: Estimating Population Size and Vital Rates\n1. Suppose you are studying a jaguar population using camera traps, and you are interested in estimating the population size using the Lincoln-Petersen model. During the first period of camera trapping, you uniquely identify 14 jaguars. During the next sampling period, you identify 16 jaguars, 6 of which you had previously detected. a. What is the detection probability of jaguar at camera traps? b. Estimate jaguar abundance and variance in this population? c. Use your results from the previous question to calculate the 95% confidence intervals for your estimate of abundance. d. Why is it important to include detection probability in our abundance estimate, instead of just using the count of jaguars?\n2. What happens to your estimates of detection probability and abundance if wolverines chew off their tags and lose them during a capture-recapture study?\n3. In a capture-recapture model of a quail population abundance with 3 samples, what is the probability of detection history 110 in each of the following scenarios: i. the probability of detection is assumed to be constant. ii. the probability of detection is assumed to vary between sample occasions. iii. the probability of the initial detection is assumed to be different from the probability of subsequent detections.\n4. Suppose you are studying snowshoe hare survival, using the Kaplan-Meier method. At the beginning of the study (year 1), 33 hares were GPS-collared. When checked at year 2, you found 2 hares dead and lost the signal of 1 collared hare. You collared 5 new hares in year 2. a. What is the probability of surviving the first year? b. What is the probability of surviving the second year? c. By using this method to estimate survival, what assumptions are you making?"
+  },
+  {
+    "objectID": "index.html#chapter-5-exponential-or-geometric-change",
+    "href": "index.html#chapter-5-exponential-or-geometric-change",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 5: Exponential (or Geometric) Change",
+    "text": "Chapter 5: Exponential (or Geometric) Change\n1. Use the discrete population growth model to find the abundance of a population last year if the abundance is 2,000 this year and the geometric growth rate is 0.5. a. By what percentage is the population increasing or decreasing each year? b. Starting from the population size this year, what will the size of the population be if it continues to grow at the same rate for a total of 4 years? c. What is the population’s instantaneous growth rate if it takes 2 years to double in size? d. Based on the instantaneous growth rate, is this population stable, growing, or shrinking?\n2. Why is the geometric mean a better descriptor of a fluctuating population’s long-term growth than the arithmetic mean?\n3. A population of 10 individuals has an expected survival rate of 70%. Explain why the realized survival rate in any given year is unlikely to be exactly 70% due to demographic stochasticity."
+  },
+  {
+    "objectID": "index.html#chapter-6-structured-population-projection-models",
+    "href": "index.html#chapter-6-structured-population-projection-models",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 6: Structured Population-Projection Models",
+    "text": "Chapter 6: Structured Population-Projection Models\n1. Given the frog matrix in Fig. 6.1, calculate the annual survival of a juvenile frog. Hint: Sum the transition terms that do not involve reproduction.\n2. Each adult frog has a reproductive value 300 times higher than a pre-juvenile (Fig. 6.7). If you have limited funds for a translocation, which stage should you prioritize to jump-start population growth?\n3. Using the loggerhead sea turtle example, explain why increasing hatchling survival alone was insufficient to stop the population decline.\n4. Suppose you are tasked with studying a caribou population, and you want to know what the analytical sensitivity is for adult survival. Prior to calculating sensitivity, you estimated the asymptotic population growth rate as 1.053. You add 0.01 to adult survival and calculate the new growth rate as 1.064. What is the analytical sensitivity of adult survival?"
+  },
+  {
+    "objectID": "index.html#chapter-7-density-dependent-population-change",
+    "href": "index.html#chapter-7-density-dependent-population-change",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 7: Density-Dependent Population Change",
+    "text": "Chapter 7: Density-Dependent Population Change\n1. Draw a graph showing how population size varies over time for a population following logistic growth. Label your axes appropriately and use this graph to answer the following questions. a. Where is the population growing the fastest? Circle that region and label it with “A”. b. Where is population growth limited by the number of individuals? Circle that region and label it with “B”. c. Where is the population limited by small per-capita growth rate? Circle that region and label it “C”. d. For the region of the graph you labelled “C,” what might be causing the low per-capita growth rate?\n2. What is a strong Allee effect? Explain why a population might decline toward extinction even if $N &gt; 2$.\n3. Draw two graphs showing how per capita mortality rate could vary with population size. If birth rate is constant in both graphs, indicate the carrying capacity, positive population growth and negative or positive density dependence on each graph."
+  },
+  {
+    "objectID": "index.html#chapter-8-predation-and-wildlife-populations",
+    "href": "index.html#chapter-8-predation-and-wildlife-populations",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 8: Predation and Wildlife Populations",
+    "text": "Chapter 8: Predation and Wildlife Populations\n1. Calculate the survival probability of a population of mule deer with a 20% predation mortality rate and a 30% mortality rate from other causes when: a. predation mortality is fully additive b. predation mortality is fully compensatory\n2. Suppose you’re a manager tasked with protection of a population of rare birds called deer grouse. There’s a native hawk species that hunts the deer grouse. Biologists recently discovered an invasive rodent species called the dusky mouse that eats the eggs of the deer grouse. The dusky mouse population is growing quickly. What do you need to consider before taking action to protect the deer grouse from the invasive dusky mouse?\n3. If you’re an elk in Yellowstone National Park, what would your survival strategy be if you know that wolves hunt you in valley bottoms during the day and pumas hunt you in rocky terrain at night? Name a potential fitness cost of your strategy. What term describes the effect of the predators on your behavior?\n4. Which panel in figure 8.2 matches the following predator-prey interaction where lynx populations in a boreal forest increase in abundance as snowshoe hare populations increase. The rate of that increase slows as the hare population gets bigger. Because the snowshoe hares are masters of camouflage, Lynx need to spend more time searching for hares to pursue when hare populations are low.\n5. Draw a graph of predation rate (% prey killed) against prey abundance. Indicate the area of positive or negative density dependence on this graph.\n\n## Chapter 9: Genetic Variation and Fitness\n1. After how many generations of genetic drift in an isolated population does the inbreeding coefficient for a subpopulation relative to the total population reach 0.01 if the effective population size is 50?\n2. What is the inbreeding coefficient for a subpopulation relative to the total population of an isolated species experiencing genetic drift after 2 generations if the effective population size is 50?\n3. Suppose you are studying a subpopulation of bighorn sheep within a larger metapopulation. You estimate FST of 0.7. a. What does that tell you about genetic variation in the subpopulation? b. You also found that juvenile survival has decreased by 40% in the subpopulation, although you did not find a significant change in the mean population growth rate. What does this suggest about inbreeding depression in the subpopulation?\n4. Why did the founder effect not have a significant negative impact on the genetic variation of the Yellowstone wolf population after the first ten years if only 31 individuals were translocated to the park?"
+  },
+  {
+    "objectID": "index.html#chapter-10-dynamics-of-multiple-populations",
+    "href": "index.html#chapter-10-dynamics-of-multiple-populations",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 10: Dynamics of Multiple Populations",
+    "text": "Chapter 10: Dynamics of Multiple Populations\n1. How might the construction of a new freeway impact the genetic composition of a population of brown bears in Montana over many generations? Name one real-world solution to this problem.\n2. After reading through example A in Box 10.7, is the puma population in Yellowstone National Park considered a source or a sink for the greater metapopulation? Why might this be the case?\n3. You are tasked with translocating a population of Glurps from the planet Brahe to restore the Glurp population on the planet Lipperhey where they recently went extinct. What is the first thing that you need to find out before planning the translocation?\n4. Based on the study described in Box 10.3 and your knowledge about a zoonotic pathogen (one that can be passed from animals to people) that exhibits density-dependent transmission among wild deer mice, write a hypothesis about where you might expect there to be the greatest risk of pathogen transmission to humans on a fragmented landscape after clearcut logging.\n5. Distinguish between demographic rescue and genetic rescue in a small, isolated population of mountain pygmy possums."
+  },
+  {
+    "objectID": "index.html#chapter-11-population-responses-to-stressors",
+    "href": "index.html#chapter-11-population-responses-to-stressors",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 11: Population Responses to Stressors",
+    "text": "Chapter 11: Population Responses to Stressors\n1. Define the three responses available to a population of Arctic foxes facing a warming climate and explain which of these options constitute resilience.\n2. Snowshoe hares initiate their seasonal color molt based on photoperiod (day length), but snowmelt is occurring earlier due to climate change. a. Is this a form of plastic rescue? b. What is the consequence for survival?\n3. Draw a hypothetical reaction norm graph depicting phenotypic plasticity for egg-laying dates in great tits against mean spring temperature. Label the axis that indicates the “Adjust” response."
+  },
+  {
+    "objectID": "index.html#chapter-12-dynamics-of-small-and-declining-populations",
+    "href": "index.html#chapter-12-dynamics-of-small-and-declining-populations",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 12: Dynamics of Small and Declining Populations",
+    "text": "Chapter 12: Dynamics of Small and Declining Populations\n1. A population of heath hen experienced a disease outbreak, low egg fertility, and a skewed sex ratio for one decade and eventually went extinct. Which of these processes are examples of environmental, genetic, and demographic stochasticity?\n2. You are part of a research group tasked with conducting a population viability analysis (PVA) for an endangered species of sea slug. This species is the only known source for a chemical compound used in a lifesaving drug. The compound cannot be synthesized in the lab and the sea slugs cannot be bred in captivity. Briefly discuss each of the four key considerations that you should make as you develop your PVA (1-3 sentences for each consideration).\n3. Contrast a keystone species with a dominant species. Why might a minimum viable population be insufficient for a keystone species like a sea otter?"
+  },
+  {
+    "objectID": "index.html#chapter-13-sustainable-harvest",
+    "href": "index.html#chapter-13-sustainable-harvest",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 13: Sustainable Harvest",
+    "text": "Chapter 13: Sustainable Harvest\n1. You are studying greater sage-grouse, and you want to know if hunting mortality is compensatory or additive. a. If harvest were completely additive, what annual survival be? b. If harvest were completely compensatory, what would annual survival be? c. Say you estimate that the coefficient for hunting mortality is 0.25 (95% CI: 0.13-0.37). What does this suggest about the effect of hunting on annual survival?\n2. Why is a fixed-quota harvest (taking exactly 40 animals/year) riskier than a fixed-effort harvest in an unpredictable environment.\n3. Intense trophy hunting on bighorn sheep removes the fastest-growing rams with the largest horns. a. What is the likely evolutionary response? b. Why is this called a “debt”?"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html#chapter-1-the-big-picture",
+    "href": "index.html#chapter-1-the-big-picture",
+    "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
+    "section": "Chapter 1: The Big Picture",
+    "text": "Chapter 1: The Big Picture\n1. A newly described vertebrate species is found in a remote jungle. Given that vertebrates make up roughly 3.5% of described eukaryotic species (Fig. 1.1), and there are ~2 million described species, calculate how many vertebrate species were already known prior to this discovery.\n2. Human numbers are projected to level off at 10.5 billion by 2100. If we dropped fertility to replacement levels today, why wouldn’t the population stop growing immediately? Use the concept of population momentum to explain.\n3. The baseline extinction rate is estimated at 2 E/MSY (extinctions per million species per year). If there are 10,000 species of birds, how many would you expect to go extinct in a single century under “normal” deep-time conditions?\n4. Current extinction rates are estimated to be 10–30 times higher than the background rate. Using the 2 E/MSY baseline, calculate the current range of extinctions per million species per year."
+  }
+]
