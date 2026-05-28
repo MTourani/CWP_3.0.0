@@ -14,13 +14,397 @@ title: "Conservation of Wildlife Populations Exercises, 3rd Edition"
 
 [4.]{.underline} Current extinction rates are estimated to be 10–30 times higher than the background rate. Using the 2 E/MSY baseline, calculate the current range of extinctions per million species per year.
 
+🌶️ The Living Planet Index (LPI) is a measure of the state of the global biodiversity trends, including vertebrate species from terrestrial, freshwater and marine habitats. The 2016 LPI reported a 58% average decline in wild vertebrate populations since 1970. In this report, a total of14,152 populations across 3,706 species were included. Based on this report, population sizes of vertebrate species have, on average, dropped by more than half in little more than 40 years. The dataset spanning years between 1970 and 2012 is public.
+
+<br>
+
+::: {style="background-color:beige;"}
+**Questions:**
+
+(1) Write code to visualize data and provide data summaries to answer: are all studied wildlife populations in decline? Hint: Find out how many populations show at least 58% decline. What percentage of the studied populations are decreasing in each continent?
+
+(2) Showcase a potential issue with the LPI. Hint: use data summaries and visualization in R to break down data, e.g., by taxa, realm, and continent. Bonus: Showcase a remedy to the issue.
+:::
+
+Where to start? You can use program R for data analysis. Access data, summarize, and visualize it.
+
+## Stepping stones in R
+
+```         
+(1) Open your existing RStudio Project for this course.
+(2) Create a new R script and save it right away. 
+(3) In the script, define key variables, and load any additional packages into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.
+```
+
 ------------------------------------------------------------------------
 
 ## Chapter 2: Gaining Reliable Knowledge
 
-[1.]{.underline} A sample of 16 army cutworm moths was collected from a mountain top in Yellowstone National Park. The mean length of the sampled moths is 50 mm, and the sample variance is 4 mm. a. If the true mean length of the whole population is 20 mm and the true population variance is 15 mm, draw a target like one of those in Fig 2.1 that would depict the accuracy and precision of your sample of 16 moths relative to the true population metrics. b. What would happen to our estimated standard error (SE) if we increased the sample size? i.e., does the SE increase, decrease or stay the same? c. What would happen to the standard deviation (SD) if the sample size increased? i.e., does the SD increase, decrease or stay the same?
+[1.]{.underline} A sample of 16 army cutworm moths was collected from a mountain top in Yellowstone National Park. The mean length of the sampled moths is 50 mm, and the sample variance is 4 mm.
+
+a\. If the true mean length of the whole population is 20 mm and the true population variance is 15 mm, draw a target like one of those in Fig 2.1 that would depict the accuracy and precision of your sample of 16 moths relative to the true population metrics.
+
+b\. What would happen to our estimated standard error (SE) if we increased the sample size? i.e., does the SE increase, decrease or stay the same?
+
+c\. What would happen to the standard deviation (SD) if the sample size increased? i.e., does the SD increase, decrease or stay the same?
 
 [2.]{.underline} In the context of endangered species monitoring (Table 2.1), describe Type I and Type II errors and identify their conservation consequences in this context.
+
+🌶️ <br>
+
+Gaining reliable knowledge in applied wildlife population ecology requires a rigourous and formal process coupling ideas (hypotheses) to reliable measured facts. In the spirit of “embracing the uncertainty”, in this exercise, we focus on three approaches for inference: maximum likelihood estimation, null hypothesis significant testing, and Bayesian estimation.
+
+Suppose we are tasked with monitoring griffon eggs (also spelled griffin or gryphon). We want to collect evidence on griffons breeding success. We visit 30 nests, and expect to find 20 nests with eggs. The data would look like the plot below.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+options(scipen = 999)
+
+trials  <- 30
+success <- 20
+griffon <- sample(c(0, 1),
+                  trials,
+                  replace = TRUE,
+                  prob    = c((trials - success) / trials, success / trials))
+barplot(table(griffon),
+        col = ifelse(names(table(griffon)) == 0, "grey", "lightblue"),
+        ylab = "Frequency",
+        xlab = "Breeding success (1: success, 0: failure)")
+
+
+
+```
+
+From such data we can calculate the observed proportion of nests with and without eggs.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+proportion <- round(sum(griffon) / length(griffon), 2)
+1 - proportion
+
+```
+
+But this does not tell us much. To make generalisable statements about the breeding success, we need to complete some statistical analyses. We examine this data with a simple model that makes the following assumption: at every visit to a griffon nest, we have a probability of p to find eggs.
+
+First, we can use the dbinom() function to find the likelihood for different probabilities of a success. Then, we can find the probability with the maximum likelihood estimate.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+n_success  <- sum(griffon)
+n_trial    <- length(griffon)
+probs      <- seq(0, 1, 0.001)
+likelihood <- dbinom(x = n_success, size = n_trial, prob = probs)
+mle        <- probs[which.max(likelihood)]
+
+
+```
+
+Let's plot the likelihoods and show the probability with the maximum likelihood.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+  
+plot(probs,
+     likelihood,
+     type = "l",
+     lwd = 2,
+     xlab = "Probability of breeding success",
+     ylab = "Likelihood")
+
+abline(v = mle, col = "orange", lwd = 2, lty = 2)
+text(mle,
+     max(likelihood),
+     "Maximum Likelihood",
+     pos = 2,
+     srt = 90,
+     col = "orange")
+
+
+```
+
+We now have a maximum likelihood estimate for the probability of griffon breeding success. Although the maximum likelihood is the best estimate, this estimate is not enough to draw statistical conclusions. We need to calculate the uncertainty or confidence in our estimates. The 95% confidence intervals mean if we repeat the analysis many times and each time create a confidence interval, 95% of the confidence intervals would contain the true value. We can calculate the confidence intervals for the maximum likelihood estimate, by assuming the statistic follows a normal distribution.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+phat <- n_success / n_trial 
+se   <- sqrt(phat * (1-phat) / n_trial) # standard error
+
+# calculate the lower and upper confidence intervals
+lci <- mle - 1.96 * se
+uci <- mle + 1.96 * se
+
+plot(probs,
+     likelihood,
+     type = "l",
+     lwd = 2,
+     xlab = "Probability of breeding success",
+     ylab = "Likelihood")
+
+
+abline(v = c(lci, uci), col = "lightblue", lwd = 3, lty = 2) # CI lines
+abline(v = mle, col = "orange", lwd = 2, lty = 2)
+
+text(mle,
+     max(likelihood),
+     "Maximum Likelihood",
+     pos = 2,
+     srt = 90,
+     col = "orange")
+
+text(lci,
+     max(likelihood),
+     "Lower CI",
+     pos = 2,
+     srt = 90,
+     col = "lightblue")
+
+text(uci,
+     max(likelihood),
+     "Upper CI",
+     pos = 2,
+     srt = 90,
+     col = "lightblue")
+
+
+```
+
+You see the 95% confidence intervals for probability of breeding success, with a maximum likelihood estimate of 0.7. If we were to repeat our sampling many times and each time create a confidence interval, on average the true value would be within the confidence interval 95% of the time. Here our uncertainty spans from 0.6 to 0.9. Probability values outside of this range are less likely, according to our model.
+
+We can also calculate a p-value: probability to see the observed or more extreme data given the null hypothesis. Here the equal probability of success and failure is the H0 and is rejected based on p-value \< 0.05.
+
+```{r, out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+stats::binom.test(x = n_success, #two sided 
+                  n = n_trial, 
+                  p = 0.5) # H0: equal success and failure probability of .5
+
+
+
+```
+
+We can use the same likelihood as in maximum likelihood estimation to make inference using Bayesian estimation. The outcome of Bayesian inference is the Bayesian posterior distribution. Recall from equation 2.6, all we need is some prior information about the model parameters.
+
+```{r, out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+prior     <- dbeta(probs, n_success - 1, (n_trial - n_success) - 1)
+posterior <- likelihood * prior / sum(likelihood * prior) * length(probs)
+
+```
+
+We can plot the Bayesian posterior distribution, prior and the likelihood.
+
+```{r, out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+distribution <- list( "posterior" = posterior, "prior" = prior, "likelihood" = likelihood)
+for (d in 1 : length(distribution)) {
+  
+  if(d == 1) {
+    plot(probs,
+         posterior,
+         type = "l",
+         lwd  = 2,
+         lty  = d,
+         col = "grey70",
+         xlab = "Probability of breeding sucsess",
+         ylab = "Posterior distribution")
+    
+  } else {
+    lines(probs,
+          distribution[[d]],
+          lwd = 2,
+          lty = d)
+  }
+}
+
+legend("topleft",
+       legend = c("Posterior", "Prior", "Likelihood"),
+       lty    = 1 : length(distribution),
+       col    = c("grey70", "black", "black"),
+       lwd    = 3)
+
+
+```
+
+Unlike the maximum likelihood estimate which is a point estimate, the Bayesian posterior is a distribution. Let's check out some of the properties of the posterior, such as the mean, variance, and standard deviation.
+
+```{r, out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+prior     <- prior / sum(prior)  # scales so that prior sums to 1
+posterior <- likelihood * prior / sum(likelihood * prior) 
+
+
+posterior_mean <- sum(probs * posterior)
+posterior_var  <- sum(probs ^ 2 * posterior) - posterior_mean ^ 2
+posterior_sd   <- sqrt(posterior_var)
+
+# posterior probability that the probability of breeding success is greater than 0.8
+sum(posterior[probs > 0.8])
+
+```
+
+As with the maximum likelihood estimation, we provide the uncertainty bounds of the Bayesian estimation as credible intervals. Although the interpretation of the intervals are not the same. A 95% credible interval is the interval that has 95% probability of containing the true value of the parameter. Whereas a 95% confidence interval indicates that 95% of the intervals constructed with repeated sampling will contain the true value.
+
+```{r, out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+# posterior percentiles - central 98% interval
+probs[max(which(cumsum(posterior) < 0.025))]
+probs[max(which(cumsum(posterior) < 0.975))]
+
+
+cumPost <- cumsum(posterior) / (length(posterior) -1)
+
+lci <- probs[which.min(abs(cumPost - 0.025))]
+uci <- probs[which.min(abs(cumPost - 0.975))]
+
+```
+
+The posterior distributions are mathematically determined once the priors and the likelihood are set. However, the mathematical form of the posterior is sometimes very difficult to deal with. There are several methods to find the shape and other important properties of the posterior in real life examples in later chapters. To name a few, Markov Chain Monte Carlo (MCMC) Simulation, and Laplace approximation are two popular methods in biostatistics.
+
+::: {style="background-color:beige;"}
+**Practice:**
+
+Use plots to explore the data:
+
+1)  We rejected the null hypothesis based on p-value \< 0.05. Use the binom.test() function to test alternative hypotheses about probability of breeding success.
+
+2)  Bayesian posterior depends on prior width and the amount of data. Specify a different prior and change the number of trials to see the impact.
+
+3)  Suppose we count the number of adult griffons that visit a feeding site during one day. Calculate likelihoods of possible values of griffon, assuming the count follows a Poisson distribution.
+:::
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 1.Load required packages--------------------------------
+library(utils)
+
+# 2.Load data---------------------------------------------
+url_remote  <- "https://raw.githubusercontent.com/"
+path_git    <- "MTourani/WILD470_S2025/refs/heads/main/"
+file_name   <- "owid_covid_data_2021.csv"
+data <- utils::read.csv(paste0(url_remote, path_git, file_name))
+
+# 3.Filter data-------------------------------------------
+covid_data <- data[, c("continent",
+                       "location",
+                       "hospital_beds_per_thousand",
+                       "life_expectancy",
+                       "total_cases",
+                       "total_deaths",
+                       "aged_65_older",
+                       "aged_70_older",
+                       "gdp_per_capita"
+)]
+
+clean_data <- na.omit(covid_data) # remove NA
+
+```
+
+We make sure both continent and location are factor variables, with levels referring to actual values still in the filtered data. In addition, we calculate the average values of the number of hospital beds per 1000 inhabitants and life expectancy for each country.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 4.Data summary----------------------------------------------------------
+clean_data$continent <- factor(clean_data$continent)
+clean_data$location  <- factor(clean_data$location)
+avg_data   <- aggregate(. ~ location + continent,
+                        data = clean_data,
+                        FUN = mean,
+                        drop = FALSE,
+                        na.rm = TRUE)
+```
+
+Finally, in anticipation of plots that compare countries in terms of the number of hospital beds per 1000 inhabitants and share of the population that is 65 and older, we sort the rows in the table according to the number of hospital beds, in descending order.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 5.Sort data---------------------------------------------
+avg_data <- avg_data[order(avg_data$hospital_beds_per_thousand,
+                           decreasing = TRUE),]
+
+```
+
+Let's start by looking at the distribution of life expectancy across countries. We can use function hist() to plot a histogram.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 6.Visualize data: histogram---------------------------------------------------
+hist(avg_data$life_expectancy,
+     xlab = "Life expectancy (years)",
+     ylab = "Number of countries",
+     col  = "firebrick3",
+     main = "")
+
+```
+
+Life expectancy at birth has increased almost continuously across the world for the past couple of centuries. COVID-19 in 2020 decreased life expectancy by \>1.5 years, erasing most gains in life expectancy from the previous 5 years. But COVID-19 has tended to cause fatalities disproportionately among older age groups (\>64 and among males). The largest reductions in life expectancy driven by Covid during 2020 were in the United States, where life expectancy for males dropped by \>2 years.
+
+Let's use a scatter plot to see whether there is an indication of a relationship between the average life expectancy and the number of hospital beds. We color code observations according to the continent. In addition, we mark and label the observation for the United States.
+
+```{r, results = "hide", out.width = "450px", fig.align = "center", message = FALSE, warning = FALSE}
+# 7.Visualize data: scatter plot------------------------------------------------
+continent_list <- levels(avg_data$continent)
+colors <- topo.colors(length(continent_list))
+names(colors) <- continent_list
+plot(life_expectancy ~ hospital_beds_per_thousand,
+     data = avg_data,
+     pch  = 19,
+     col  = colors[continent],
+     xlab = "Hospital beds / 1000 inhabitants",
+     ylab = "Life expectancy (years)")
+legend("bottomright",
+       legend = continent_list,
+       pch    = 19,
+       col    = colors,
+       bty    = "n")
+points(life_expectancy ~ hospital_beds_per_thousand,
+       data = avg_data[avg_data$location == "United States",],
+       pch  = 1,
+       col  = "black",
+       cex  = 1.5,
+       lwd  = 2)
+text(avg_data[avg_data$location == "United States",
+              "hospital_beds_per_thousand"], 
+     avg_data[avg_data$location == "United States", 
+              "life_expectancy"],
+     "United States",
+     pos = 3)
+```
+
+The previous plot suggests some pronounced differences between continents both in terms of the average number of hospital beds and average life expectancy. We can visualize these comparisons using box plots.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 8.Visualize data: box plot----------------------------------------------------
+par(mfrow = c(1, 2), mar = c(7, 5, 1, 1), las = 3)
+boxplot(life_expectancy ~ continent,
+        data = avg_data,
+        col  = colors,
+        ylab = "Life expectancy (years)",
+        xlab = NA)
+boxplot(hospital_beds_per_thousand ~ continent,
+        data = avg_data,
+        col  = colors,
+        ylab = "Hospital beds / 1000 inhabitants",
+        xlab = NA)
+
+```
+
+Now we can make a comparison between counties in terms of the number of hospital beds per 1000 inhabitants. First let's reduce the data to only the first 20 records (the 20 countries with the most hospital beds per inhabitant). Then we use function barplot() to display the results.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 9.Visualize data: bar plot----------------------------------------------------
+bar_data <- avg_data[1:20,]
+par(mfrow = c(1, 1), mar = c(7, 5, 1, 1), las = 3)
+barplot(bar_data$hospital_beds_per_thousand,
+        names.arg =  bar_data$location,
+        col       = colors[bar_data$continent],
+        ylab      = "Hospital beds / 1000 inhabitants")
+legend("topright",
+       legend = continent_list,
+       col    = colors,
+       bty    = "n",
+       pch    = 15 )
+
+```
+
+::: {style="background-color:beige;"}
+**Practice:**
+
+Use plots to explore the data: 1) Make a comparison between continents in terms of number of total covid deaths and share of the population that is 65 years and older. 2) Visualize the relationship between the total number of covid deaths and share of the population that is 70 years and older. Can you find the country with the most number of total Covid deaths? what is the share of its population that is 70 years and older?
+:::
 
 ------------------------------------------------------------------------
 
@@ -38,158 +422,129 @@ title: "Conservation of Wildlife Populations Exercises, 3rd Edition"
 
 ## Chapter 4: Estimating Population Size and Vital Rates
 
-[1.]{.underline} Suppose you are studying a jaguar population using camera traps, and you are interested in estimating the population size using the Lincoln-Petersen model. During the first period of camera trapping, you uniquely identify 14 jaguars. During the next sampling period, you identify 16 jaguars, 6 of which you had previously detected. a. What is the detection probability of jaguar at camera traps? b. Estimate jaguar abundance and variance in this population? c. Use your results from the previous question to calculate the 95% confidence intervals for your estimate of abundance. d. Why is it important to include detection probability in our abundance estimate, instead of just using the count of jaguars?
+[1.]{.underline} Suppose you are studying a jaguar population using camera traps, and you are interested in estimating the population size using the Lincoln-Petersen model. During the first period of camera trapping, you uniquely identify 14 jaguars. During the next sampling period, you identify 16 jaguars, 6 of which you had previously detected.
+
+a\. What is the detection probability of jaguar at camera traps?
+
+b\. Estimate jaguar abundance and variance in this population?
+
+c\. Use your results from the previous question to calculate the 95% confidence intervals for your estimate of abundance.
+
+d\. Why is it important to include detection probability in our abundance estimate, instead of just using the count of jaguars?
 
 [2.]{.underline} What happens to your estimates of detection probability and abundance if wolverines chew off their tags and lose them during a capture-recapture study?
 
-[3.]{.underline} In a capture-recapture model of a quail population abundance with 3 samples, what is the probability of detection history 110 in each of the following scenarios: i. the probability of detection is assumed to be constant. ii. the probability of detection is assumed to vary between sample occasions. iii. the probability of the initial detection is assumed to be different from the probability of subsequent detections.
+[3.]{.underline} In a capture-recapture model of a quail population abundance with 3 samples, what is the probability of detection history 110 in each of the following scenarios:
 
-[4.]{.underline} Suppose you are studying snowshoe hare survival, using the Kaplan-Meier method. At the beginning of the study (year 1), 33 hares were GPS-collared. When checked at year 2, you found 2 hares dead and lost the signal of 1 collared hare. You collared 5 new hares in year 2. a. What is the probability of surviving the first year? b. What is the probability of surviving the second year? c. By using this method to estimate survival, what assumptions are you making?
+i\. the probability of detection is assumed to be constant.
+
+ii\. the probability of detection is assumed to vary between sample occasions.
+
+iii\. the probability of the initial detection is assumed to be different from the probability of subsequent detections.
+
+[4.]{.underline} Suppose you are studying snowshoe hare survival, using the Kaplan-Meier method. At the beginning of the study (year 1), 33 hares were GPS-collared. When checked at year 2, you found 2 hares dead and lost the signal of 1 collared hare. You collared 5 new hares in year 2.
+
+a\. What is the probability of surviving the first year?
+
+b\. What is the probability of surviving the second year?
+
+c\. By using this method to estimate survival, what assumptions are you making?
 
 ------------------------------------------------------------------------
 
 ## Chapter 5: Exponential (or Geometric) Change
 
-[1.]{.underline} Use the discrete population growth model to find the abundance of a population last year if the abundance is 2,000 this year and the geometric growth rate is 0.5. a. By what percentage is the population increasing or decreasing each year? b. Starting from the population size this year, what will the size of the population be if it continues to grow at the same rate for a total of 4 years? c. What is the population’s instantaneous growth rate if it takes 2 years to double in size? d. Based on the instantaneous growth rate, is this population stable, growing, or shrinking?
+[1.]{.underline} Use the discrete population growth model to find the abundance of a population last year if the abundance is 2,000 this year and the geometric growth rate is 0.5.
+
+a\. By what percentage is the population increasing or decreasing each year?
+
+b\. Starting from the population size this year, what will the size of the population be if it continues to grow at the same rate for a total of 4 years?
+
+c\. What is the population’s instantaneous growth rate if it takes 2 years to double in size?
+
+d\. Based on the instantaneous growth rate, is this population stable, growing, or shrinking?
 
 [2.]{.underline} Why is the geometric mean a better descriptor of a fluctuating population's long-term growth than the arithmetic mean?
 
 [3.]{.underline} A population of 10 individuals has an expected survival rate of 70%. Explain why the realized survival rate in any given year is unlikely to be exactly 70% due to demographic stochasticity.
 
-:chili:
+🌶️ One non-intuitive idea that emerged from Chapter 5 in the text is that (under many conditions) the average growth rate of a population might be much higher than the most likely population trajectory. That is, when conditions are variable, population dynamics are governed not by the arithmetic mean, but rather by the geometric mean. Let’s see how that plays out.
 
-The American bison populations have fluctuated a lot over time. At one point, their numbers was reduced to a few individuals. Conservation efforts including recovery plans and protection led to an increase in the bison population in the Yellowstone National Park. In this exercise, we examine the process of population growth in order to forecast the expected future growth of the population and the expected time to reach the target size.
+Suppose a sage grouse population abundance was at 50 individuals in year 2020 and 65 individuals in year 2021. We can calculate the geometric growth rate $\lambda$ and the exponential growth rate $\rho$ as:
 
-<br>
+```{r, results = "hide", out.width = "400px"}
 
-## Stepping stones in R
+N1 <- 50
+N2 <- 65
 
-The first thing we usually do when we start an R session is:
+lambda <- N2/N1  # geometric growth rate
+rho <- log(lambda) # exponential growth rate
 
-```         
-(1) Open your existing RStudio Project for this course.
-(2) Create a new R script and save it right away.
-(3) In the script, define key variables, and load any additional packages into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.
+print(lambda)
+print(rho)
+
 ```
 
-In this exercise, we define our model parameters, and set up a storage vector to store each parameter. We can store data in memory by assigning it to an “object” using the assignment operator \<-. For example, the code below would assign the object $r$ the value of 0.1.
+If managers have monitored the sage grouse population over 10 years, we can use the time-series to calculate the annual growth rate $\lambda_y$.
 
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 1. Assigning a value to a vector ---------------------------------------------
-r <- 0.1      # discrete per-capita growth rate
+```{r, out.width = "400px"}
+
+year <- 2012:2021
+abundance <- c(52, 43, 90, 125, 72, 128, 97, 50, 50, 65)
+
+sg_data <- data.frame(matrix(nrow = length(year), ncol = 3))
+colnames(sg_data) <- c("year", "abundance", "lambda_y")
+
+sg_data$year <- year
+sg_data$abundance <- abundance
+
+for(i in 1:length(sg_data$year)) {
+  sg_data$lambda_y[i] <- sg_data$abundance[i + 1] / sg_data$abundance[i]
+}
+
+print(sg_data)
+
 ```
 
-Let $r$ be the discrete per-capita growth rate. Note that any text after a pound sign (#) is not evaluated by R. These are comments and are intended to help you follow the code. You should always include comments in any code that you write as humans tend to read and understand written language better than computer code.
+Now, to calculate the average annual growth rate we need to understand the difference between the arithmetic mean $\lambda_a$ vs the geometric mean $\lambda_g$. We calculated $\rho$ above based on $\lambda_g$, but what it means is a constant fraction or proportion of the current population is added to or subtracted from the population continuously or instantaneously. The geometric growth means a constant fraction or proportion of the current population is added to or subtracted from the population at each discrete time step. Finally, the arithmetic Growth means a constant number of individuals is added to or subtracted from the population at each time step, regardless of the current population size.
 
-Now, define the initial population size to an object called $N_0$ (that is, population size at time 0) by assigning the value of 100 to the object $N_0$, and the number of years (e.g., 30 years) by assigning the value of 30 to the object $nyears$. $(1 + r)$ is equal to $\lambda$ (lambda), the finite rate of growth. The code below stores the result of the calculation $(1 + 0.1 = 1.1)$ in the object $lambda$.
+```{r, results = "hide", out.width = "400px"}
 
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 2.Define model parameters ----------------------------------------------------
-lambda <- 1 + r     # the finite rate of growth 
-N0     <- 100       # initial population size
-nyears <- 30        # the number of time steps to simulate data
+#Arithmetic mean
+lambda_a <- mean(sg_data$lambda_y, na.rm = TRUE)
+
+#Geometric Mean
+lambda_g <- prod(sg_data$lambda_y, na.rm = TRUE) ^ (1 / length(sg_data$lambda_y))
+
 ```
 
-We can find the population size at the next time step by multiplying $N_0$ by $lambda$. As soon as you run the code below, the result of the calculation is printed.
+With a known growth rate, projection of abundance is done based on: $N_{t+1}$ = $N_{t}$ $\lambda$ or equally based on: $N_{t}$ = $N_{1}$ $\lambda^t$. If we project abundance of the grouse population based on these two calculated growth averages, we get different numbers. You noticed that $\lambda_y$ for the year 2021 was NA, and the abundance for this year was 65. Which of the two growth rate averages leads to this abundance for the year 2021? As you see below, $\lambda_g$ describes the most likely future trajectory of a population with stochastic growth. Overall, $\lambda_g$ is smaller than $\lambda_a$ whenever $\lambda_y$ varies across the years.
 
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 3.Vector operations ----------------------------------------------------------
-lambda * N0      # Multiply the value stored in the object "N0" by lambda. 
+```{r, results = "hide", out.width = "400px"}
+
+print(lambda_a)
+print(lambda_g)
+
+#Projected N
+sg_data$abundance[1] * (lambda_a ^ length(year))
+sg_data$abundance[1] * (lambda_g ^ length(year))
+
 ```
 
-How can we find the population size for the next 30 years? First, make an object that is a vector of years using the “sequence” function: seq(). Remember, you can look up the arguments of this function by executing ?seq().
-
-The code below, creates a sequence of numbers from 0 to the value stored in the object $nyears$ (in this case, 30). By executing the code below, you've created a string of numbers from 0 - 30 (increment by 1) that contains 31 elements. A single series of elements (e.g., a single column of numbers) is called a vector. You then assign this vector to the object $year$.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 4.Create a sequence of numbers -----------------------------------------------
-year <- seq(from = 0, to = nyears, by = 1)  
-year         # Print the value of the object "year" that you just created.
-```
-
-Let's build a storage structure for simulated population size over this time period. The number of values to store is one more than $nyears$ (because it includes year 0). Thus, we define a vector to contain the value of $nyears + 1$, and use that to simulate population size as below.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 5.Create an empty vector -----------------------------------------------------
-vec_size <- nyears + 1  
-N <- numeric(vec_size)    # Make an empty storage vector, called N 
-names(N) <- year          # Link each N value with its corresponding year 
-N                         # Print the contents of the object "N"
-```
-
-The numeric() function takes the contents within the parentheses and converts those contents to the "numeric" class. What you need to know is that the value within the parentheses (here is 31) is used to tell this function how many zeros to create. So, this line of code creates a vector of 31 zeros, and assigns that vector to the object "N".
-
-We have already defined the initial population size $N_0$ above. We can assign that value to the first element in our vector of population size $N$ as below. The brackets \[ \] are used to indicate the position of an element within a vector.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 6.reassign values in a vector ------------------------------------------------
-N[1] <- N0
-N
-```
-
-If you print the contents of the object $N$, you will find that the first zero is now changes to 100. Remember, the $N$ object is a vector of 31 zeros representing year 0 to year 30.
-
-We can now find the population size at year 30, by applying this equation: $N_t = N_0$ $\lambda^t$.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 7.Find abundance for one year ------------------------------------------------
-N30 <- N0 * lambda ^ nyears
-round(N30)
-```
-
-However, instead of typing one line of code per year, we can use a "for loop" in R to repeat this line and find the population size per year. Because we stored the value of $N_0$ as the first element of $N$, we start the for loop to simulate data from year 1.
-
-The for-loop will run through the line of code between the curly brackets {}. $i$ is the name of a variable (you can use $j$, or $k$, or any variable name you like. $i$ changes each time the loop iterates; It will increase by 1 each time the loop is run, starting at 2 up until the specified maximum number of iterations.
-
-The code between the curly brackets takes the \[$i - 1$\] element of $N$, multiplies that element by the value of $lambda$, then assigns that calculated result to the \[$i$\] element of $N$.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 8. Find abundnace for many years ---------------------------------------------
-for (i in 2 : vec_size) {  # the loop starts here   
-  N[i] <- N[i-1] * lambda  
-}                          # the loop ends here
-
-round(N)                   # print the contents of the object "N" (rounded).
-```
-
-This is the simplest model of population growth, called the exponential growth model. The exponential growth occurs in nature when a species is not limited by other species (no predation, parasitism, or competitors), resources are not limited, and the environment is constant. Colonization, or recovery of a population after a large-scale disturbance (fires, crash from disease) can temporarily allow exponential growth.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 9. Visualize changes of abundnace over time ----------------------------------
-plot(N ~ year,
-     xlab = "Year",
-     ylab = "Population size",
-     col  = "turquoise") 
-```
-
-This plot() function tells R to plot the y variable by the x variable. "N" is the y variable (dependent variable), and "year" is the x variable (independent variable). The tilde "\~" stands for "as a function of". There are many ways to customize the appearance of a plot in R - for now, I specified color and axes lables (xlab and ylab).
-
-You could change the discrete per-capita growth rate $r$ and find out how the change in population size over time varies with the different $r$ values (7% and 25% discrete annual growth rate). First, create a vector of values as below.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 10. Creat a vector -----------------------------------------------------------
-r <- c(-0.07, 0.07, 0.25) # discrete per-capita growth rate
-```
-
-When we use this model to forecast future population size, we assume that parameters are constant. However, if conditions change then all bets are off. It is more realistic to assume that in some years the population increases slightly faster than average. In other years the population declines, despite the overall increasing trend. Many factors can influence the rate of population growth. One of the most common reasons is random variation in environmental conditions. Some winters are colder than others which lead to higher than average death rates. Some breeding seasons may be particularly productive so there is a higher than average rate of reproduction. Therefore, we often estimate the population growth rate as a point estimate (e.g., mean) with uncertainty around the estimate (e.g., variance). For simplicity, we assumed a constant growth rate in this exercise. <br>
-
-## 
+We saw in the text the two intuitive ways most commonly used to estimate average exponential trend: a) drawing a line through the log(abundance) data over time; b) taking simple averages of the consecutive series of r values. However, we also saw that these methods can give different, and possibly inappropriate, answers because they make fundamentally different assumptions about the processes that cause variation in population growth over time. The first approach assumes that all the variation in the abundances over time comes from observation error (OE). The second assumes that all the variation in the average growth rate arises from process noise (PN). Here we’ll get some hands-on practice with the EGOE and EGPN trend estimators and will analyze both sources of variation at once using a state-space model (EGSS).
 
 ::: {style="background-color:beige;"}
-**Questions:**
+**Practice:**
 
-(1) What is the population size at year 30 if the annual growth rate was 7%, -7%, or 25%? Provide all coding steps you take to find the answers.
+1.  With an initial abundance of 50 in year 2020, project abundance for years 2025 and 2027, assuming situations (a) and (b) and then visualize the two projections of population abundnace.
 
-(2) Visualize changes of population size over time with annual growth rate of 7%, -7%, and 25%. Using par() function, create a multipanel figure to show the three plots side by side. Remember to indicate the growth rate value of each plot and include code for all of these steps.
+<!-- -->
 
-(3) Use trial and error to modify the value of $r$ (discrete annual rate of growth) such that the final population size after 50 years is as close as possible to 2000 (initial population is still 100). What is the value of $r$ you identified by trial and error?
-
-(4) In this exercise, let's define extinction as population size equals zero. When this population is decreasing, how long does it take until the population goes extinct?
-
-(5) Bonus: Can you solve the equation in step #7 for $r$ and analytically find $r$ in Question 3? Write the equation/code in your answer.
-
-(6) Bonus: Can you use a for-loop to answer Questions 1-2? Remember to include the complete code to reproduce the results.
+(a) growth is deterministic ($\lambda_y$ = 1.05) over the years.
+(b) growth is stochastic and fluctuates between 1.55 and 0.55 ($\lambda_{2020}$ = 1.05, $\lambda_{2021}$ = 0.55, $\lambda_{2022}$ = 1.05, $\lambda_{2023}$ = 0.55, etc).
 :::
+
+<br>
 
 ------------------------------------------------------------------------
 
@@ -203,11 +558,11 @@ When we use this model to forecast future population size, we assume that parame
 
 [4.]{.underline} Suppose you are tasked with studying a caribou population, and you want to know what the analytical sensitivity is for adult survival. Prior to calculating sensitivity, you estimated the asymptotic population growth rate as 1.053. You add 0.01 to adult survival and calculate the new growth rate as 1.064. What is the analytical sensitivity of adult survival?
 
-![](images/lf_28.png)
+![](images/lf_28.png){width="1000"}
 
-![](images/lf_30.png)
+![](images/lf_30.png){width="1000"}
 
-:chili: Above, you are presented two life cycle diagrams of two bird species. Please answer 10 questions below for each of the two diagrams.
+🌶️Above, you are presented two life cycle diagrams of two bird species. Please answer 10 questions below for each of the two diagrams.
 
 ::: {style="background-color:beige;"}
 **Questions:**
@@ -240,6 +595,8 @@ When we use this model to forecast future population size, we assume that parame
 [2.]{.underline} What is a strong Allee effect? Explain why a population might decline toward extinction even if \$N \> 2\$.
 
 [3.]{.underline} Draw two graphs showing how per capita mortality rate could vary with population size. If birth rate is constant in both graphs, indicate the carrying capacity, positive population growth and negative or positive density dependence on each graph.
+
+🌶️ This is a spicy exercise!
 
 ------------------------------------------------------------------------
 

@@ -159,7 +159,7 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
-<span class="menu-text">Conservation of Wildlife Populations, 3rd Edition</span></a>
+<span class="menu-text">About</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -178,12 +178,11 @@ window.Quarto = {
    
   <ul>
   <li><a href="#chapter-1-the-big-picture" id="toc-chapter-1-the-big-picture" class="nav-link active" data-scroll-target="#chapter-1-the-big-picture">Chapter 1: The Big Picture</a></li>
+  <li><a href="#stepping-stones-in-r" id="toc-stepping-stones-in-r" class="nav-link" data-scroll-target="#stepping-stones-in-r">Stepping stones in R</a></li>
   <li><a href="#chapter-2-gaining-reliable-knowledge" id="toc-chapter-2-gaining-reliable-knowledge" class="nav-link" data-scroll-target="#chapter-2-gaining-reliable-knowledge">Chapter 2: Gaining Reliable Knowledge</a></li>
   <li><a href="#chapter-3-genetic-concepts-and-tools" id="toc-chapter-3-genetic-concepts-and-tools" class="nav-link" data-scroll-target="#chapter-3-genetic-concepts-and-tools">Chapter 3: Genetic Concepts and Tools</a></li>
   <li><a href="#chapter-4-estimating-population-size-and-vital-rates" id="toc-chapter-4-estimating-population-size-and-vital-rates" class="nav-link" data-scroll-target="#chapter-4-estimating-population-size-and-vital-rates">Chapter 4: Estimating Population Size and Vital Rates</a></li>
   <li><a href="#chapter-5-exponential-or-geometric-change" id="toc-chapter-5-exponential-or-geometric-change" class="nav-link" data-scroll-target="#chapter-5-exponential-or-geometric-change">Chapter 5: Exponential (or Geometric) Change</a></li>
-  <li><a href="#stepping-stones-in-r" id="toc-stepping-stones-in-r" class="nav-link" data-scroll-target="#stepping-stones-in-r">Stepping stones in R</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#chapter-6-structured-population-projection-models" id="toc-chapter-6-structured-population-projection-models" class="nav-link" data-scroll-target="#chapter-6-structured-population-projection-models">Chapter 6: Structured Population-Projection Models</a></li>
   <li><a href="#chapter-7-density-dependent-population-change" id="toc-chapter-7-density-dependent-population-change" class="nav-link" data-scroll-target="#chapter-7-density-dependent-population-change">Chapter 7: Density-Dependent Population Change</a></li>
   <li><a href="#chapter-8-predation-and-wildlife-populations" id="toc-chapter-8-predation-and-wildlife-populations" class="nav-link" data-scroll-target="#chapter-8-predation-and-wildlife-populations">Chapter 8: Predation and Wildlife Populations</a></li>
@@ -223,12 +222,387 @@ window.Quarto = {
 <p><u>2.</u> Human numbers are projected to level off at 10.5 billion by 2100. If we dropped fertility to replacement levels today, why wouldn’t the population stop growing immediately? Use the concept of population momentum to explain.</p>
 <p><u>3.</u> The baseline extinction rate is estimated at 2 E/MSY (extinctions per million species per year). If there are 10,000 species of birds, how many would you expect to go extinct in a single century under “normal” deep-time conditions?</p>
 <p><u>4.</u> Current extinction rates are estimated to be 10–30 times higher than the background rate. Using the 2 E/MSY baseline, calculate the current range of extinctions per million species per year.</p>
+<p>🌶️ The Living Planet Index (LPI) is a measure of the state of the global biodiversity trends, including vertebrate species from terrestrial, freshwater and marine habitats. The 2016 LPI reported a 58% average decline in wild vertebrate populations since 1970. In this report, a total of14,152 populations across 3,706 species were included. Based on this report, population sizes of vertebrate species have, on average, dropped by more than half in little more than 40 years. The dataset spanning years between 1970 and 2012 is public.</p>
+<p><br></p>
+<div style="background-color:beige;">
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li><p>Write code to visualize data and provide data summaries to answer: are all studied wildlife populations in decline? Hint: Find out how many populations show at least 58% decline. What percentage of the studied populations are decreasing in each continent?</p></li>
+<li><p>Showcase a potential issue with the LPI. Hint: use data summaries and visualization in R to break down data, e.g., by taxa, realm, and continent. Bonus: Showcase a remedy to the issue.</p></li>
+</ol>
+</div>
+<p>Where to start? You can use program R for data analysis. Access data, summarize, and visualize it.</p>
+</section>
+<section id="stepping-stones-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="stepping-stones-in-r">Stepping stones in R</h2>
+<pre><code>(1) Open your existing RStudio Project for this course.
+(2) Create a new R script and save it right away. 
+(3) In the script, define key variables, and load any additional packages into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.</code></pre>
 <hr>
 </section>
 <section id="chapter-2-gaining-reliable-knowledge" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-2-gaining-reliable-knowledge">Chapter 2: Gaining Reliable Knowledge</h2>
-<p><u>1.</u> A sample of 16 army cutworm moths was collected from a mountain top in Yellowstone National Park. The mean length of the sampled moths is 50 mm, and the sample variance is 4 mm. a. If the true mean length of the whole population is 20 mm and the true population variance is 15 mm, draw a target like one of those in Fig 2.1 that would depict the accuracy and precision of your sample of 16 moths relative to the true population metrics. b. What would happen to our estimated standard error (SE) if we increased the sample size? i.e., does the SE increase, decrease or stay the same? c.&nbsp;What would happen to the standard deviation (SD) if the sample size increased? i.e., does the SD increase, decrease or stay the same?</p>
+<p><u>1.</u> A sample of 16 army cutworm moths was collected from a mountain top in Yellowstone National Park. The mean length of the sampled moths is 50 mm, and the sample variance is 4 mm.</p>
+<p>a. If the true mean length of the whole population is 20 mm and the true population variance is 15 mm, draw a target like one of those in Fig 2.1 that would depict the accuracy and precision of your sample of 16 moths relative to the true population metrics.</p>
+<p>b. What would happen to our estimated standard error (SE) if we increased the sample size? i.e., does the SE increase, decrease or stay the same?</p>
+<p>c. What would happen to the standard deviation (SD) if the sample size increased? i.e., does the SD increase, decrease or stay the same?</p>
 <p><u>2.</u> In the context of endangered species monitoring (Table 2.1), describe Type I and Type II errors and identify their conservation consequences in this context.</p>
+<p>🌶️ <br></p>
+<p>Gaining reliable knowledge in applied wildlife population ecology requires a rigourous and formal process coupling ideas (hypotheses) to reliable measured facts. In the spirit of “embracing the uncertainty”, in this exercise, we focus on three approaches for inference: maximum likelihood estimation, null hypothesis significant testing, and Bayesian estimation.</p>
+<p>Suppose we are tasked with monitoring griffon eggs (also spelled griffin or gryphon). We want to collect evidence on griffons breeding success. We visit 30 nests, and expect to find 20 nests with eggs. The data would look like the plot below.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>trials  <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>success <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>griffon <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                  trials,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">prob    =</span> <span class="fu">c</span>((trials <span class="sc">-</span> success) <span class="sc">/</span> trials, success <span class="sc">/</span> trials))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(griffon),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">ifelse</span>(<span class="fu">names</span>(<span class="fu">table</span>(griffon)) <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"grey"</span>, <span class="st">"lightblue"</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Frequency"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Breeding success (1: success, 0: failure)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From such data we can calculate the observed proportion of nests with and without eggs.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>proportion <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sum</span>(griffon) <span class="sc">/</span> <span class="fu">length</span>(griffon), <span class="dv">2</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> proportion</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>But this does not tell us much. To make generalisable statements about the breeding success, we need to complete some statistical analyses. We examine this data with a simple model that makes the following assumption: at every visit to a griffon nest, we have a probability of p to find eggs.</p>
+<p>First, we can use the dbinom() function to find the likelihood for different probabilities of a success. Then, we can find the probability with the maximum likelihood estimate.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n_success  <span class="ot">&lt;-</span> <span class="fu">sum</span>(griffon)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>n_trial    <span class="ot">&lt;-</span> <span class="fu">length</span>(griffon)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>probs      <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.001</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>likelihood <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="at">x =</span> n_success, <span class="at">size =</span> n_trial, <span class="at">prob =</span> probs)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>mle        <span class="ot">&lt;-</span> probs[<span class="fu">which.max</span>(likelihood)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s plot the likelihoods and show the probability with the maximum likelihood.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(probs,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>     likelihood,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Probability of breeding success"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Likelihood"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> mle, <span class="at">col =</span> <span class="st">"orange"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(mle,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>     <span class="fu">max</span>(likelihood),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Maximum Likelihood"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">2</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">srt =</span> <span class="dv">90</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"orange"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We now have a maximum likelihood estimate for the probability of griffon breeding success. Although the maximum likelihood is the best estimate, this estimate is not enough to draw statistical conclusions. We need to calculate the uncertainty or confidence in our estimates. The 95% confidence intervals mean if we repeat the analysis many times and each time create a confidence interval, 95% of the confidence intervals would contain the true value. We can calculate the confidence intervals for the maximum likelihood estimate, by assuming the statistic follows a normal distribution.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>phat <span class="ot">&lt;-</span> n_success <span class="sc">/</span> n_trial </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>se   <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(phat <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>phat) <span class="sc">/</span> n_trial) <span class="co"># standard error</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the lower and upper confidence intervals</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>lci <span class="ot">&lt;-</span> mle <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>uci <span class="ot">&lt;-</span> mle <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(probs,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>     likelihood,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Probability of breeding success"</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Likelihood"</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(lci, uci), <span class="at">col =</span> <span class="st">"lightblue"</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>) <span class="co"># CI lines</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> mle, <span class="at">col =</span> <span class="st">"orange"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(mle,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>     <span class="fu">max</span>(likelihood),</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Maximum Likelihood"</span>,</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">2</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">srt =</span> <span class="dv">90</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"orange"</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(lci,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>     <span class="fu">max</span>(likelihood),</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Lower CI"</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">2</span>,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>     <span class="at">srt =</span> <span class="dv">90</span>,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"lightblue"</span>)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(uci,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>     <span class="fu">max</span>(likelihood),</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>     <span class="st">"Upper CI"</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">2</span>,</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>     <span class="at">srt =</span> <span class="dv">90</span>,</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You see the 95% confidence intervals for probability of breeding success, with a maximum likelihood estimate of 0.7. If we were to repeat our sampling many times and each time create a confidence interval, on average the true value would be within the confidence interval 95% of the time. Here our uncertainty spans from 0.6 to 0.9. Probability values outside of this range are less likely, according to our model.</p>
+<p>We can also calculate a p-value: probability to see the observed or more extreme data given the null hypothesis. Here the equal probability of success and failure is the H0 and is rejected based on p-value &lt; 0.05.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">::</span><span class="fu">binom.test</span>(<span class="at">x =</span> n_success, <span class="co">#two sided </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">n =</span> n_trial, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">p =</span> <span class="fl">0.5</span>) <span class="co"># H0: equal success and failure probability of .5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Exact binomial test
+
+data:  n_success and n_trial
+number of successes = 21, number of trials = 30, p-value = 0.04277
+alternative hypothesis: true probability of success is not equal to 0.5
+95 percent confidence interval:
+ 0.5060410 0.8526548
+sample estimates:
+probability of success 
+                   0.7 </code></pre>
+</div>
+</div>
+<p>We can use the same likelihood as in maximum likelihood estimation to make inference using Bayesian estimation. The outcome of Bayesian inference is the Bayesian posterior distribution. Recall from equation 2.6, all we need is some prior information about the model parameters.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>prior     <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(probs, n_success <span class="sc">-</span> <span class="dv">1</span>, (n_trial <span class="sc">-</span> n_success) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span> likelihood <span class="sc">*</span> prior <span class="sc">/</span> <span class="fu">sum</span>(likelihood <span class="sc">*</span> prior) <span class="sc">*</span> <span class="fu">length</span>(probs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can plot the Bayesian posterior distribution, prior and the likelihood.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>distribution <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="st">"posterior"</span> <span class="ot">=</span> posterior, <span class="st">"prior"</span> <span class="ot">=</span> prior, <span class="st">"likelihood"</span> <span class="ot">=</span> likelihood)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (d <span class="cf">in</span> <span class="dv">1</span> <span class="sc">:</span> <span class="fu">length</span>(distribution)) {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(d <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot</span>(probs,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>         posterior,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">lwd  =</span> <span class="dv">2</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">lty  =</span> d,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">col =</span> <span class="st">"grey70"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">xlab =</span> <span class="st">"Probability of breeding sucsess"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">ylab =</span> <span class="st">"Posterior distribution"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(probs,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>          distribution[[d]],</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">lty =</span> d)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Posterior"</span>, <span class="st">"Prior"</span>, <span class="st">"Likelihood"</span>),</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty    =</span> <span class="dv">1</span> <span class="sc">:</span> <span class="fu">length</span>(distribution),</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">col    =</span> <span class="fu">c</span>(<span class="st">"grey70"</span>, <span class="st">"black"</span>, <span class="st">"black"</span>),</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd    =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Unlike the maximum likelihood estimate which is a point estimate, the Bayesian posterior is a distribution. Let’s check out some of the properties of the posterior, such as the mean, variance, and standard deviation.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>prior     <span class="ot">&lt;-</span> prior <span class="sc">/</span> <span class="fu">sum</span>(prior)  <span class="co"># scales so that prior sums to 1</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span> likelihood <span class="sc">*</span> prior <span class="sc">/</span> <span class="fu">sum</span>(likelihood <span class="sc">*</span> prior) </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>posterior_mean <span class="ot">&lt;-</span> <span class="fu">sum</span>(probs <span class="sc">*</span> posterior)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>posterior_var  <span class="ot">&lt;-</span> <span class="fu">sum</span>(probs <span class="sc">^</span> <span class="dv">2</span> <span class="sc">*</span> posterior) <span class="sc">-</span> posterior_mean <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>posterior_sd   <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(posterior_var)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior probability that the probability of breeding success is greater than 0.8</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(posterior[probs <span class="sc">&gt;</span> <span class="fl">0.8</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04943682</code></pre>
+</div>
+</div>
+<p>As with the maximum likelihood estimation, we provide the uncertainty bounds of the Bayesian estimation as credible intervals. Although the interpretation of the intervals are not the same. A 95% credible interval is the interval that has 95% probability of containing the true value of the parameter. Whereas a 95% confidence interval indicates that 95% of the intervals constructed with repeated sampling will contain the true value.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior percentiles - central 98% interval</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>probs[<span class="fu">max</span>(<span class="fu">which</span>(<span class="fu">cumsum</span>(posterior) <span class="sc">&lt;</span> <span class="fl">0.025</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.584</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>probs[<span class="fu">max</span>(<span class="fu">which</span>(<span class="fu">cumsum</span>(posterior) <span class="sc">&lt;</span> <span class="fl">0.975</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.815</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cumPost <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(posterior) <span class="sc">/</span> (<span class="fu">length</span>(posterior) <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>lci <span class="ot">&lt;-</span> probs[<span class="fu">which.min</span>(<span class="fu">abs</span>(cumPost <span class="sc">-</span> <span class="fl">0.025</span>))]</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>uci <span class="ot">&lt;-</span> probs[<span class="fu">which.min</span>(<span class="fu">abs</span>(cumPost <span class="sc">-</span> <span class="fl">0.975</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The posterior distributions are mathematically determined once the priors and the likelihood are set. However, the mathematical form of the posterior is sometimes very difficult to deal with. There are several methods to find the shape and other important properties of the posterior in real life examples in later chapters. To name a few, Markov Chain Monte Carlo (MCMC) Simulation, and Laplace approximation are two popular methods in biostatistics.</p>
+<div style="background-color:beige;">
+<p><strong>Practice:</strong></p>
+<p>Use plots to explore the data:</p>
+<ol type="1">
+<li><p>We rejected the null hypothesis based on p-value &lt; 0.05. Use the binom.test() function to test alternative hypotheses about probability of breeding success.</p></li>
+<li><p>Bayesian posterior depends on prior width and the amount of data. Specify a different prior and change the number of trials to see the impact.</p></li>
+<li><p>Suppose we count the number of adult griffons that visit a feeding site during one day. Calculate likelihoods of possible values of griffon, assuming the count follows a Poisson distribution.</p></li>
+</ol>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.Load required packages--------------------------------</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(utils)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.Load data---------------------------------------------</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>url_remote  <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/"</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>path_git    <span class="ot">&lt;-</span> <span class="st">"MTourani/WILD470_S2025/refs/heads/main/"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>file_name   <span class="ot">&lt;-</span> <span class="st">"owid_covid_data_2021.csv"</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> utils<span class="sc">::</span><span class="fu">read.csv</span>(<span class="fu">paste0</span>(url_remote, path_git, file_name))</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.Filter data-------------------------------------------</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>covid_data <span class="ot">&lt;-</span> data[, <span class="fu">c</span>(<span class="st">"continent"</span>,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"location"</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"hospital_beds_per_thousand"</span>,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"life_expectancy"</span>,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"total_cases"</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"total_deaths"</span>,</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"aged_65_older"</span>,</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"aged_70_older"</span>,</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"gdp_per_capita"</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(covid_data) <span class="co"># remove NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We make sure both continent and location are factor variables, with levels referring to actual values still in the filtered data. In addition, we calculate the average values of the number of hospital beds per 1000 inhabitants and life expectancy for each country.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4.Data summary----------------------------------------------------------</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>clean_data<span class="sc">$</span>continent <span class="ot">&lt;-</span> <span class="fu">factor</span>(clean_data<span class="sc">$</span>continent)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>clean_data<span class="sc">$</span>location  <span class="ot">&lt;-</span> <span class="fu">factor</span>(clean_data<span class="sc">$</span>location)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>avg_data   <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(. <span class="sc">~</span> location <span class="sc">+</span> continent,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">data =</span> clean_data,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">FUN =</span> mean,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">drop =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally, in anticipation of plots that compare countries in terms of the number of hospital beds per 1000 inhabitants and share of the population that is 65 and older, we sort the rows in the table according to the number of hospital beds, in descending order.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5.Sort data---------------------------------------------</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>avg_data <span class="ot">&lt;-</span> avg_data[<span class="fu">order</span>(avg_data<span class="sc">$</span>hospital_beds_per_thousand,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">decreasing =</span> <span class="cn">TRUE</span>),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s start by looking at the distribution of life expectancy across countries. We can use function hist() to plot a histogram.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.Visualize data: histogram---------------------------------------------------</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(avg_data<span class="sc">$</span>life_expectancy,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Life expectancy (years)"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Number of countries"</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">"firebrick3"</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Life expectancy at birth has increased almost continuously across the world for the past couple of centuries. COVID-19 in 2020 decreased life expectancy by &gt;1.5 years, erasing most gains in life expectancy from the previous 5 years. But COVID-19 has tended to cause fatalities disproportionately among older age groups (&gt;64 and among males). The largest reductions in life expectancy driven by Covid during 2020 were in the United States, where life expectancy for males dropped by &gt;2 years.</p>
+<p>Let’s use a scatter plot to see whether there is an indication of a relationship between the average life expectancy and the number of hospital beds. We color code observations according to the continent. In addition, we mark and label the observation for the United States.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 7.Visualize data: scatter plot------------------------------------------------</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>continent_list <span class="ot">&lt;-</span> <span class="fu">levels</span>(avg_data<span class="sc">$</span>continent)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">topo.colors</span>(<span class="fu">length</span>(continent_list))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(colors) <span class="ot">&lt;-</span> continent_list</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(life_expectancy <span class="sc">~</span> hospital_beds_per_thousand,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">data =</span> avg_data,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch  =</span> <span class="dv">19</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> colors[continent],</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Hospital beds / 1000 inhabitants"</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Life expectancy (years)"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> continent_list,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch    =</span> <span class="dv">19</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">col    =</span> colors,</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty    =</span> <span class="st">"n"</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(life_expectancy <span class="sc">~</span> hospital_beds_per_thousand,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">data =</span> avg_data[avg_data<span class="sc">$</span>location <span class="sc">==</span> <span class="st">"United States"</span>,],</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch  =</span> <span class="dv">1</span>,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">col  =</span> <span class="st">"black"</span>,</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex  =</span> <span class="fl">1.5</span>,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd  =</span> <span class="dv">2</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(avg_data[avg_data<span class="sc">$</span>location <span class="sc">==</span> <span class="st">"United States"</span>,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>              <span class="st">"hospital_beds_per_thousand"</span>], </span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>     avg_data[avg_data<span class="sc">$</span>location <span class="sc">==</span> <span class="st">"United States"</span>, </span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>              <span class="st">"life_expectancy"</span>],</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>     <span class="st">"United States"</span>,</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>     <span class="at">pos =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="450"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The previous plot suggests some pronounced differences between continents both in terms of the average number of hospital beds and average life expectancy. We can visualize these comparisons using box plots.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 8.Visualize data: box plot----------------------------------------------------</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">las =</span> <span class="dv">3</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(life_expectancy <span class="sc">~</span> continent,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> avg_data,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col  =</span> colors,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Life expectancy (years)"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="cn">NA</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(hospital_beds_per_thousand <span class="sc">~</span> continent,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> avg_data,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">col  =</span> colors,</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Hospital beds / 1000 inhabitants"</span>,</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now we can make a comparison between counties in terms of the number of hospital beds per 1000 inhabitants. First let’s reduce the data to only the first 20 records (the 20 countries with the most hospital beds per inhabitant). Then we use function barplot() to display the results.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 9.Visualize data: bar plot----------------------------------------------------</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>bar_data <span class="ot">&lt;-</span> avg_data[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">las =</span> <span class="dv">3</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(bar_data<span class="sc">$</span>hospital_beds_per_thousand,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">names.arg =</span>  bar_data<span class="sc">$</span>location,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">col       =</span> colors[bar_data<span class="sc">$</span>continent],</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab      =</span> <span class="st">"Hospital beds / 1000 inhabitants"</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> continent_list,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">col    =</span> colors,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">bty    =</span> <span class="st">"n"</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch    =</span> <span class="dv">15</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="background-color:beige;">
+<p><strong>Practice:</strong></p>
+<p>Use plots to explore the data: 1) Make a comparison between continents in terms of number of total covid deaths and share of the population that is 65 years and older. 2) Visualize the relationship between the total number of covid deaths and share of the population that is 70 years and older. Can you find the country with the most number of total Covid deaths? what is the share of its population that is 70 years and older?</p>
+</div>
 <hr>
 </section>
 <section id="chapter-3-genetic-concepts-and-tools" class="level2">
@@ -241,121 +615,103 @@ window.Quarto = {
 </section>
 <section id="chapter-4-estimating-population-size-and-vital-rates" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-4-estimating-population-size-and-vital-rates">Chapter 4: Estimating Population Size and Vital Rates</h2>
-<p><u>1.</u> Suppose you are studying a jaguar population using camera traps, and you are interested in estimating the population size using the Lincoln-Petersen model. During the first period of camera trapping, you uniquely identify 14 jaguars. During the next sampling period, you identify 16 jaguars, 6 of which you had previously detected. a. What is the detection probability of jaguar at camera traps? b. Estimate jaguar abundance and variance in this population? c.&nbsp;Use your results from the previous question to calculate the 95% confidence intervals for your estimate of abundance. d.&nbsp;Why is it important to include detection probability in our abundance estimate, instead of just using the count of jaguars?</p>
+<p><u>1.</u> Suppose you are studying a jaguar population using camera traps, and you are interested in estimating the population size using the Lincoln-Petersen model. During the first period of camera trapping, you uniquely identify 14 jaguars. During the next sampling period, you identify 16 jaguars, 6 of which you had previously detected.</p>
+<p>a. What is the detection probability of jaguar at camera traps?</p>
+<p>b. Estimate jaguar abundance and variance in this population?</p>
+<p>c. Use your results from the previous question to calculate the 95% confidence intervals for your estimate of abundance.</p>
+<p>d. Why is it important to include detection probability in our abundance estimate, instead of just using the count of jaguars?</p>
 <p><u>2.</u> What happens to your estimates of detection probability and abundance if wolverines chew off their tags and lose them during a capture-recapture study?</p>
-<p><u>3.</u> In a capture-recapture model of a quail population abundance with 3 samples, what is the probability of detection history 110 in each of the following scenarios: i. the probability of detection is assumed to be constant. ii. the probability of detection is assumed to vary between sample occasions. iii. the probability of the initial detection is assumed to be different from the probability of subsequent detections.</p>
-<p><u>4.</u> Suppose you are studying snowshoe hare survival, using the Kaplan-Meier method. At the beginning of the study (year 1), 33 hares were GPS-collared. When checked at year 2, you found 2 hares dead and lost the signal of 1 collared hare. You collared 5 new hares in year 2. a. What is the probability of surviving the first year? b. What is the probability of surviving the second year? c.&nbsp;By using this method to estimate survival, what assumptions are you making?</p>
+<p><u>3.</u> In a capture-recapture model of a quail population abundance with 3 samples, what is the probability of detection history 110 in each of the following scenarios:</p>
+<p>i. the probability of detection is assumed to be constant.</p>
+<p>ii. the probability of detection is assumed to vary between sample occasions.</p>
+<p>iii. the probability of the initial detection is assumed to be different from the probability of subsequent detections.</p>
+<p><u>4.</u> Suppose you are studying snowshoe hare survival, using the Kaplan-Meier method. At the beginning of the study (year 1), 33 hares were GPS-collared. When checked at year 2, you found 2 hares dead and lost the signal of 1 collared hare. You collared 5 new hares in year 2.</p>
+<p>a. What is the probability of surviving the first year?</p>
+<p>b. What is the probability of surviving the second year?</p>
+<p>c. By using this method to estimate survival, what assumptions are you making?</p>
 <hr>
 </section>
 <section id="chapter-5-exponential-or-geometric-change" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-5-exponential-or-geometric-change">Chapter 5: Exponential (or Geometric) Change</h2>
-<p><u>1.</u> Use the discrete population growth model to find the abundance of a population last year if the abundance is 2,000 this year and the geometric growth rate is 0.5. a. By what percentage is the population increasing or decreasing each year? b. Starting from the population size this year, what will the size of the population be if it continues to grow at the same rate for a total of 4 years? c.&nbsp;What is the population’s instantaneous growth rate if it takes 2 years to double in size? d.&nbsp;Based on the instantaneous growth rate, is this population stable, growing, or shrinking?</p>
+<p><u>1.</u> Use the discrete population growth model to find the abundance of a population last year if the abundance is 2,000 this year and the geometric growth rate is 0.5.</p>
+<p>a. By what percentage is the population increasing or decreasing each year?</p>
+<p>b. Starting from the population size this year, what will the size of the population be if it continues to grow at the same rate for a total of 4 years?</p>
+<p>c. What is the population’s instantaneous growth rate if it takes 2 years to double in size?</p>
+<p>d. Based on the instantaneous growth rate, is this population stable, growing, or shrinking?</p>
 <p><u>2.</u> Why is the geometric mean a better descriptor of a fluctuating population’s long-term growth than the arithmetic mean?</p>
 <p><u>3.</u> A population of 10 individuals has an expected survival rate of 70%. Explain why the realized survival rate in any given year is unlikely to be exactly 70% due to demographic stochasticity.</p>
-<p>:chili:</p>
-<p>The American bison populations have fluctuated a lot over time. At one point, their numbers was reduced to a few individuals. Conservation efforts including recovery plans and protection led to an increase in the bison population in the Yellowstone National Park. In this exercise, we examine the process of population growth in order to forecast the expected future growth of the population and the expected time to reach the target size.</p>
-<p><br></p>
-</section>
-<section id="stepping-stones-in-r" class="level2">
-<h2 class="anchored" data-anchor-id="stepping-stones-in-r">Stepping stones in R</h2>
-<p>The first thing we usually do when we start an R session is:</p>
-<pre><code>(1) Open your existing RStudio Project for this course.
-(2) Create a new R script and save it right away.
-(3) In the script, define key variables, and load any additional packages into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.</code></pre>
-<p>In this exercise, we define our model parameters, and set up a storage vector to store each parameter. We can store data in memory by assigning it to an “object” using the assignment operator &lt;-. For example, the code below would assign the object <span class="math inline">\(r\)</span> the value of 0.1.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Assigning a value to a vector ---------------------------------------------</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.1</span>      <span class="co"># discrete per-capita growth rate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>🌶️ One non-intuitive idea that emerged from Chapter 5 in the text is that (under many conditions) the average growth rate of a population might be much higher than the most likely population trajectory. That is, when conditions are variable, population dynamics are governed not by the arithmetic mean, but rather by the geometric mean. Let’s see how that plays out.</p>
+<p>Suppose a sage grouse population abundance was at 50 individuals in year 2020 and 65 individuals in year 2021. We can calculate the geometric growth rate <span class="math inline">\(\lambda\)</span> and the exponential growth rate <span class="math inline">\(\rho\)</span> as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>N1 <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>N2 <span class="ot">&lt;-</span> <span class="dv">65</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> N2<span class="sc">/</span>N1  <span class="co"># geometric growth rate</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fu">log</span>(lambda) <span class="co"># exponential growth rate</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lambda)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rho)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Let <span class="math inline">\(r\)</span> be the discrete per-capita growth rate. Note that any text after a pound sign (#) is not evaluated by R. These are comments and are intended to help you follow the code. You should always include comments in any code that you write as humans tend to read and understand written language better than computer code.</p>
-<p>Now, define the initial population size to an object called <span class="math inline">\(N_0\)</span> (that is, population size at time 0) by assigning the value of 100 to the object <span class="math inline">\(N_0\)</span>, and the number of years (e.g., 30 years) by assigning the value of 30 to the object <span class="math inline">\(nyears\)</span>. <span class="math inline">\((1 + r)\)</span> is equal to <span class="math inline">\(\lambda\)</span> (lambda), the finite rate of growth. The code below stores the result of the calculation <span class="math inline">\((1 + 0.1 = 1.1)\)</span> in the object <span class="math inline">\(lambda\)</span>.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.Define model parameters ----------------------------------------------------</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> r     <span class="co"># the finite rate of growth </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>N0     <span class="ot">&lt;-</span> <span class="dv">100</span>       <span class="co"># initial population size</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>nyears <span class="ot">&lt;-</span> <span class="dv">30</span>        <span class="co"># the number of time steps to simulate data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>We can find the population size at the next time step by multiplying <span class="math inline">\(N_0\)</span> by <span class="math inline">\(lambda\)</span>. As soon as you run the code below, the result of the calculation is printed.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.Vector operations ----------------------------------------------------------</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="sc">*</span> N0      <span class="co"># Multiply the value stored in the object "N0" by lambda. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>How can we find the population size for the next 30 years? First, make an object that is a vector of years using the “sequence” function: seq(). Remember, you can look up the arguments of this function by executing ?seq().</p>
-<p>The code below, creates a sequence of numbers from 0 to the value stored in the object <span class="math inline">\(nyears\)</span> (in this case, 30). By executing the code below, you’ve created a string of numbers from 0 - 30 (increment by 1) that contains 31 elements. A single series of elements (e.g., a single column of numbers) is called a vector. You then assign this vector to the object <span class="math inline">\(year\)</span>.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4.Create a sequence of numbers -----------------------------------------------</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> nyears, <span class="at">by =</span> <span class="dv">1</span>)  </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>year         <span class="co"># Print the value of the object "year" that you just created.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Let’s build a storage structure for simulated population size over this time period. The number of values to store is one more than <span class="math inline">\(nyears\)</span> (because it includes year 0). Thus, we define a vector to contain the value of <span class="math inline">\(nyears + 1\)</span>, and use that to simulate population size as below.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5.Create an empty vector -----------------------------------------------------</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>vec_size <span class="ot">&lt;-</span> nyears <span class="sc">+</span> <span class="dv">1</span>  </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">numeric</span>(vec_size)    <span class="co"># Make an empty storage vector, called N </span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(N) <span class="ot">&lt;-</span> year          <span class="co"># Link each N value with its corresponding year </span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>N                         <span class="co"># Print the contents of the object "N"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The numeric() function takes the contents within the parentheses and converts those contents to the “numeric” class. What you need to know is that the value within the parentheses (here is 31) is used to tell this function how many zeros to create. So, this line of code creates a vector of 31 zeros, and assigns that vector to the object “N”.</p>
-<p>We have already defined the initial population size <span class="math inline">\(N_0\)</span> above. We can assign that value to the first element in our vector of population size <span class="math inline">\(N\)</span> as below. The brackets [ ] are used to indicate the position of an element within a vector.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.reassign values in a vector ------------------------------------------------</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>N[<span class="dv">1</span>] <span class="ot">&lt;-</span> N0</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>N</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>If you print the contents of the object <span class="math inline">\(N\)</span>, you will find that the first zero is now changes to 100. Remember, the <span class="math inline">\(N\)</span> object is a vector of 31 zeros representing year 0 to year 30.</p>
-<p>We can now find the population size at year 30, by applying this equation: <span class="math inline">\(N_t = N_0\)</span> <span class="math inline">\(\lambda^t\)</span>.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 7.Find abundance for one year ------------------------------------------------</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>N30 <span class="ot">&lt;-</span> N0 <span class="sc">*</span> lambda <span class="sc">^</span> nyears</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(N30)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>However, instead of typing one line of code per year, we can use a “for loop” in R to repeat this line and find the population size per year. Because we stored the value of <span class="math inline">\(N_0\)</span> as the first element of <span class="math inline">\(N\)</span>, we start the for loop to simulate data from year 1.</p>
-<p>The for-loop will run through the line of code between the curly brackets {}. <span class="math inline">\(i\)</span> is the name of a variable (you can use <span class="math inline">\(j\)</span>, or <span class="math inline">\(k\)</span>, or any variable name you like. <span class="math inline">\(i\)</span> changes each time the loop iterates; It will increase by 1 each time the loop is run, starting at 2 up until the specified maximum number of iterations.</p>
-<p>The code between the curly brackets takes the [<span class="math inline">\(i - 1\)</span>] element of <span class="math inline">\(N\)</span>, multiplies that element by the value of <span class="math inline">\(lambda\)</span>, then assigns that calculated result to the [<span class="math inline">\(i\)</span>] element of <span class="math inline">\(N\)</span>.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. Find abundnace for many years ---------------------------------------------</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span> <span class="sc">:</span> vec_size) {  <span class="co"># the loop starts here   </span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  N[i] <span class="ot">&lt;-</span> N[i<span class="dv">-1</span>] <span class="sc">*</span> lambda  </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>}                          <span class="co"># the loop ends here</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(N)                   <span class="co"># print the contents of the object "N" (rounded).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>This is the simplest model of population growth, called the exponential growth model. The exponential growth occurs in nature when a species is not limited by other species (no predation, parasitism, or competitors), resources are not limited, and the environment is constant. Colonization, or recovery of a population after a large-scale disturbance (fires, crash from disease) can temporarily allow exponential growth.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 9. Visualize changes of abundnace over time ----------------------------------</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(N <span class="sc">~</span> year,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Year"</span>,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Population size"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">"turquoise"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="600"></p>
-</figure>
+<p>If managers have monitored the sage grouse population over 10 years, we can use the time-series to calculate the annual growth rate <span class="math inline">\(\lambda_y\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="dv">2012</span><span class="sc">:</span><span class="dv">2021</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>abundance <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">52</span>, <span class="dv">43</span>, <span class="dv">90</span>, <span class="dv">125</span>, <span class="dv">72</span>, <span class="dv">128</span>, <span class="dv">97</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">65</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>sg_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">length</span>(year), <span class="at">ncol =</span> <span class="dv">3</span>))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sg_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"abundance"</span>, <span class="st">"lambda_y"</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>sg_data<span class="sc">$</span>year <span class="ot">&lt;-</span> year</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>sg_data<span class="sc">$</span>abundance <span class="ot">&lt;-</span> abundance</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sg_data<span class="sc">$</span>year)) {</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  sg_data<span class="sc">$</span>lambda_y[i] <span class="ot">&lt;-</span> sg_data<span class="sc">$</span>abundance[i <span class="sc">+</span> <span class="dv">1</span>] <span class="sc">/</span> sg_data<span class="sc">$</span>abundance[i]</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sg_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   year abundance  lambda_y
+1  2012        52 0.8269231
+2  2013        43 2.0930233
+3  2014        90 1.3888889
+4  2015       125 0.5760000
+5  2016        72 1.7777778
+6  2017       128 0.7578125
+7  2018        97 0.5154639
+8  2019        50 1.0000000
+9  2020        50 1.3000000
+10 2021        65        NA</code></pre>
 </div>
 </div>
+<p>Now, to calculate the average annual growth rate we need to understand the difference between the arithmetic mean <span class="math inline">\(\lambda_a\)</span> vs the geometric mean <span class="math inline">\(\lambda_g\)</span>. We calculated <span class="math inline">\(\rho\)</span> above based on <span class="math inline">\(\lambda_g\)</span>, but what it means is a constant fraction or proportion of the current population is added to or subtracted from the population continuously or instantaneously. The geometric growth means a constant fraction or proportion of the current population is added to or subtracted from the population at each discrete time step. Finally, the arithmetic Growth means a constant number of individuals is added to or subtracted from the population at each time step, regardless of the current population size.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Arithmetic mean</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>lambda_a <span class="ot">&lt;-</span> <span class="fu">mean</span>(sg_data<span class="sc">$</span>lambda_y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Geometric Mean</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>lambda_g <span class="ot">&lt;-</span> <span class="fu">prod</span>(sg_data<span class="sc">$</span>lambda_y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">^</span> (<span class="dv">1</span> <span class="sc">/</span> <span class="fu">length</span>(sg_data<span class="sc">$</span>lambda_y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This plot() function tells R to plot the y variable by the x variable. “N” is the y variable (dependent variable), and “year” is the x variable (independent variable). The tilde “~” stands for “as a function of”. There are many ways to customize the appearance of a plot in R - for now, I specified color and axes lables (xlab and ylab).</p>
-<p>You could change the discrete per-capita growth rate <span class="math inline">\(r\)</span> and find out how the change in population size over time varies with the different <span class="math inline">\(r\)</span> values (7% and 25% discrete annual growth rate). First, create a vector of values as below.</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10. Creat a vector -----------------------------------------------------------</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.07</span>, <span class="fl">0.07</span>, <span class="fl">0.25</span>) <span class="co"># discrete per-capita growth rate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With a known growth rate, projection of abundance is done based on: <span class="math inline">\(N_{t+1}\)</span> = <span class="math inline">\(N_{t}\)</span> <span class="math inline">\(\lambda\)</span> or equally based on: <span class="math inline">\(N_{t}\)</span> = <span class="math inline">\(N_{1}\)</span> <span class="math inline">\(\lambda^t\)</span>. If we project abundance of the grouse population based on these two calculated growth averages, we get different numbers. You noticed that <span class="math inline">\(\lambda_y\)</span> for the year 2021 was NA, and the abundance for this year was 65. Which of the two growth rate averages leads to this abundance for the year 2021? As you see below, <span class="math inline">\(\lambda_g\)</span> describes the most likely future trajectory of a population with stochastic growth. Overall, <span class="math inline">\(\lambda_g\)</span> is smaller than <span class="math inline">\(\lambda_a\)</span> whenever <span class="math inline">\(\lambda_y\)</span> varies across the years.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lambda_a)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(lambda_g)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Projected N</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>sg_data<span class="sc">$</span>abundance[<span class="dv">1</span>] <span class="sc">*</span> (lambda_a <span class="sc">^</span> <span class="fu">length</span>(year))</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>sg_data<span class="sc">$</span>abundance[<span class="dv">1</span>] <span class="sc">*</span> (lambda_g <span class="sc">^</span> <span class="fu">length</span>(year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>When we use this model to forecast future population size, we assume that parameters are constant. However, if conditions change then all bets are off. It is more realistic to assume that in some years the population increases slightly faster than average. In other years the population declines, despite the overall increasing trend. Many factors can influence the rate of population growth. One of the most common reasons is random variation in environmental conditions. Some winters are colder than others which lead to higher than average death rates. Some breeding seasons may be particularly productive so there is a higher than average rate of reproduction. Therefore, we often estimate the population growth rate as a point estimate (e.g., mean) with uncertainty around the estimate (e.g., variance). For simplicity, we assumed a constant growth rate in this exercise. <br></p>
-</section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<p>We saw in the text the two intuitive ways most commonly used to estimate average exponential trend: a) drawing a line through the log(abundance) data over time; b) taking simple averages of the consecutive series of r values. However, we also saw that these methods can give different, and possibly inappropriate, answers because they make fundamentally different assumptions about the processes that cause variation in population growth over time. The first approach assumes that all the variation in the abundances over time comes from observation error (OE). The second assumes that all the variation in the average growth rate arises from process noise (PN). Here we’ll get some hands-on practice with the EGOE and EGPN trend estimators and will analyze both sources of variation at once using a state-space model (EGSS).</p>
 <div style="background-color:beige;">
-<p><strong>Questions:</strong></p>
+<p><strong>Practice:</strong></p>
 <ol type="1">
-<li><p>What is the population size at year 30 if the annual growth rate was 7%, -7%, or 25%? Provide all coding steps you take to find the answers.</p></li>
-<li><p>Visualize changes of population size over time with annual growth rate of 7%, -7%, and 25%. Using par() function, create a multipanel figure to show the three plots side by side. Remember to indicate the growth rate value of each plot and include code for all of these steps.</p></li>
-<li><p>Use trial and error to modify the value of <span class="math inline">\(r\)</span> (discrete annual rate of growth) such that the final population size after 50 years is as close as possible to 2000 (initial population is still 100). What is the value of <span class="math inline">\(r\)</span> you identified by trial and error?</p></li>
-<li><p>In this exercise, let’s define extinction as population size equals zero. When this population is decreasing, how long does it take until the population goes extinct?</p></li>
-<li><p>Bonus: Can you solve the equation in step #7 for <span class="math inline">\(r\)</span> and analytically find <span class="math inline">\(r\)</span> in Question 3? Write the equation/code in your answer.</p></li>
-<li><p>Bonus: Can you use a for-loop to answer Questions 1-2? Remember to include the complete code to reproduce the results.</p></li>
+<li>With an initial abundance of 50 in year 2020, project abundance for years 2025 and 2027, assuming situations (a) and (b) and then visualize the two projections of population abundnace.</li>
+</ol>
+<!-- -->
+<ol type="a">
+<li>growth is deterministic (<span class="math inline">\(\lambda_y\)</span> = 1.05) over the years.</li>
+<li>growth is stochastic and fluctuates between 1.55 and 0.55 (<span class="math inline">\(\lambda_{2020}\)</span> = 1.05, <span class="math inline">\(\lambda_{2021}\)</span> = 0.55, <span class="math inline">\(\lambda_{2022}\)</span> = 1.05, <span class="math inline">\(\lambda_{2023}\)</span> = 0.55, etc).</li>
 </ol>
 </div>
+<p><br></p>
 <hr>
 </section>
 <section id="chapter-6-structured-population-projection-models" class="level2">
@@ -364,9 +720,9 @@ window.Quarto = {
 <p><u>2.</u> Each adult frog has a reproductive value 300 times higher than a pre-juvenile (Fig. 6.7). If you have limited funds for a translocation, which stage should you prioritize to jump-start population growth?</p>
 <p><u>3.</u> Using the loggerhead sea turtle example, explain why increasing hatchling survival alone was insufficient to stop the population decline.</p>
 <p><u>4.</u> Suppose you are tasked with studying a caribou population, and you want to know what the analytical sensitivity is for adult survival. Prior to calculating sensitivity, you estimated the asymptotic population growth rate as 1.053. You add 0.01 to adult survival and calculate the new growth rate as 1.064. What is the analytical sensitivity of adult survival?</p>
-<p><img src="images/lf_28.png" class="img-fluid"></p>
-<p><img src="images/lf_30.png" class="img-fluid"></p>
-<p>:chili: Above, you are presented two life cycle diagrams of two bird species. Please answer 10 questions below for each of the two diagrams.</p>
+<p><img src="images/lf_28.png" class="img-fluid" width="1000"></p>
+<p><img src="images/lf_30.png" class="img-fluid" width="1000"></p>
+<p>🌶️Above, you are presented two life cycle diagrams of two bird species. Please answer 10 questions below for each of the two diagrams.</p>
 <div style="background-color:beige;">
 <p><strong>Questions:</strong></p>
 <ol type="1">
@@ -388,6 +744,7 @@ window.Quarto = {
 <p><u>1.</u> Draw a graph showing how population size varies over time for a population following logistic growth. Label your axes appropriately and use this graph to answer the following questions. a. Where is the population growing the fastest? Circle that region and label it with “A”. b. Where is population growth limited by the number of individuals? Circle that region and label it with “B”. c.&nbsp;Where is the population limited by small per-capita growth rate? Circle that region and label it “C”. d.&nbsp;For the region of the graph you labelled “C,” what might be causing the low per-capita growth rate?</p>
 <p><u>2.</u> What is a strong Allee effect? Explain why a population might decline toward extinction even if $N &gt; 2$.</p>
 <p><u>3.</u> Draw two graphs showing how per capita mortality rate could vary with population size. If birth rate is constant in both graphs, indicate the carrying capacity, positive population growth and negative or positive density dependence on each graph.</p>
+<p>🌶️ This is a spicy exercise!</p>
 <hr>
 </section>
 <section id="chapter-8-predation-and-wildlife-populations" class="level2">
