@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -68,6 +103,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -95,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./about.html"> 
-<span class="menu-text">About</span></a>
+<span class="menu-text">Conservation of Wildlife Populations, 3rd Edition</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -118,6 +182,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#chapter-3-genetic-concepts-and-tools" id="toc-chapter-3-genetic-concepts-and-tools" class="nav-link" data-scroll-target="#chapter-3-genetic-concepts-and-tools">Chapter 3: Genetic Concepts and Tools</a></li>
   <li><a href="#chapter-4-estimating-population-size-and-vital-rates" id="toc-chapter-4-estimating-population-size-and-vital-rates" class="nav-link" data-scroll-target="#chapter-4-estimating-population-size-and-vital-rates">Chapter 4: Estimating Population Size and Vital Rates</a></li>
   <li><a href="#chapter-5-exponential-or-geometric-change" id="toc-chapter-5-exponential-or-geometric-change" class="nav-link" data-scroll-target="#chapter-5-exponential-or-geometric-change">Chapter 5: Exponential (or Geometric) Change</a></li>
+  <li><a href="#stepping-stones-in-r" id="toc-stepping-stones-in-r" class="nav-link" data-scroll-target="#stepping-stones-in-r">Stepping stones in R</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#chapter-6-structured-population-projection-models" id="toc-chapter-6-structured-population-projection-models" class="nav-link" data-scroll-target="#chapter-6-structured-population-projection-models">Chapter 6: Structured Population-Projection Models</a></li>
   <li><a href="#chapter-7-density-dependent-population-change" id="toc-chapter-7-density-dependent-population-change" class="nav-link" data-scroll-target="#chapter-7-density-dependent-population-change">Chapter 7: Density-Dependent Population Change</a></li>
   <li><a href="#chapter-8-predation-and-wildlife-populations" id="toc-chapter-8-predation-and-wildlife-populations" class="nav-link" data-scroll-target="#chapter-8-predation-and-wildlife-populations">Chapter 8: Predation and Wildlife Populations</a></li>
@@ -186,6 +252,111 @@ ul.task-list li input[type="checkbox"] {
 <p><u>1.</u> Use the discrete population growth model to find the abundance of a population last year if the abundance is 2,000 this year and the geometric growth rate is 0.5. a. By what percentage is the population increasing or decreasing each year? b. Starting from the population size this year, what will the size of the population be if it continues to grow at the same rate for a total of 4 years? c.&nbsp;What is the population’s instantaneous growth rate if it takes 2 years to double in size? d.&nbsp;Based on the instantaneous growth rate, is this population stable, growing, or shrinking?</p>
 <p><u>2.</u> Why is the geometric mean a better descriptor of a fluctuating population’s long-term growth than the arithmetic mean?</p>
 <p><u>3.</u> A population of 10 individuals has an expected survival rate of 70%. Explain why the realized survival rate in any given year is unlikely to be exactly 70% due to demographic stochasticity.</p>
+<p>:chili:</p>
+<p>The American bison populations have fluctuated a lot over time. At one point, their numbers was reduced to a few individuals. Conservation efforts including recovery plans and protection led to an increase in the bison population in the Yellowstone National Park. In this exercise, we examine the process of population growth in order to forecast the expected future growth of the population and the expected time to reach the target size.</p>
+<p><br></p>
+</section>
+<section id="stepping-stones-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="stepping-stones-in-r">Stepping stones in R</h2>
+<p>The first thing we usually do when we start an R session is:</p>
+<pre><code>(1) Open your existing RStudio Project for this course.
+(2) Create a new R script and save it as "Lab03_YOURNAME.R"
+(3) In the script, define key variables, and load any additional packages
+into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.</code></pre>
+<p>In this exercise, we define our model parameters, and set up a storage vector to store each parameter. We can store data in memory by assigning it to an “object” using the assignment operator &lt;-. For example, the code below would assign the object <span class="math inline">\(r\)</span> the value of 0.1.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Assigning a value to a vector ---------------------------------------------</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">0.1</span>      <span class="co"># discrete per-capita growth rate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let <span class="math inline">\(r\)</span> be the discrete per-capita growth rate. Note that any text after a pound sign (#) is not evaluated by R. These are comments and are intended to help you follow the code. You should always include comments in any code that you write as humans tend to read and understand written language better than computer code.</p>
+<p>Now, define the initial population size to an object called <span class="math inline">\(N_0\)</span> (that is, population size at time 0) by assigning the value of 100 to the object <span class="math inline">\(N_0\)</span>, and the number of years (e.g., 30 years) by assigning the value of 30 to the object <span class="math inline">\(nyears\)</span>. <span class="math inline">\((1 + r)\)</span> is equal to <span class="math inline">\(\lambda\)</span> (lambda), the finite rate of growth. The code below stores the result of the calculation <span class="math inline">\((1 + 0.1 = 1.1)\)</span> in the object <span class="math inline">\(lambda\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.Define model parameters ----------------------------------------------------</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> r     <span class="co"># the finite rate of growth </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>N0     <span class="ot">&lt;-</span> <span class="dv">100</span>       <span class="co"># initial population size</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>nyears <span class="ot">&lt;-</span> <span class="dv">30</span>        <span class="co"># the number of time steps to simulate data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can find the population size at the next time step by multiplying <span class="math inline">\(N_0\)</span> by <span class="math inline">\(lambda\)</span>. As soon as you run the code below, the result of the calculation is printed.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.Vector operations ----------------------------------------------------------</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>lambda <span class="sc">*</span> N0      <span class="co"># Multiply the value stored in the object "N0" by lambda. </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How can we find the population size for the next 30 years? First, make an object that is a vector of years using the “sequence” function: seq(). Remember, you can look up the arguments of this function by executing ?seq().</p>
+<p>The code below, creates a sequence of numbers from 0 to the value stored in the object <span class="math inline">\(nyears\)</span> (in this case, 30). By executing the code below, you’ve created a string of numbers from 0 - 30 (increment by 1) that contains 31 elements. A single series of elements (e.g., a single column of numbers) is called a vector. You then assign this vector to the object <span class="math inline">\(year\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4.Create a sequence of numbers -----------------------------------------------</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> nyears, <span class="at">by =</span> <span class="dv">1</span>)  </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>year         <span class="co"># Print the value of the object "year" that you just created.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s build a storage structure for simulated population size over this time period. The number of values to store is one more than <span class="math inline">\(nyears\)</span> (because it includes year 0). Thus, we define a vector to contain the value of <span class="math inline">\(nyears + 1\)</span>, and use that to simulate population size as below.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5.Create an empty vector -----------------------------------------------------</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>vec_size <span class="ot">&lt;-</span> nyears <span class="sc">+</span> <span class="dv">1</span>  </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">numeric</span>(vec_size)    <span class="co"># Make an empty storage vector, called N </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(N) <span class="ot">&lt;-</span> year          <span class="co"># Link each N value with its corresponding year </span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>N                         <span class="co"># Print the contents of the object "N"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The numeric() function takes the contents within the parentheses and converts those contents to the “numeric” class. What you need to know is that the value within the parentheses (here is 31) is used to tell this function how many zeros to create. So, this line of code creates a vector of 31 zeros, and assigns that vector to the object “N”.</p>
+<p>We have already defined the initial population size <span class="math inline">\(N_0\)</span> above. We can assign that value to the first element in our vector of population size <span class="math inline">\(N\)</span> as below. The brackets [ ] are used to indicate the position of an element within a vector.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.reassign values in a vector ------------------------------------------------</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>N[<span class="dv">1</span>] <span class="ot">&lt;-</span> N0</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>N</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If you print the contents of the object <span class="math inline">\(N\)</span>, you will find that the first zero is now changes to 100. Remember, the <span class="math inline">\(N\)</span> object is a vector of 31 zeros representing year 0 to year 30.</p>
+<p>We can now find the population size at year 30, by applying this equation: <span class="math inline">\(N_t = N_0\)</span> <span class="math inline">\(\lambda^t\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 7.Find abundance for one year ------------------------------------------------</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>N30 <span class="ot">&lt;-</span> N0 <span class="sc">*</span> lambda <span class="sc">^</span> nyears</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(N30)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>However, instead of typing one line of code per year, we can use a “for loop” in R to repeat this line and find the population size per year. Because we stored the value of <span class="math inline">\(N_0\)</span> as the first element of <span class="math inline">\(N\)</span>, we start the for loop to simulate data from year 1.</p>
+<p>The for-loop will run through the line of code between the curly brackets {}. <span class="math inline">\(i\)</span> is the name of a variable (you can use <span class="math inline">\(j\)</span>, or <span class="math inline">\(k\)</span>, or any variable name you like. <span class="math inline">\(i\)</span> changes each time the loop iterates; It will increase by 1 each time the loop is run, starting at 2 up until the specified maximum number of iterations.</p>
+<p>The code between the curly brackets takes the [<span class="math inline">\(i - 1\)</span>] element of <span class="math inline">\(N\)</span>, multiplies that element by the value of <span class="math inline">\(lambda\)</span>, then assigns that calculated result to the [<span class="math inline">\(i\)</span>] element of <span class="math inline">\(N\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. Find abundnace for many years ---------------------------------------------</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span> <span class="sc">:</span> vec_size) {  <span class="co"># the loop starts here   </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  N[i] <span class="ot">&lt;-</span> N[i<span class="dv">-1</span>] <span class="sc">*</span> lambda  </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>}                          <span class="co"># the loop ends here</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(N)                   <span class="co"># print the contents of the object "N" (rounded).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This is the simplest model of population growth, called the exponential growth model. The exponential growth occurs in nature when a species is not limited by other species (no predation, parasitism, or competitors), resources are not limited, and the environment is constant. Colonization, or recovery of a population after a large-scale disturbance (fires, crash from disease) can temporarily allow exponential growth.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 9. Visualize changes of abundnace over time ----------------------------------</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(N <span class="sc">~</span> year,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Year"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Population size"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col  =</span> <span class="st">"turquoise"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="600"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This plot() function tells R to plot the y variable by the x variable. “N” is the y variable (dependent variable), and “year” is the x variable (independent variable). The tilde “~” stands for “as a function of”. There are many ways to customize the appearance of a plot in R - for now, I specified color and axes lables (xlab and ylab).</p>
+<p>You could change the discrete per-capita growth rate <span class="math inline">\(r\)</span> and find out how the change in population size over time varies with the different <span class="math inline">\(r\)</span> values (7% and 25% discrete annual growth rate). First, create a vector of values as below.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 10. Creat a vector -----------------------------------------------------------</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.07</span>, <span class="fl">0.07</span>, <span class="fl">0.25</span>) <span class="co"># discrete per-capita growth rate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When we use this model to forecast future population size, we assume that parameters are constant. However, if conditions change then all bets are off. It is more realistic to assume that in some years the population increases slightly faster than average. In other years the population declines, despite the overall increasing trend. Many factors can influence the rate of population growth. One of the most common reasons is random variation in environmental conditions. Some winters are colder than others which lead to higher than average death rates. Some breeding seasons may be particularly productive so there is a higher than average rate of reproduction. Therefore, we often estimate the population growth rate as a point estimate (e.g., mean) with uncertainty around the estimate (e.g., variance). For simplicity, we assumed a constant growth rate in this exercise. <br></p>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<div style="background-color:beige;">
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li><p>What is the population size at year 30 if the annual growth rate was 7%, -7%, or 25%? Provide all coding steps you take to find the answers.</p></li>
+<li><p>Visualize changes of population size over time with annual growth rate of 7%, -7%, and 25%. Using par() function, create a multipanel figure to show the three plots side by side. Remember to indicate the growth rate value of each plot and include code for all of these steps.</p></li>
+<li><p>Use trial and error to modify the value of <span class="math inline">\(r\)</span> (discrete annual rate of growth) such that the final population size after 50 years is as close as possible to 2000 (initial population is still 100). What is the value of <span class="math inline">\(r\)</span> you identified by trial and error?</p></li>
+<li><p>In this exercise, let’s define extinction as population size equals zero. When this population is decreasing, how long does it take until the population goes extinct?</p></li>
+<li><p>Bonus: Can you solve the equation in step #7 for <span class="math inline">\(r\)</span> and analytically find <span class="math inline">\(r\)</span> in Question 3? Write the equation/code in your answer.</p></li>
+<li><p>Bonus: Can you use a for-loop to answer Questions 1-2? Remember to include the complete code to reproduce the results.</p></li>
+</ol>
+</div>
 <hr>
 </section>
 <section id="chapter-6-structured-population-projection-models" class="level2">
@@ -194,7 +365,22 @@ ul.task-list li input[type="checkbox"] {
 <p><u>2.</u> Each adult frog has a reproductive value 300 times higher than a pre-juvenile (Fig. 6.7). If you have limited funds for a translocation, which stage should you prioritize to jump-start population growth?</p>
 <p><u>3.</u> Using the loggerhead sea turtle example, explain why increasing hatchling survival alone was insufficient to stop the population decline.</p>
 <p><u>4.</u> Suppose you are tasked with studying a caribou population, and you want to know what the analytical sensitivity is for adult survival. Prior to calculating sensitivity, you estimated the asymptotic population growth rate as 1.053. You add 0.01 to adult survival and calculate the new growth rate as 1.064. What is the analytical sensitivity of adult survival?</p>
-<hr>
+<p>:chili: Above, you are presented two life cycle diagrams of two bird species. Please answer 10 questions below for each of the two diagrams.</p>
+<div style="background-color:beige;">
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li><p>Based on the diagram, is the life cycle age-structured or stage-structured? Describe your reason.</p></li>
+<li><p>For this population, what is age/stage at first reproduction?</p></li>
+<li><p>What percentage of individuals stay in Class 1 each year?</p></li>
+<li><p>What does each arrow represent?</p></li>
+<li><p>What does each number on each arrow represent?</p></li>
+<li><p>What percentage of individuals in the last class survive each year?</p></li>
+<li><p>Could you compare survival of individuals in this population?</p></li>
+<li><p>Write out the projection matrix for this population (using parameter names and numbers).</p></li>
+<li><p>Write out the equation to project the population forward 1 year.</p></li>
+<li><p>Can you summarise the profile of this bird? Can you make a guess on the species name?</p></li>
+</ol>
+</div>
 </section>
 <section id="chapter-7-density-dependent-population-change" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-7-density-dependent-population-change">Chapter 7: Density-Dependent Population Change</h2>

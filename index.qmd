@@ -56,6 +56,142 @@ title: "Conservation of Wildlife Populations Exercises, 3rd Edition"
 
 [3.]{.underline} A population of 10 individuals has an expected survival rate of 70%. Explain why the realized survival rate in any given year is unlikely to be exactly 70% due to demographic stochasticity.
 
+:chili:
+
+The American bison populations have fluctuated a lot over time. At one point, their numbers was reduced to a few individuals. Conservation efforts including recovery plans and protection led to an increase in the bison population in the Yellowstone National Park. In this exercise, we examine the process of population growth in order to forecast the expected future growth of the population and the expected time to reach the target size.
+
+<br>
+
+## Stepping stones in R
+
+The first thing we usually do when we start an R session is:
+
+```         
+(1) Open your existing RStudio Project for this course.
+(2) Create a new R script and save it as "Lab03_YOURNAME.R"
+(3) In the script, define key variables, and load any additional packages
+into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.
+```
+
+In this exercise, we define our model parameters, and set up a storage vector to store each parameter. We can store data in memory by assigning it to an “object” using the assignment operator \<-. For example, the code below would assign the object $r$ the value of 0.1.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 1. Assigning a value to a vector ---------------------------------------------
+r <- 0.1      # discrete per-capita growth rate
+```
+
+Let $r$ be the discrete per-capita growth rate. Note that any text after a pound sign (#) is not evaluated by R. These are comments and are intended to help you follow the code. You should always include comments in any code that you write as humans tend to read and understand written language better than computer code.
+
+Now, define the initial population size to an object called $N_0$ (that is, population size at time 0) by assigning the value of 100 to the object $N_0$, and the number of years (e.g., 30 years) by assigning the value of 30 to the object $nyears$. $(1 + r)$ is equal to $\lambda$ (lambda), the finite rate of growth. The code below stores the result of the calculation $(1 + 0.1 = 1.1)$ in the object $lambda$.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 2.Define model parameters ----------------------------------------------------
+lambda <- 1 + r     # the finite rate of growth 
+N0     <- 100       # initial population size
+nyears <- 30        # the number of time steps to simulate data
+```
+
+We can find the population size at the next time step by multiplying $N_0$ by $lambda$. As soon as you run the code below, the result of the calculation is printed.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 3.Vector operations ----------------------------------------------------------
+lambda * N0      # Multiply the value stored in the object "N0" by lambda. 
+```
+
+How can we find the population size for the next 30 years? First, make an object that is a vector of years using the “sequence” function: seq(). Remember, you can look up the arguments of this function by executing ?seq().
+
+The code below, creates a sequence of numbers from 0 to the value stored in the object $nyears$ (in this case, 30). By executing the code below, you've created a string of numbers from 0 - 30 (increment by 1) that contains 31 elements. A single series of elements (e.g., a single column of numbers) is called a vector. You then assign this vector to the object $year$.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 4.Create a sequence of numbers -----------------------------------------------
+year <- seq(from = 0, to = nyears, by = 1)  
+year         # Print the value of the object "year" that you just created.
+```
+
+Let's build a storage structure for simulated population size over this time period. The number of values to store is one more than $nyears$ (because it includes year 0). Thus, we define a vector to contain the value of $nyears + 1$, and use that to simulate population size as below.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 5.Create an empty vector -----------------------------------------------------
+vec_size <- nyears + 1  
+N <- numeric(vec_size)    # Make an empty storage vector, called N 
+names(N) <- year          # Link each N value with its corresponding year 
+N                         # Print the contents of the object "N"
+```
+
+The numeric() function takes the contents within the parentheses and converts those contents to the "numeric" class. What you need to know is that the value within the parentheses (here is 31) is used to tell this function how many zeros to create. So, this line of code creates a vector of 31 zeros, and assigns that vector to the object "N".
+
+We have already defined the initial population size $N_0$ above. We can assign that value to the first element in our vector of population size $N$ as below. The brackets \[ \] are used to indicate the position of an element within a vector.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 6.reassign values in a vector ------------------------------------------------
+N[1] <- N0
+N
+```
+
+If you print the contents of the object $N$, you will find that the first zero is now changes to 100. Remember, the $N$ object is a vector of 31 zeros representing year 0 to year 30.
+
+We can now find the population size at year 30, by applying this equation: $N_t = N_0$ $\lambda^t$.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 7.Find abundance for one year ------------------------------------------------
+N30 <- N0 * lambda ^ nyears
+round(N30)
+```
+
+However, instead of typing one line of code per year, we can use a "for loop" in R to repeat this line and find the population size per year. Because we stored the value of $N_0$ as the first element of $N$, we start the for loop to simulate data from year 1.
+
+The for-loop will run through the line of code between the curly brackets {}. $i$ is the name of a variable (you can use $j$, or $k$, or any variable name you like. $i$ changes each time the loop iterates; It will increase by 1 each time the loop is run, starting at 2 up until the specified maximum number of iterations.
+
+The code between the curly brackets takes the \[$i - 1$\] element of $N$, multiplies that element by the value of $lambda$, then assigns that calculated result to the \[$i$\] element of $N$.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 8. Find abundnace for many years ---------------------------------------------
+for (i in 2 : vec_size) {  # the loop starts here   
+  N[i] <- N[i-1] * lambda  
+}                          # the loop ends here
+
+round(N)                   # print the contents of the object "N" (rounded).
+```
+
+This is the simplest model of population growth, called the exponential growth model. The exponential growth occurs in nature when a species is not limited by other species (no predation, parasitism, or competitors), resources are not limited, and the environment is constant. Colonization, or recovery of a population after a large-scale disturbance (fires, crash from disease) can temporarily allow exponential growth.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 9. Visualize changes of abundnace over time ----------------------------------
+plot(N ~ year,
+     xlab = "Year",
+     ylab = "Population size",
+     col  = "turquoise") 
+```
+
+This plot() function tells R to plot the y variable by the x variable. "N" is the y variable (dependent variable), and "year" is the x variable (independent variable). The tilde "\~" stands for "as a function of". There are many ways to customize the appearance of a plot in R - for now, I specified color and axes lables (xlab and ylab).
+
+You could change the discrete per-capita growth rate $r$ and find out how the change in population size over time varies with the different $r$ values (7% and 25% discrete annual growth rate). First, create a vector of values as below.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 10. Creat a vector -----------------------------------------------------------
+r <- c(-0.07, 0.07, 0.25) # discrete per-capita growth rate
+```
+
+When we use this model to forecast future population size, we assume that parameters are constant. However, if conditions change then all bets are off. It is more realistic to assume that in some years the population increases slightly faster than average. In other years the population declines, despite the overall increasing trend. Many factors can influence the rate of population growth. One of the most common reasons is random variation in environmental conditions. Some winters are colder than others which lead to higher than average death rates. Some breeding seasons may be particularly productive so there is a higher than average rate of reproduction. Therefore, we often estimate the population growth rate as a point estimate (e.g., mean) with uncertainty around the estimate (e.g., variance). For simplicity, we assumed a constant growth rate in this exercise. <br>
+
+## 
+
+::: {style="background-color:beige;"}
+**Questions:**
+
+(1) What is the population size at year 30 if the annual growth rate was 7%, -7%, or 25%? Provide all coding steps you take to find the answers.
+
+(2) Visualize changes of population size over time with annual growth rate of 7%, -7%, and 25%. Using par() function, create a multipanel figure to show the three plots side by side. Remember to indicate the growth rate value of each plot and include code for all of these steps.
+
+(3) Use trial and error to modify the value of $r$ (discrete annual rate of growth) such that the final population size after 50 years is as close as possible to 2000 (initial population is still 100). What is the value of $r$ you identified by trial and error?
+
+(4) In this exercise, let's define extinction as population size equals zero. When this population is decreasing, how long does it take until the population goes extinct?
+
+(5) Bonus: Can you solve the equation in step #7 for $r$ and analytically find $r$ in Question 3? Write the equation/code in your answer.
+
+(6) Bonus: Can you use a for-loop to answer Questions 1-2? Remember to include the complete code to reproduce the results.
+:::
+
 ------------------------------------------------------------------------
 
 ## Chapter 6: Structured Population-Projection Models
@@ -68,7 +204,31 @@ title: "Conservation of Wildlife Populations Exercises, 3rd Edition"
 
 [4.]{.underline} Suppose you are tasked with studying a caribou population, and you want to know what the analytical sensitivity is for adult survival. Prior to calculating sensitivity, you estimated the asymptotic population growth rate as 1.053. You add 0.01 to adult survival and calculate the new growth rate as 1.064. What is the analytical sensitivity of adult survival?
 
-------------------------------------------------------------------------
+:chili: Above, you are presented two life cycle diagrams of two bird species. Please answer 10 questions below for each of the two diagrams.
+
+::: {style="background-color:beige;"}
+**Questions:**
+
+(1) Based on the diagram, is the life cycle age-structured or stage-structured? Describe your reason.
+
+(2) For this population, what is age/stage at first reproduction?
+
+(3) What percentage of individuals stay in Class 1 each year?
+
+(4) What does each arrow represent?
+
+(5) What does each number on each arrow represent?
+
+(6) What percentage of individuals in the last class survive each year?
+
+(7) Could you compare survival of individuals in this population?
+
+(8) Write out the projection matrix for this population (using parameter names and numbers).
+
+(9) Write out the equation to project the population forward 1 year.
+
+(10) Can you summarise the profile of this bird? Can you make a guess on the species name?
+:::
 
 ## Chapter 7: Density-Dependent Population Change
 
