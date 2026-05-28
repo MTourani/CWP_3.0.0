@@ -14,9 +14,7 @@ title: "Conservation of Wildlife Populations Exercises, 3rd Edition"
 
 [4.]{.underline} Current extinction rates are estimated to be 10–30 times higher than the background rate. Using the 2 E/MSY baseline, calculate the current range of extinctions per million species per year.
 
-🌶️ The Living Planet Index (LPI) is a measure of the state of the global biodiversity trends, including vertebrate species from terrestrial, freshwater and marine habitats. The 2016 LPI reported a 58% average decline in wild vertebrate populations since 1970. In this report, a total of14,152 populations across 3,706 species were included. Based on this report, population sizes of vertebrate species have, on average, dropped by more than half in little more than 40 years. The dataset spanning years between 1970 and 2012 is public.
-
-<br>
+🌶️ The Living Planet Index (LPI) is a measure of the state of the global biodiversity trends, including vertebrate species from terrestrial, freshwater and marine habitats. The 2016 LPI reported a 58% average decline in wild vertebrate populations since 1970. In this report, a total of 14,152 populations across 3,706 species were included. Based on this report, population sizes of vertebrate species have, on average, dropped by more than half in little more than 40 years. The dataset spanning years between 1970 and 2012 is public.
 
 ::: {style="background-color:beige;"}
 **Questions:**
@@ -26,7 +24,7 @@ title: "Conservation of Wildlife Populations Exercises, 3rd Edition"
 (2) Showcase a potential issue with the LPI. Hint: use data summaries and visualization in R to break down data, e.g., by taxa, realm, and continent. Bonus: Showcase a remedy to the issue.
 :::
 
-Where to start? You can use program R for data analysis. Access data, summarize, and visualize it.
+Where to start? You can use program R to load, summarize, visualize, and analyze data.
 
 ## Stepping stones in R
 
@@ -50,14 +48,9 @@ c\. What would happen to the standard deviation (SD) if the sample size increase
 
 [2.]{.underline} In the context of endangered species monitoring (Table 2.1), describe Type I and Type II errors and identify their conservation consequences in this context.
 
-🌶️ <br>
-
-Gaining reliable knowledge in applied wildlife population ecology requires a rigourous and formal process coupling ideas (hypotheses) to reliable measured facts. In the spirit of “embracing the uncertainty”, in this exercise, we focus on three approaches for inference: maximum likelihood estimation, null hypothesis significant testing, and Bayesian estimation.
-
-Suppose we are tasked with monitoring griffon eggs (also spelled griffin or gryphon). We want to collect evidence on griffons breeding success. We visit 30 nests, and expect to find 20 nests with eggs. The data would look like the plot below.
+🌶️ Gaining reliable knowledge in applied wildlife population ecology requires a rigourous and formal process coupling ideas (hypotheses) to reliable measured facts. In the spirit of “embracing the uncertainty”, in this exercise, we focus on three approaches for inference: maximum likelihood estimation, null hypothesis significant testing, and Bayesian estimation. Suppose we are tasked with monitoring griffon eggs (also spelled griffin or gryphon). We want to collect evidence on griffons breeding success. We visit 30 nests, and expect to find 20 nests with eggs. The data would look like the plot below.
 
 ```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-options(scipen = 999)
 
 trials  <- 30
 success <- 20
@@ -259,151 +252,11 @@ uci <- probs[which.min(abs(cumPost - 0.975))]
 The posterior distributions are mathematically determined once the priors and the likelihood are set. However, the mathematical form of the posterior is sometimes very difficult to deal with. There are several methods to find the shape and other important properties of the posterior in real life examples in later chapters. To name a few, Markov Chain Monte Carlo (MCMC) Simulation, and Laplace approximation are two popular methods in biostatistics.
 
 ::: {style="background-color:beige;"}
-**Practice:**
+**Questions:**
 
-Use plots to explore the data:
-
-1)  We rejected the null hypothesis based on p-value \< 0.05. Use the binom.test() function to test alternative hypotheses about probability of breeding success.
-
-2)  Bayesian posterior depends on prior width and the amount of data. Specify a different prior and change the number of trials to see the impact.
-
-3)  Suppose we count the number of adult griffons that visit a feeding site during one day. Calculate likelihoods of possible values of griffon, assuming the count follows a Poisson distribution.
-:::
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 1.Load required packages--------------------------------
-library(utils)
-
-# 2.Load data---------------------------------------------
-url_remote  <- "https://raw.githubusercontent.com/"
-path_git    <- "MTourani/WILD470_S2025/refs/heads/main/"
-file_name   <- "owid_covid_data_2021.csv"
-data <- utils::read.csv(paste0(url_remote, path_git, file_name))
-
-# 3.Filter data-------------------------------------------
-covid_data <- data[, c("continent",
-                       "location",
-                       "hospital_beds_per_thousand",
-                       "life_expectancy",
-                       "total_cases",
-                       "total_deaths",
-                       "aged_65_older",
-                       "aged_70_older",
-                       "gdp_per_capita"
-)]
-
-clean_data <- na.omit(covid_data) # remove NA
-
-```
-
-We make sure both continent and location are factor variables, with levels referring to actual values still in the filtered data. In addition, we calculate the average values of the number of hospital beds per 1000 inhabitants and life expectancy for each country.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 4.Data summary----------------------------------------------------------
-clean_data$continent <- factor(clean_data$continent)
-clean_data$location  <- factor(clean_data$location)
-avg_data   <- aggregate(. ~ location + continent,
-                        data = clean_data,
-                        FUN = mean,
-                        drop = FALSE,
-                        na.rm = TRUE)
-```
-
-Finally, in anticipation of plots that compare countries in terms of the number of hospital beds per 1000 inhabitants and share of the population that is 65 and older, we sort the rows in the table according to the number of hospital beds, in descending order.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 5.Sort data---------------------------------------------
-avg_data <- avg_data[order(avg_data$hospital_beds_per_thousand,
-                           decreasing = TRUE),]
-
-```
-
-Let's start by looking at the distribution of life expectancy across countries. We can use function hist() to plot a histogram.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 6.Visualize data: histogram---------------------------------------------------
-hist(avg_data$life_expectancy,
-     xlab = "Life expectancy (years)",
-     ylab = "Number of countries",
-     col  = "firebrick3",
-     main = "")
-
-```
-
-Life expectancy at birth has increased almost continuously across the world for the past couple of centuries. COVID-19 in 2020 decreased life expectancy by \>1.5 years, erasing most gains in life expectancy from the previous 5 years. But COVID-19 has tended to cause fatalities disproportionately among older age groups (\>64 and among males). The largest reductions in life expectancy driven by Covid during 2020 were in the United States, where life expectancy for males dropped by \>2 years.
-
-Let's use a scatter plot to see whether there is an indication of a relationship between the average life expectancy and the number of hospital beds. We color code observations according to the continent. In addition, we mark and label the observation for the United States.
-
-```{r, results = "hide", out.width = "450px", fig.align = "center", message = FALSE, warning = FALSE}
-# 7.Visualize data: scatter plot------------------------------------------------
-continent_list <- levels(avg_data$continent)
-colors <- topo.colors(length(continent_list))
-names(colors) <- continent_list
-plot(life_expectancy ~ hospital_beds_per_thousand,
-     data = avg_data,
-     pch  = 19,
-     col  = colors[continent],
-     xlab = "Hospital beds / 1000 inhabitants",
-     ylab = "Life expectancy (years)")
-legend("bottomright",
-       legend = continent_list,
-       pch    = 19,
-       col    = colors,
-       bty    = "n")
-points(life_expectancy ~ hospital_beds_per_thousand,
-       data = avg_data[avg_data$location == "United States",],
-       pch  = 1,
-       col  = "black",
-       cex  = 1.5,
-       lwd  = 2)
-text(avg_data[avg_data$location == "United States",
-              "hospital_beds_per_thousand"], 
-     avg_data[avg_data$location == "United States", 
-              "life_expectancy"],
-     "United States",
-     pos = 3)
-```
-
-The previous plot suggests some pronounced differences between continents both in terms of the average number of hospital beds and average life expectancy. We can visualize these comparisons using box plots.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 8.Visualize data: box plot----------------------------------------------------
-par(mfrow = c(1, 2), mar = c(7, 5, 1, 1), las = 3)
-boxplot(life_expectancy ~ continent,
-        data = avg_data,
-        col  = colors,
-        ylab = "Life expectancy (years)",
-        xlab = NA)
-boxplot(hospital_beds_per_thousand ~ continent,
-        data = avg_data,
-        col  = colors,
-        ylab = "Hospital beds / 1000 inhabitants",
-        xlab = NA)
-
-```
-
-Now we can make a comparison between counties in terms of the number of hospital beds per 1000 inhabitants. First let's reduce the data to only the first 20 records (the 20 countries with the most hospital beds per inhabitant). Then we use function barplot() to display the results.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-# 9.Visualize data: bar plot----------------------------------------------------
-bar_data <- avg_data[1:20,]
-par(mfrow = c(1, 1), mar = c(7, 5, 1, 1), las = 3)
-barplot(bar_data$hospital_beds_per_thousand,
-        names.arg =  bar_data$location,
-        col       = colors[bar_data$continent],
-        ylab      = "Hospital beds / 1000 inhabitants")
-legend("topright",
-       legend = continent_list,
-       col    = colors,
-       bty    = "n",
-       pch    = 15 )
-
-```
-
-::: {style="background-color:beige;"}
-**Practice:**
-
-Use plots to explore the data: 1) Make a comparison between continents in terms of number of total covid deaths and share of the population that is 65 years and older. 2) Visualize the relationship between the total number of covid deaths and share of the population that is 70 years and older. Can you find the country with the most number of total Covid deaths? what is the share of its population that is 70 years and older?
+1.  We rejected the null hypothesis based on p-value \< 0.05. Use the binom.test() function to test alternative hypotheses about probability of breeding success.
+2.  Bayesian posterior depends on prior width and the amount of data. Specify a different prior and change the number of trials to see the impact.
+3.  Suppose we count the number of adult griffons that visit a feeding site during one day. Calculate likelihoods of possible values of griffon, assuming the count follows a Poisson distribution.
 :::
 
 ------------------------------------------------------------------------
@@ -417,6 +270,94 @@ Use plots to explore the data: 1) Make a comparison between continents in terms 
 [3.]{.underline} Explain why mtDNA is often more useful than nuclear DNA for species identification from small or degraded samples like a single hair found in the woods.
 
 [4.]{.underline} Looking at the example of forensic application using microsatellite DNA in Figure 3.2, which deer, a, b, or c, did the antler tissue sample came from?
+
+🌶️ Many populations of Pacific salmon (Oncorhynchus spp.) from southern California to northern Washington are listed for protection under the US Endangered Species Act 1973 (ESA). Here we use a [published](https://onlinelibrary.wiley.com/doi/10.1111/eva.13647) dataset on Chilkat River Chinook salmon (O. tshawytscha) in Southeast Alaska to estimate abundance using close-kin mark-recapture and parentage analysis. This data set includes genetic data on sampled offspring and their assigned parent. First, let's explore the data. From 682 offspring, 220 were assigned to at least one parent. There are 147 unique parent IDs.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+salmon <- read.csv("https://raw.githubusercontent.com/swrosenbaum/tGMR_simulations/main/Data/ParentPair.csv")
+
+nrow(salmon)
+length(unique(salmon$OffspringID))
+
+# Remove duplicates
+salmon <- salmon[!duplicated(salmon$OffspringID),]
+
+# How many unique parent ID
+unique(salmon$InferredMum)
+unique(salmon$InferredDad)
+
+# How many offspring were assigned parent
+assigned_p <- salmon[which(salmon$InferredDad != "*"),]
+assigned_m <- salmon[which(salmon$InferredMum != "#"),]
+
+assigned <- salmon[which(salmon$InferredDad != "*" |
+                           salmon$InferredMum != "#"), ]
+
+```
+
+Now, let's quantify key population abundance statistics. In its simplest form, the estimator (Lincoln–Petersen estimator with two sampling intervals; Chapter 4) will use the observed marks (n1): the number of successfully genotyped adult samples in the first sampling interval, the recaptures (m2): the number of genotyped adult samples that were assigned as parents of genotyped offspring from the second sampling interval, and the captures (n2): the number of genotypes obtained from juveniles sampled in the second interval.
+
+Note that the number of sampled offspring is multiplied by 2, because offsprings carry genotypes of female and male parent and therefore have two opportunities to recapture marks.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+capture   <- n2 <- 682 * 2                        # number of offsprings
+mark      <- n1 <- 583                            # number of adults
+recapture <- m2 <- 147                            # number of adults assigned to an offspring
+
+N         <- round((n1 * (n2 + 1)) / (m2 + 1), 0) # adult abundance
+
+```
+
+Let's plot these quantities. We can use barplot() to make a side-by-side comparison.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+bar_data <- matrix(c(N, capture, mark, recapture), nrow = 4)
+colnames(bar_data) <- "Number of individuals"
+rownames(bar_data) <- c("Abundance", "captured", "marked", "recaptured")
+ 
+barplot( height   = bar_data,
+         names    = "",
+         legend   = rownames(bar_data),
+         ylab     = colnames(bar_data),
+         xlab     = NA,
+         las      = 2,
+         lwd      = 2,
+         beside   = T,
+         density  = c(10, 5, 20, 30, 7),
+         angle    = c(45, 0, 90, 11, 36),
+         col      = "brown")
+
+```
+
+We calculated adult abundance based on observed values at 5377. But remember from Chapter 2, we need to produce generalisable results. If we repeat the sampling, each time we get a different estimate of the population size. For the Lincoln-Peterson estimator, the variation in estimates can be calculated as below.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+var       <- (n1 ^ 2 * (n2 + 1) * (n2 - m2)) / ((m2 + 1) ^ 2 * (m2 + 2)) # variance; equation 4.9
+
+```
+
+Sampling variance is a common statistic to show parameter uncertainty. How about the 95% confidence intervals of the population size estimate? Well, we can calculate that using the standard deviation of the sampling variance, i.e, the standard error.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+
+uci <- N + (1.96 * (sqrt(var)))  # equation 4.10, in chapter 4
+lci <- N - (1.96 * (sqrt(var)))
+
+round(c(lci, uci), 0)
+
+```
+
+Based on this analysis, the Chinook salmon abundance is between 4562 and 6192, with a mean estimate of 5377 individuals.
+
+::: {style="background-color:beige;"}
+**Question:**
+
+Generate new data using the probability distribution for m2, number of recaptures. How does the estimate of N change with different numbers of recaptures?
+:::
 
 ------------------------------------------------------------------------
 
@@ -449,6 +390,79 @@ a\. What is the probability of surviving the first year?
 b\. What is the probability of surviving the second year?
 
 c\. By using this method to estimate survival, what assumptions are you making?
+
+🌶️ The the Lincoln-Peterson method is used to estimate the abundance of a closed population using mark-recapture data. Using this method, animals do not need to be uniquely marked to estimate abundance. We learned that: $\hat{N}$ = $\frac{n_1 n_2}{m_2}$, where $n_1$ is the number of animals caught and marked in the first sample, $n_2$ is the number of animals caught in the second sample, and $m_2$ is the number of animals caught in both samples.
+
+We could use R to estimate abundance using the Lincoln-Peterson estimator.
+
+First, let's create three objects n1, n2, and m2 and store the sampling data. We captured 44 individuals on the first sample occasion, 32 individuals on the second sample occasion, and 15 individuals were captured in both sample occasions.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 1. Define objects --------------------------------------------------------
+n1 <- 44
+n2 <- 32
+m2 <- 15
+
+```
+
+Remember that R will ignore any code that follows a #. Before moving on, use comments to define what each object represents (e.g., Number of individuals captured on first occasion, Number of individuals captured on second occasion, Number of previously marked individuals captured on second occasion).
+
+Then, highlight all three lines and then click Ctrl + Enter (or command + return on Mac) to run the code. Can you type in the LP equation in R? What is the estimated abundance of this population?
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 2. LP Estimator ------------------------------------------------------
+N <- n1 * n2 / m2
+N
+```
+
+This formula is a statistic estimating total population abundance on the basis of a sample. Recall from the lecture on inference, we still need to make inference about the parameter, N, on the basis of the statistic, $\hat{N}$. To do this, we need to understand the sampling uncertainty for this statistic (we need to ask: “what do we really know about the population, and what don’t we know?”). That is, if we collected a different sample from the same population, we might get a very different answer for N. If we took 100 or 1000 different samples, we might get 100 or 1000 different estimates for N. The variation among these estimates is the sampling uncertainty.
+
+We can calculate the uncertainty (i.e., variance) of our estimated abundance using:
+
+var($\hat{N}$) = $\frac{(n_1 + 1)(n_2 + 1)(n_1 - m_2)(n_2 - m_2)}{(m_2+1)^2(m_2+2)}$
+
+This formula technically represents sampling variance, which is a common way to represent parameter uncertainty in statistics. Can you create a new object called "tau" and calculate variance of our estimated abundance in R?
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 3. Calculate variance -----------------------------------------------------
+tau <- ((n1+1)*(n2+1)*(n1-m2)*(n2-m2))/((m2+1)^2*(m2+2))  
+tau
+```
+
+How reliable is our abundance estimate? To find out, we can construct confidence intervals around the estimate and quantify the precision. A confidence interval is a range of values which is expected to include the true abundance a given percentage of the time. Typically, the given percentage is 95%, but confidence interval could also be 90% or 99%, or any range you wish. The upper and lower values of a confidence interval are called the confidence limits. Clearly, we want confidence intervals to be as small as possible.
+
+How can we find the confidence interval? First, we find the standard deviation of the sampling variance (usually called “standard error” of the statistic) which is just the square root of the sampling variance:
+
+$$se({\hat{N})=\sqrt{var{\hat{(N)}}}}$$
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 4. Calculate standard error  -------------------------------------------------
+se <- sqrt(tau)
+se
+```
+
+We can use the sqrt() function to take the square root if the sampling variance, or any other quantity.
+
+Then, the 95% confidence interval for $\hat{N}$ is approximately 2 “standard error” units from the value of $\hat{N}$:
+
+$\hat{N}$ $\pm$ 1.96$\times$ $se(\hat{N})$
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 5. Confidence interval  ------------------------------------------------------
+lci <- N - 1.96 * se
+uci <- N + 1.96 * se
+
+lci
+uci
+```
+
+::: {style="background-color:beige;"}
+**Question:**
+
+(1) Type in the Lincoln-Peterson estimator and report the estimated abundance of the first example population?
+
+(2) Calculate the variance of the estimated abundance in R and report the variance.
+:::
 
 ------------------------------------------------------------------------
 
@@ -596,9 +610,183 @@ We saw in the text the two intuitive ways most commonly used to estimate average
 
 [3.]{.underline} Draw two graphs showing how per capita mortality rate could vary with population size. If birth rate is constant in both graphs, indicate the carrying capacity, positive population growth and negative or positive density dependence on each graph.
 
-🌶️ This is a spicy exercise!
+🌶️ Although we have emphasized that logistic growth is just one special form of negative density dependence, it turns out that wolves reintroduced into the northern rockies exhibit negative density dependence that can be reasonably modeled using logistic growth. Ever since wolves were introduced into Yellowstone and Central Idaho, the USFWS has kept a pretty good tab on total wolf numbers in the US Northern Rockies. For this exercise we will use these data from 1995-2015 (representing the total wolf count in Yellowstone, Central Idaho and NW Montana).
 
-------------------------------------------------------------------------
+In this exercise, we directly create an R object as data, and use the stats package in R. We define our model parameters, and set up a storage dataframe to store the population size data.
+
+We can store data in memory by assigning it to an “object” using the assignment operator \<-. For example, the code below would assign the object $wolf_data$ the population size values of 101 - 1881.
+
+```{r, out.width = "400px", fig.align = "center"}
+
+wolf_data <- data.frame(year = 1995:2015,
+                        N    = c(101, 152, 213, 275, 322, 437, 563, 663,
+                                 761, 846, 1020, 1300, 1513, 1655, 1733,
+                                 1723, 1804, 1715, 1691, 1787, 1881))
+
+```
+
+You can inspect the dataframe $wolfdata$ and find out how many years of data is provided.
+
+After 25 years the wolf population may have reached a relatively constant population size consistent with a carrying capacity ($K$). Note that this number is probably determined more by human tolerance than by ‘natural’ density dependence factors like food availability, territoriality disease, etc. Still, ‘human tolerance’ carrying capacities are not uncommon, especially for large carnivores.
+
+You can use the plot() function to visualize how this wolf population changes with time. What are the x and y variables in this plot? Could you change the color, size, and shape of the points?
+
+```{r, out.width = "400px", fig.align = "center"}
+
+plot(wolf_data$year,
+     wolf_data$N,
+     ylab     = "Abundance",
+     xlab     = "Year",
+     cex.lab  = 1.5,
+     pch      = 19,
+     col      = "darkgray",
+     cex      = 2,
+     xaxt     = "n",
+     las      = 2)
+axis(1)
+
+```
+
+Eyeballing from plotting abundance over the years, what is the approximate carrying capacity for wolves in the US Northern Rockies?
+
+Let's calculate per capita exponential growth rate $\rho_t$. Notice that even though the growth seems pretty steady in the previous graph, it actually fluctuates quite a bit year to year.
+
+We can use a for-loop, similar to the previous lab to calculate $\rho_t$ for each time step.
+
+```{r, out.width = "400px", fig.align = "center"}
+
+rho_t <- NA
+for(t in 1 : length(wolf_data$N)) {
+  rho_t[t] <- log(wolf_data$N[t + 1] / wolf_data$N[t])
+}
+
+
+```
+
+You can visulaize how the per capita growth rate changes over time as shown below.
+
+```{r, out.width = "400px", fig.align = "center"}
+
+plot(wolf_data$year,
+     rho_t,
+     ylab    = "Exponential Growth Rate",
+     xlab    = "Year",
+     cex.lab = 1.5,
+     pch     = 19,
+     cex     = 2,
+     xaxt    = "n",
+     type    = "l",
+     lwd     = 3,
+     las     = 2)
+axis(1)
+
+```
+
+In order to determine the intercept of the linear relationship between N and $\rho$ we can use a linear regression. This is $\rho_0$ for the logistic growth model.
+
+```{r, out.width = "400px", fig.align = "center"}
+
+mod <- lm(rho_t ~ wolf_data$N)   # linear regression model 
+summary(mod)
+
+plot(wolf_data$N,
+     rho_t,
+     ylab    = "Exponential Growth Rate",
+     xlab    = "Abundance",
+     cex.lab = 1.5,
+     pch     = 19,
+     cex     = 2,
+     xaxt    = "n",
+     las     = 2)
+axis(1)
+abline(mod, col = "red", lwd = 2)
+
+
+```
+
+Now, plot the fitted line from the linear model over the plot of $\rho$ against N using R function abline().
+
+Looking at the model output, the first coefficient is the intercept and the second coefficient is the slope of the red line.
+
+```{r, out.width = "400px", fig.align = "center"}
+
+rho_0 <- mod$coefficients[1]
+slope <- mod$coefficients[2]
+	
+```
+
+With these two numbers we can calculate the carrying capacity K.
+
+```{r, out.width = "400px", fig.align = "center"}
+
+K <- rho_0 / abs(slope)
+
+```
+
+Let’s see how well these two parameters ($\rho_0$ and K) characterize our wolf population under a logistic growth model. First, we project the wolf population 50 years using an initial abundance of 101 and the discrete form of the logistic growth equation.
+
+You can use the code below to assign $nyear$ to value 50, initial population size to value 101, and find the population size over 50 years. You can use a for-loop to avoid repeating similar line of code per year and store the values in object $N_t$ .
+
+```{r, out.width = "400px", fig.align = "center"}
+n_year <- 50
+N_t <- rep(NA, n_year)
+N_t[1] <- 101
+	
+for (t in 2 : n_year - 1) {
+  
+  # discrete logistic growth equation
+  N_t[t + 1] <- N_t[t] * exp(rho_0 * (1 - (N_t[t] / K)))
+}
+
+```
+
+We can now visualize the estimated abundance as a line graph and add the data points for comparison. As you see with this visualization, the logistic growth model fits the data very well. The wolf population appears to be experiencing density dependent growth with an exponential increase in growth initially that slowed to a carrying capacity around 1874.
+
+```{r, out.width = "400px", fig.align = "center"}
+
+plot( x        = 1 : n_year,
+      y        = N_t,
+      xlab     = "Year",
+      ylab     = "Abundance",
+      sub      = "Estimated wolf population abundance over 50 years",
+      cex.lab  = 1.5,
+      cex      = 2,
+      xaxt     = "n",
+      type     = "l",
+      lwd      = 3,
+      las      = 2
+)
+axis(1)
+
+points( x   = 1 : length(wolf_data$N),
+        y   = wolf_data$N,
+        pch = 21,
+        cex = 2,
+        col = "darkgray"
+)
+
+```
+
+Environmental stochasticity could cause K to vary over time. Another mechanism that can cause a population to fluctuate around K has nothing to do with stochasticity. Even deterministically growing populations can overshoot K when there is a lag in the effect of the proximity of N to K on r. The magnitude of r and the time lag involved can both influence these dynamics.
+
+::: {style="background-color:beige;"}
+**Questions:**
+
+1.  With different values of $\rho_0$ (between about 1 and 3) in the discrete logistic growth equation estimate abundance to achieve examples of:
+
+    a\. damped oscillations
+
+    b\. two-point stable limit cycles
+
+    c\. four-point stable limit cycles
+
+    d\. chaos
+
+<!-- -->
+
+2.  Create a line graph that represents each, with the value of $\rho_0$ that you used labeled on each plot.
+3.  Which of these sources of “noise” around K— stochastic K or damped oscillations/stable limit cycles/chaos— do you think is more common in real wildlife populations? Why?
+:::
 
 ## Chapter 8: Predation and Wildlife Populations
 
@@ -612,6 +800,88 @@ We saw in the text the two intuitive ways most commonly used to estimate average
 
 [5.]{.underline} Draw a graph of predation rate (% prey killed) against prey abundance. Indicate the area of positive or negative density dependence on this graph.
 
+🌶️Management of critically endangered species may pose considerable scientific and ethical dilemmas. Channel Islands are inhabited by an endemic, carnivore species, the island fox (Urocyon litteralis). These islands are also populated by introduced feral pigs (Sus scrofa). The presence of pigs (and the loss of bald eagles) enabled golden eagles (Aquila chrysaetos) to colonize the islands in early 1990’s. The eagles prey mainly on pigs and foxes are their secondary, alternative prey. Canine distemper became an issue in the late 1990s. The species was listed as endangered, and things looked bleak for island fox. Science-based conservation recommendations were badly needed, and time was short.
+
+The rate of predation by a predator population is determined by two attributes of the predator's response to changes in prey density: functional response and numerical response. The numerical response is simply how predator number changes as prey abundance changes. The functional response relates a single predator's prey consumption rate to prey population density.
+
+Suppose we have a long-term dataset of abundance of Island fox, the prey, on an island and the number of prey killed per eagle predator (indexed by fox teeth per eagle scat). Predation rate is the percentage of the prey population killed per unit time.
+
+```{r, results = "hide", out.width = "400px", fig.align = "center"}
+
+fox_data       <- data.frame( years        = 1:22, 
+                              abundance    = round(runif(22, 20, 200), 0))
+fox_data$eaten <- 0.25 * fox_data$abundance
+pred_rate      <- fox_data$eaten / fox_data$abundance * 100
+print(pred_rate)
+
+```
+
+However, the predation rate in nature is rarely constant over time. The number of prey killed will be a product of both the number of predators (the predator numerical response) and how many prey each individual predator kills (the predator functional response), i.e., number of prey killed is the predator numerical response times the predator functional response. If the prey-dependent functional response that we used was: y = 2.62 N / \[6.53 + N\], then the functional response increases with numerical response.
+
+```{r, out.width = "400px", fig.align = "center"}
+
+eagle_data <- data.frame( years        = 1:22, 
+                                abundance    = round(runif(22, 8, 20), 0))
+fox_data$eaten_per <- mean(fox_data$eaten) / eagle_data$abundance
+kill_rate <- (2.62 * fox_data$abundance) / (6.53 + fox_data$abundance)
+
+
+plot(y        = eagle_data$abundance,
+     x        = fox_data$abundance,
+     ylab     = "Numerical response of eagle",
+     xlab     = "Prey abundance",
+     cex.lab  = 1.5,
+     pch      = 19,
+     col      = "darkgray",
+     cex      = 2,
+     xaxt     = "n",
+     las      = 2)
+axis(1)
+
+```
+
+Predator population size could linearly, quadraticly or hyperbolicaly change with prey population size, or not dependent on it at all. Let's plot the functional response, i.e., the number of foxes eaten against fox abundance. There are three types of functional response; which type do you suspect of the plot below?
+
+```{r, out.width = "400px", fig.align = "center"}
+
+plot(y        = kill_rate,
+     x        = fox_data$abundance,
+     ylab     = "Functional response of eagle",
+     xlab     = "Prey abundance",
+     cex.lab  = 1.5,
+     pch      = 19,
+     col      = "darkgray",
+     cex      = 2,
+     xaxt     = "n",
+     las      = 2)
+axis(1)
+
+```
+
+Type 2 functional response is common in nature. At low prey densities, predators take prey in an almost constant-effort fashion: if prey density doubles, then predator locates them twice as often and kills them at twice the rate. Thus, rate of predation increases almost linearly at low prey density. As prey density increases, searching for prey becomes a less important limit on the rate of predation. Prey are easy to locate, and rate of consumption is more heavily affected by handling time, the time it takes to catch, subdue, kill and eat a prey item, once prey located.
+
+As searching becomes less important and handling becomes more important, the rate of predation shows decelerating rate of increase. (still increases, but less quickly) Eventually, search is not limiting at all, and rate of predation levels off at upper limit determined by handling time alone.
+
+Let's calculate predation rate and the number of prey eaten from the kill rate we calculated above.
+
+```{r, results = "hide", out.width = "400px", fig.align = "center"}
+
+pred_rate      <- kill_rate / fox_data$abundance  * 100
+n_eaten        <- kill_rate * eagle_data$abundance
+print(kill_rate)
+print(pred_rate)
+print(n_eaten)
+
+```
+
+::: {style="background-color:beige;"}
+**Practice:**
+
+1.  By comparing the predation rate and population size, are the changes stabilizing or destabilizing for the fox population?
+2.  Use a function to describe the numerical response curve which changes positively with prey abundance. How does this change affect the predation rate? Find out if the predation rates are stabilizing or destabilizing the fox population.
+3.  Use two different functions to describe types 1 and 3 functional response curves. Then, visualize the curves for comparison.
+:::
+
 ------------------------------------------------------------------------
 
 \## Chapter 9: Genetic Variation and Fitness
@@ -623,6 +893,78 @@ We saw in the text the two intuitive ways most commonly used to estimate average
 [3.]{.underline} Suppose you are studying a subpopulation of bighorn sheep within a larger metapopulation. You estimate FST of 0.7. a. What does that tell you about genetic variation in the subpopulation? b. You also found that juvenile survival has decreased by 40% in the subpopulation, although you did not find a significant change in the mean population growth rate. What does this suggest about inbreeding depression in the subpopulation?
 
 [4.]{.underline} Why did the founder effect not have a significant negative impact on the genetic variation of the Yellowstone wolf population after the first ten years if only 31 individuals were translocated to the park?
+
+🌶️Suppose individuals in a wildlife population are found to suffer a fatal genetic disorder that has a genetic basis, recessive inheritance, and shows up in 1 out of every 400 individuals.
+
+We’ll assume only 2 alleles and refer to the dominant (normal) allele as F, and to the fatal disorder disease allele as f. 0.25 percent of the population suffer from the disease. What are the allele frequencies? What percent of the population is a non-affected “carrier” of the allele or a homozygous FF?
+
+```{r, results = "hide", out.width = "400px", fig.align = "center"}
+percent <-   1 / 400 * 100 
+
+# allele frequencies
+freq_f <- sqrt(1/400) 
+freq_F <- 1- freq_f 
+freq_Ff <- 2 * freq_f * freq_F # HW 
+freq_FF <- 2 * freq_F * freq_F  
+
+print(freq_F)
+print(freq_f)
+print(freq_Ff)
+print(freq_FF)
+
+```
+
+Under HW conditions, allele frequencies in the next generation are theoretically predicted as p = q = 0.5. In reality, allele frequencies might deviate from theory just by chance. Genetic drift occurs when allele frequencies change randomly, or drift, from one generation to the next just because some alleles get passed on from parents to offspring while others do not.
+
+Every individual in the population has a 50% chance to inherit the F-allele on its first chromosome, and a 50% chance to inherit the F-allele on its second chromosome. This is equivalent to two coin tosses (one for each allele inherited), where the probability for receiving a particular genotype is dependent on the allele frequencies in the population.
+
+Let's simulate this random process, with the allele frequency and the population size. Try different values to see the impact on allele frequencies.
+
+```{r, out.width = "600px", fig.align = "center"}
+n <-   c(30, 150, 1000)                               # population size
+p <-  0.5                                             # allele frequency
+rbinom(1, size = 2 * n[1], prob = p) / (2 * n[1])     # allele frequency in the next generation 
+
+t <- 1000                                             # repeat sampling 1000 times
+freq <- list()
+for (i in 1 : length(n)) {
+  freq[[i]] <- rbinom(t, size = 2 * n[i], prob = p) / (2 * n[i]) 
+}
+
+par(mfrow = c(1 , 3))
+
+for (i in 1 : length(n)) {
+  hist(freq[[i]],
+       main = paste0("N = ", i),
+       xlab = "Allele frequency",
+       ylab = "Number of cases",
+       xlim = c(0.2, 0.8))
+}
+
+```
+
+The random changes in allele frequencies under genetic drift are in strong contrast to natural selection, where alleles of higher fitness increase in frequency. As you see in the histograms, the strength of genetic drift is inversely related to the effective population size .
+
+This is the size of the breeding population. To unpack, let's simulate a population of marmots, with known abundance of females and males over five years. Assume a sex ratio of 0.6, and that half of the population are breeders.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center"}
+marmot_data <- data.frame(year      = 2016 : 2020,
+                          total_n   = round(runif(5, 100, 300), 0))
+sex_ratio <- 0.6
+breed_ratio <- 0.5
+
+marmot_data$f_n <- marmot_data$total_n * sex_ratio * breed_ratio
+marmot_data$m_n <- marmot_data$total_n * (1 - sex_ratio) * breed_ratio
+
+print(marmot_data)
+
+```
+
+::: {style="background-color:beige;"}
+**Question:**
+
+Calculate the total number of breeders with a population size of 100, and the resulting Nb/N ratio, for a case where breeding sex ratio (Nf / Nm) is: a) 50%; b) 25%; c) 10%. How does a skewed sex ratio affect the Nb/N ratio?
+:::
 
 ------------------------------------------------------------------------
 
@@ -638,15 +980,23 @@ We saw in the text the two intuitive ways most commonly used to estimate average
 
 [5.]{.underline} Distinguish between demographic rescue and genetic rescue in a small, isolated population of mountain pygmy possums.
 
+🌶️
+
 ------------------------------------------------------------------------
 
 ## Chapter 11: Population Responses to Stressors
 
 [1.]{.underline} Define the three responses available to a population of Arctic foxes facing a warming climate and explain which of these options constitute resilience.
 
-[2.]{.underline} Snowshoe hares initiate their seasonal color molt based on photoperiod (day length), but snowmelt is occurring earlier due to climate change. a. Is this a form of plastic rescue? b. What is the consequence for survival?
+[2.]{.underline} Snowshoe hares initiate their seasonal color molt based on photoperiod (day length), but snowmelt is occurring earlier due to climate change.
+
+a\. Is this a form of plastic rescue?
+
+b\. What is the consequence for survival?
 
 [3.]{.underline} Draw a hypothetical reaction norm graph depicting phenotypic plasticity for egg-laying dates in great tits against mean spring temperature. Label the axis that indicates the "Adjust" response.
+
+🌶️
 
 ------------------------------------------------------------------------
 
@@ -658,12 +1008,26 @@ We saw in the text the two intuitive ways most commonly used to estimate average
 
 [3.]{.underline} Contrast a keystone species with a dominant species. Why might a minimum viable population be insufficient for a keystone species like a sea otter?
 
+🌶️
+
 ------------------------------------------------------------------------
 
 ## Chapter 13: Sustainable Harvest
 
-[1.]{.underline} You are studying greater sage-grouse, and you want to know if hunting mortality is compensatory or additive. a. If harvest were completely additive, what annual survival be? b. If harvest were completely compensatory, what would annual survival be? c. Say you estimate that the coefficient for hunting mortality is 0.25 (95% CI: 0.13-0.37). What does this suggest about the effect of hunting on annual survival?
+[1.]{.underline} You are studying greater sage-grouse, and you want to know if hunting mortality is compensatory or additive.
+
+a\. If harvest were completely additive, what annual survival be?
+
+b\. If harvest were completely compensatory, what would annual survival be?
+
+c\. Say you estimate that the coefficient for hunting mortality is 0.25 (95% CI: 0.13-0.37). What does this suggest about the effect of hunting on annual survival?
 
 [2.]{.underline} Why is a fixed-quota harvest (taking exactly 40 animals/year) riskier than a fixed-effort harvest in an unpredictable environment.
 
-[3.]{.underline} Intense trophy hunting on bighorn sheep removes the fastest-growing rams with the largest horns. a. What is the likely evolutionary response? b. Why is this called a "debt"?
+[3.]{.underline} Intense trophy hunting on bighorn sheep removes the fastest-growing rams with the largest horns.
+
+a\. What is the likely evolutionary response?
+
+b\. Why is this called a "debt"?
+
+🌶️
