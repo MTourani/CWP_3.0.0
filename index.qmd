@@ -68,9 +68,8 @@ The first thing we usually do when we start an R session is:
 
 ```         
 (1) Open your existing RStudio Project for this course.
-(2) Create a new R script and save it as "Lab03_YOURNAME.R"
-(3) In the script, define key variables, and load any additional packages
-into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.
+(2) Create a new R script and save it right away.
+(3) In the script, define key variables, and load any additional packages into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.
 ```
 
 In this exercise, we define our model parameters, and set up a storage vector to store each parameter. We can store data in memory by assigning it to an “object” using the assignment operator \<-. For example, the code below would assign the object $r$ the value of 0.1.
@@ -203,6 +202,10 @@ When we use this model to forecast future population size, we assume that parame
 [3.]{.underline} Using the loggerhead sea turtle example, explain why increasing hatchling survival alone was insufficient to stop the population decline.
 
 [4.]{.underline} Suppose you are tasked with studying a caribou population, and you want to know what the analytical sensitivity is for adult survival. Prior to calculating sensitivity, you estimated the asymptotic population growth rate as 1.053. You add 0.01 to adult survival and calculate the new growth rate as 1.064. What is the analytical sensitivity of adult survival?
+
+![](images/lf_28.png)
+
+![](images/lf_30.png)
 
 :chili: Above, you are presented two life cycle diagrams of two bird species. Please answer 10 questions below for each of the two diagrams.
 

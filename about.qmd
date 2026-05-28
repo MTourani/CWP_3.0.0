@@ -1,5 +1,5 @@
 ---
-title: "Conservation of Wildlife Populations, 3rd Edition"
+title: "About"
 ---
 
 ## Author Information
@@ -8,7 +8,7 @@ L. Scott Mills, Andrew Whiteley, and Mahdieh Tourani
 
 Wildlife Biology Program, Department of Ecosystem and Conservation Sciences, University of Montana
 
---- ![](images/coverImage_Ed3.png){width="600"}
+--- [![](images/coverImage_Ed3.png){width="500"}](https://academic.oup.com/book/60786)
 
 ## Description 
 
