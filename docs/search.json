@@ -86,9 +86,9 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Conservation of Wildlife Populations, 3rd Edition",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
+    "text": "L. Scott Mills, Andrew Whiteley, and Mahdieh Tourani\nWildlife Biology Program, Department of Ecosystem and Conservation Sciences, University of Montana"
   },
   {
     "objectID": "index.html#chapter-1-the-big-picture",
@@ -96,5 +96,19 @@
     "title": "Conservation of Wildlife Populations Exercises, 3rd Edition",
     "section": "Chapter 1: The Big Picture",
     "text": "Chapter 1: The Big Picture\n1. A newly described vertebrate species is found in a remote jungle. Given that vertebrates make up roughly 3.5% of described eukaryotic species (Fig. 1.1), and there are ~2 million described species, calculate how many vertebrate species were already known prior to this discovery.\n2. Human numbers are projected to level off at 10.5 billion by 2100. If we dropped fertility to replacement levels today, why wouldn’t the population stop growing immediately? Use the concept of population momentum to explain.\n3. The baseline extinction rate is estimated at 2 E/MSY (extinctions per million species per year). If there are 10,000 species of birds, how many would you expect to go extinct in a single century under “normal” deep-time conditions?\n4. Current extinction rates are estimated to be 10–30 times higher than the background rate. Using the 2 E/MSY baseline, calculate the current range of extinctions per million species per year."
+  },
+  {
+    "objectID": "about.html#author-information",
+    "href": "about.html#author-information",
+    "title": "Conservation of Wildlife Populations, 3rd Edition",
+    "section": "",
+    "text": "L. Scott Mills, Andrew Whiteley, and Mahdieh Tourani\nWildlife Biology Program, Department of Ecosystem and Conservation Sciences, University of Montana"
+  },
+  {
+    "objectID": "about.html#description",
+    "href": "about.html#description",
+    "title": "Conservation of Wildlife Populations, 3rd Edition",
+    "section": "Description",
+    "text": "Description\nIn a world where threats of cataclysmic extinction loom and sustainable harvest approaches are essential, applied population ecology has never been more crucial. Conservation of Wildlife Populations, 3rd Edition provides evidence-based insight into how extinctions and human-wildlife conflicts can be minimized. L. Scott Mills, Andrew Whiteley, and Mahdieh Tourani blend rigorous science with practical solutions to illuminate paths where science and action can bring hope.\n\nThoroughly updated since the second edition, Conservation of Wildlife Populations bridges the full scope of applied wildlife population ecology, spanning conservation and wildlife biology, ecology, conservation genetics, evolutionary biology, and environmental studies. This new edition includes updated references and expanded global case studies based on both terrestrial and aquatic wildlife species. With an engaging writing style and real-world examples, this third edition shows how a broad range of practical ecological and evolutionary principles can lead to efficient and sometimes non-intuitive conservation management in a rapidly changing world.\n\nEngaging and approachable, yet thorough and solutions-oriented, this is a must-read book for students and practitioners in ecology, wildlife biology, and conservation genetics. Undergraduate and postgraduate students will be equipped to advance conservation management and research, while field practitioners will find the scientific basis for making efficient and effective conservation decisions."
   }
 ]
