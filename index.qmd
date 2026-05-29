@@ -29,9 +29,9 @@ Where to start? You can use program R to load, summarize, visualize, and analyze
 ## Stepping stones in R
 
 ```         
-(1) Open your existing RStudio Project for this course.
-(2) Create a new R script and save it right away. 
-(3) In the script, define key variables, and load any additional packages into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.
+(1) Create/Open your RStudio Project for these exercise.
+(2) Create a new R script, for each chapter and save it with chapter number. 
+(3) In the script, define key variables, and install and load any additional packages into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.
 ```
 
 ```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
@@ -55,11 +55,11 @@ colnames(data)
 
 [1.]{.underline} A sample of 16 army cutworm moths was collected from a mountain top in Yellowstone National Park. The mean length of the sampled moths is 50 mm, and the sample variance is 4 mm.
 
-a\. If the true mean length of the whole population is 20 mm and the true population variance is 15 mm, draw a target like one of those in Fig 2.1 that would depict the accuracy and precision of your sample of 16 moths relative to the true population metrics.
+a. If the true mean length of the whole population is 20 mm and the true population variance is 15 mm, draw a target like one of those in Fig 2.1 that would depict the accuracy and precision of your sample of 16 moths relative to the true population metrics.
 
-b\. What would happen to our estimated standard error (SE) if we increased the sample size? i.e., does the SE increase, decrease or stay the same?
+b. What would happen to our estimated standard error (SE) if we increased the sample size? i.e., does the SE increase, decrease or stay the same?
 
-c\. What would happen to the standard deviation (SD) if the sample size increased? i.e., does the SD increase, decrease or stay the same?
+c. What would happen to the standard deviation (SD) if the sample size increased? i.e., does the SD increase, decrease or stay the same?
 
 🌶️ Suppose a rare orchid population is found only in a specific forest tract slated for logging. To determine if this population should be protected under the Endangered Species Act (ESA), researchers conduct a study to see if it is genetically distinct from a common, widespread orchid species found throughout the state. Let's say the null hypothesis is: The rare orchid population is genetically identical to the common species (they are "homogeneous"). The Alternative Hypothesis is: The rare orchid population is a distinct subspecies. Because funding is limited and the flowering season is short, researchers only collect a small sample size of 10 orchids.
 
@@ -77,9 +77,9 @@ In this context, conservation scientists and policy makers often face a 'burden 
 
 ## Chapter 3: Genetic Concepts and Tools
 
-[1.]{.underline} At a single locus in an endangered finch, there are three alleles with frequencies \$p\$, \$q\$, and \$r\$. Calculate the expected heterozygosity under Hardy-Weinberg equilibrium.
+[1.]{.underline} At a single locus in an endangered finch, there are three alleles with frequencies $p=0.364$, $q=0.352$, and $r=0.284$. Calculate the expected heterozygosity under Hardy-Weinberg equilibrium.
 
-[2.]{.underline} A population of beetles has two alleles for color. The dominant allele is \$A\$ and the recessive allele is \$a\$. In a sample of 1,000 beetles, 160 display the recessive phenotype. Assuming the population is in Hardy–Weinberg equilibrium, what are the frequencies of the \$A\$ and \$a\$ alleles, and what proportion of the population is expected to be heterozygous? (Show your work)
+[2.]{.underline} A population of beetles has two alleles for color. The dominant allele is $A$ and the recessive allele is $a$. In a sample of 1,000 beetles, 160 display the recessive phenotype. Assuming the population is in Hardy–Weinberg equilibrium, what are the frequencies of the $A$ and $a$ alleles, and what proportion of the population is expected to be heterozygous?
 
 [3.]{.underline} Explain why mtDNA is often more useful than nuclear DNA for species identification from small or degraded samples like a single hair found in the woods.
 
@@ -179,31 +179,31 @@ Generate new data using the probability distribution for m2, number of recapture
 
 [1.]{.underline} Suppose you are studying a jaguar population using camera traps, and you are interested in estimating the population size using the Lincoln-Petersen model. During the first period of camera trapping, you uniquely identify 14 jaguars. During the next sampling period, you identify 16 jaguars, 6 of which you had previously detected.
 
-a\. What is the detection probability of jaguar at camera traps?
+a. What is the detection probability of jaguar at camera traps?
 
-b\. Estimate jaguar abundance and variance in this population?
+b. Estimate jaguar abundance and variance in this population?
 
-c\. Use your results from the previous question to calculate the 95% confidence intervals for your estimate of abundance.
+c. Use your results from the previous question to calculate the 95% confidence intervals for your estimate of abundance.
 
-d\. Why is it important to include detection probability in our abundance estimate, instead of just using the count of jaguars?
+d. Why is it important to include detection probability in our abundance estimate, instead of just using the count of jaguars?
 
 [2.]{.underline} What happens to your estimates of detection probability and abundance if wolverines chew off their tags and lose them during a capture-recapture study?
 
 [3.]{.underline} In a capture-recapture model of a quail population abundance with 3 samples, what is the probability of detection history 110 in each of the following scenarios:
 
-i\. the probability of detection is assumed to be constant.
+i. the probability of detection is assumed to be constant.
 
-ii\. the probability of detection is assumed to vary between sample occasions.
+ii. the probability of detection is assumed to vary between sample occasions.
 
-iii\. the probability of the initial detection is assumed to be different from the probability of subsequent detections.
+iii. the probability of the initial detection is assumed to be different from the probability of subsequent detections.
 
 [4.]{.underline} Suppose you are studying snowshoe hare survival, using the Kaplan-Meier method. At the beginning of the study (year 1), 33 hares were GPS-collared. When checked at year 2, you found 2 hares dead and lost the signal of 1 collared hare. You collared 5 new hares in year 2.
 
-a\. What is the probability of surviving the first year?
+a. What is the probability of surviving the first year?
 
-b\. What is the probability of surviving the second year?
+b. What is the probability of surviving the second year?
 
-c\. By using this method to estimate survival, what assumptions are you making?
+c. By using this method to estimate survival, what assumptions are you making?
 
 🌶️ The the Lincoln-Peterson method is used to estimate the abundance of a closed population using mark-recapture data. Using this method, animals do not need to be uniquely marked to estimate abundance. We learned that: $\hat{N}$ = $\frac{n_1 n_2}{m_2}$, where $n_1$ is the number of animals caught and marked in the first sample, $n_2$ is the number of animals caught in the second sample, and $m_2$ is the number of animals caught in both samples.
 
@@ -283,13 +283,13 @@ uci
 
 [1.]{.underline} Use the discrete population growth model to find the abundance of a population last year if the abundance is 2,000 this year and the geometric growth rate is 0.5.
 
-a\. By what percentage is the population increasing or decreasing each year?
+a. By what percentage is the population increasing or decreasing each year?
 
-b\. Starting from the population size this year, what will the size of the population be if it continues to grow at the same rate for a total of 4 years?
+b. Starting from the population size this year, what will the size of the population be if it continues to grow at the same rate for a total of 4 years?
 
-c\. What is the population’s instantaneous growth rate if it takes 2 years to double in size?
+c. What is the population’s instantaneous growth rate if it takes 2 years to double in size?
 
-d\. Based on the instantaneous growth rate, is this population stable, growing, or shrinking?
+d. Based on the instantaneous growth rate, is this population stable, growing, or shrinking?
 
 [2.]{.underline} Why is the geometric mean a better descriptor of a fluctuating population's long-term growth than the arithmetic mean?
 
@@ -366,10 +366,9 @@ We saw in the text the two intuitive ways most commonly used to estimate average
 
 1.  With an initial abundance of 50 in year 2020, project abundance for years 2025 and 2027, assuming situations (a) and (b) and then visualize the two projections of population abundnace.
 
-<!-- -->
+     a. growth is deterministic ($\lambda_y$ = 1.05) over the years.
 
-(a) growth is deterministic ($\lambda_y$ = 1.05) over the years.
-(b) growth is stochastic and fluctuates between 1.55 and 0.55 ($\lambda_{2020}$ = 1.05, $\lambda_{2021}$ = 0.55, $\lambda_{2022}$ = 1.05, $\lambda_{2023}$ = 0.55, etc).
+     b. growth is stochastic and fluctuates between 1.55 and 0.55 ($\lambda_{2020}$ = 1.05, $\lambda_{2021}$ = 0.55, $\lambda_{2022}$ = 1.05, $\lambda_{2023}$ = 0.55, etc).
 :::
 
 <br>
@@ -418,7 +417,15 @@ We saw in the text the two intuitive ways most commonly used to estimate average
 
 ## Chapter 7: Density-Dependent Population Change
 
-[1.]{.underline} Draw a graph showing how population size varies over time for a population following logistic growth. Label your axes appropriately and use this graph to answer the following questions. a. Where is the population growing the fastest? Circle that region and label it with “A”. b. Where is population growth limited by the number of individuals? Circle that region and label it with “B”. c. Where is the population limited by small per-capita growth rate? Circle that region and label it “C”. d. For the region of the graph you labelled “C,” what might be causing the low per-capita growth rate?
+[1.]{.underline} Draw a graph showing how population size varies over time for a population following logistic growth. Label your axes appropriately and use this graph to answer the following questions.
+
+a. Where is the population growing the fastest? Circle that region and label it with “A”.
+
+b. Where is population growth limited by the number of individuals? Circle that region and label it with “B”.
+
+c. Where is the population limited by small per-capita growth rate? Circle that region and label it “C”.
+
+d. For the region of the graph you labelled “C,” what might be causing the low per-capita growth rate?
 
 [2.]{.underline} What is a strong Allee effect? Explain why a population might decline toward extinction even if \$N \> 2\$.
 
@@ -588,13 +595,13 @@ Environmental stochasticity could cause K to vary over time. Another mechanism t
 
 1.  With different values of $\rho_0$ (between about 1 and 3) in the discrete logistic growth equation estimate abundance to achieve examples of:
 
-    a\. damped oscillations
+     a. damped oscillations
 
-    b\. two-point stable limit cycles
+     b. two-point stable limit cycles
 
-    c\. four-point stable limit cycles
+     c. four-point stable limit cycles
 
-    d\. chaos
+     d. chaos
 
 <!-- -->
 
@@ -610,7 +617,7 @@ Environmental stochasticity could cause K to vary over time. Another mechanism t
 
 [3.]{.underline} If you’re an elk in Yellowstone National Park, what would your survival strategy be if you know that wolves hunt you in valley bottoms during the day and pumas hunt you in rocky terrain at night? Name a potential fitness cost of your strategy. What term describes the effect of the predators on your behavior?
 
-[4.]{.underline} Which panel in figure 8.2 matches the following predator-prey interaction where lynx populations in a boreal forest increase in abundance as snowshoe hare populations increase. The rate of that increase slows as the hare population gets bigger. Because the snowshoe hares are masters of camouflage, Lynx need to spend more time searching for hares to pursue when hare populations are low.
+[4.]{.underline} Which panel in figure 8.2 matches the following predator-prey interaction where lynx populations in a boreal forest increase in abundance as snowshoe hare populations increase. The rate of that increase slows as the hare population gets bigger. Because the snowshoe hares are masters of camouflage, lynx needs to spend more time searching for hares to pursue when hare populations are low.
 
 [5.]{.underline} Draw a graph of predation rate (% prey killed) against prey abundance. Indicate the area of positive or negative density dependence on this graph.
 
@@ -704,13 +711,15 @@ print(n_eaten)
 
 [2.]{.underline} What is the inbreeding coefficient for a subpopulation relative to the total population of an isolated species experiencing genetic drift after 2 generations if the effective population size is 50?
 
-[3.]{.underline} Suppose you are studying a subpopulation of bighorn sheep within a larger metapopulation. You estimate FST of 0.7. a. What does that tell you about genetic variation in the subpopulation? b. You also found that juvenile survival has decreased by 40% in the subpopulation, although you did not find a significant change in the mean population growth rate. What does this suggest about inbreeding depression in the subpopulation?
+[3.]{.underline} Suppose you are studying a subpopulation of bighorn sheep within a larger metapopulation. You estimate FST of 0.7.
+
+a. What does that tell you about genetic variation in the subpopulation?
+
+b. You also found that juvenile survival has decreased by 40% in the subpopulation, although you did not find a significant change in the mean population growth rate. What does this suggest about inbreeding depression in the subpopulation?
 
 [4.]{.underline} Why did the founder effect not have a significant negative impact on the genetic variation of the Yellowstone wolf population after the first ten years if only 31 individuals were translocated to the park?
 
-🌶️Suppose individuals in a wildlife population are found to suffer a fatal genetic disorder that has a genetic basis, recessive inheritance, and shows up in 1 out of every 400 individuals.
-
-We’ll assume only 2 alleles and refer to the dominant (normal) allele as F, and to the fatal disorder disease allele as f. 0.25 percent of the population suffer from the disease. What are the allele frequencies? What percent of the population is a non-affected “carrier” of the allele or a homozygous FF?
+🌶️Suppose individuals in a wildlife population are found to suffer a fatal genetic disorder that has a genetic basis, recessive inheritance, and shows up in 1 out of every 400 individuals. We’ll assume only 2 alleles and refer to the dominant (normal) allele as F, and to the fatal disorder disease allele as f. 0.25 percent of the population suffer from the disease. What are the allele frequencies? What percent of the population is a non-affected “carrier” of the allele or a homozygous FF?
 
 ```{r, results = "hide", out.width = "400px", fig.align = "center"}
 percent <-   1 / 400 * 100 
@@ -801,7 +810,6 @@ Population 1, occurs in a nature reserve. Population 2, occurs in a fragmented f
 # Population 1 (Nature reserve)
 b1 <- 0.40
 d1 <- 0.25
-
 R1 <- 1 + b1 - d1  
 
 # Population 2 (Fragmented forest)
@@ -872,9 +880,9 @@ ssd <- stable.stage(B)
 
 [2.]{.underline} Snowshoe hares initiate their seasonal color molt based on photoperiod (day length), but snowmelt is occurring earlier due to climate change.
 
-a\. Is this a form of plastic rescue?
+a. Is this a form of plastic rescue?
 
-b\. What is the consequence for survival?
+b. What is the consequence for survival?
 
 [3.]{.underline} Draw a hypothetical reaction norm graph depicting phenotypic plasticity for egg-laying dates in great tits against mean spring temperature. Label the axis that indicates the "Adjust" response.
 
@@ -999,24 +1007,24 @@ We generated one sample and now we can put all the steps together and project th
 
 [1.]{.underline} You are studying greater sage-grouse, and you want to know if hunting mortality is compensatory or additive.
 
-a\. If harvest were completely additive, what annual survival be?
+a. If harvest were completely additive, what annual survival be?
 
-b\. If harvest were completely compensatory, what would annual survival be?
+b. If harvest were completely compensatory, what would annual survival be?
 
-c\. Say you estimate that the coefficient for hunting mortality is 0.25 (95% CI: 0.13-0.37). What does this suggest about the effect of hunting on annual survival?
+c. Say you estimate that the coefficient for hunting mortality is 0.25 (95% CI: 0.13-0.37). What does this suggest about the effect of hunting on annual survival?
 
 [2.]{.underline} Why is a fixed-quota harvest (taking exactly 40 animals/year) riskier than a fixed-effort harvest in an unpredictable environment.
 
 [3.]{.underline} Intense trophy hunting on bighorn sheep removes the fastest-growing rams with the largest horns.
 
-a\. What is the likely evolutionary response?
+a. What is the likely evolutionary response?
 
-b\. Why is this called a "debt"?
+b. Why is this called a "debt"?
 
 🌶️ For the structured mule deer population with information below, draw a two-sex life cycle diagram and write out the matrix and projection model with harvest. We can tell sexes of adults only. Adult females and males are harvested at different rates. Vital rates measured in absence of harvest:
 
 -   birth rate, b
--   survival of juvenile to adult sj
+-   survival of juvenile to adult, sj
 -   survival of adult females, sf
 -   survival of adult males, sm
 -   survival of babies until seen as juveniles, s0

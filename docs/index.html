@@ -235,9 +235,9 @@ window.Quarto = {
 </section>
 <section id="stepping-stones-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="stepping-stones-in-r">Stepping stones in R</h2>
-<pre><code>(1) Open your existing RStudio Project for this course.
-(2) Create a new R script and save it right away. 
-(3) In the script, define key variables, and load any additional packages into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.</code></pre>
+<pre><code>(1) Create/Open your RStudio Project for these exercise.
+(2) Create a new R script, for each chapter and save it with chapter number. 
+(3) In the script, define key variables, and install and load any additional packages into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.Load required packages-----------------------------------------------</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(utils)</span>
@@ -256,9 +256,11 @@ window.Quarto = {
 <section id="chapter-2-gaining-reliable-knowledge" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-2-gaining-reliable-knowledge">Chapter 2: Gaining Reliable Knowledge</h2>
 <p><u>1.</u> A sample of 16 army cutworm moths was collected from a mountain top in Yellowstone National Park. The mean length of the sampled moths is 50 mm, and the sample variance is 4 mm.</p>
-<p>a. If the true mean length of the whole population is 20 mm and the true population variance is 15 mm, draw a target like one of those in Fig 2.1 that would depict the accuracy and precision of your sample of 16 moths relative to the true population metrics.</p>
-<p>b. What would happen to our estimated standard error (SE) if we increased the sample size? i.e., does the SE increase, decrease or stay the same?</p>
-<p>c. What would happen to the standard deviation (SD) if the sample size increased? i.e., does the SD increase, decrease or stay the same?</p>
+<ol type="a">
+<li><p>If the true mean length of the whole population is 20 mm and the true population variance is 15 mm, draw a target like one of those in Fig 2.1 that would depict the accuracy and precision of your sample of 16 moths relative to the true population metrics.</p></li>
+<li><p>What would happen to our estimated standard error (SE) if we increased the sample size? i.e., does the SE increase, decrease or stay the same?</p></li>
+<li><p>What would happen to the standard deviation (SD) if the sample size increased? i.e., does the SD increase, decrease or stay the same?</p></li>
+</ol>
 <p>🌶️ Suppose a rare orchid population is found only in a specific forest tract slated for logging. To determine if this population should be protected under the Endangered Species Act (ESA), researchers conduct a study to see if it is genetically distinct from a common, widespread orchid species found throughout the state. Let’s say the null hypothesis is: The rare orchid population is genetically identical to the common species (they are “homogeneous”). The Alternative Hypothesis is: The rare orchid population is a distinct subspecies. Because funding is limited and the flowering season is short, researchers only collect a small sample size of 10 orchids.</p>
 <p>In this context, conservation scientists and policy makers often face a ‘burden of proof’ dilemma. Why the traditional null- hypothesis significant testing may be fundamentally mismatched with the ‘precautionary principle’ required for species conservation.</p>
 <div style="background-color:beige;">
@@ -273,8 +275,8 @@ window.Quarto = {
 </section>
 <section id="chapter-3-genetic-concepts-and-tools" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-3-genetic-concepts-and-tools">Chapter 3: Genetic Concepts and Tools</h2>
-<p><u>1.</u> At a single locus in an endangered finch, there are three alleles with frequencies $p$, $q$, and $r$. Calculate the expected heterozygosity under Hardy-Weinberg equilibrium.</p>
-<p><u>2.</u> A population of beetles has two alleles for color. The dominant allele is $A$ and the recessive allele is $a$. In a sample of 1,000 beetles, 160 display the recessive phenotype. Assuming the population is in Hardy–Weinberg equilibrium, what are the frequencies of the $A$ and $a$ alleles, and what proportion of the population is expected to be heterozygous? (Show your work)</p>
+<p><u>1.</u> At a single locus in an endangered finch, there are three alleles with frequencies <span class="math inline">\(p=0.364\)</span>, <span class="math inline">\(q=0.352\)</span>, and <span class="math inline">\(r=0.284\)</span>. Calculate the expected heterozygosity under Hardy-Weinberg equilibrium.</p>
+<p><u>2.</u> A population of beetles has two alleles for color. The dominant allele is <span class="math inline">\(A\)</span> and the recessive allele is <span class="math inline">\(a\)</span>. In a sample of 1,000 beetles, 160 display the recessive phenotype. Assuming the population is in Hardy–Weinberg equilibrium, what are the frequencies of the <span class="math inline">\(A\)</span> and <span class="math inline">\(a\)</span> alleles, and what proportion of the population is expected to be heterozygous?</p>
 <p><u>3.</u> Explain why mtDNA is often more useful than nuclear DNA for species identification from small or degraded samples like a single hair found in the woods.</p>
 <p><u>4.</u> Looking at the example of forensic application using microsatellite DNA in Figure 3.2, which deer, a, b, or c, did the antler tissue sample came from?</p>
 <p>🌶️ Many populations of Pacific salmon (Oncorhynchus spp.) from southern California to northern Washington are listed for protection under the US Endangered Species Act 1973 (ESA). Here we use a <a href="https://onlinelibrary.wiley.com/doi/10.1111/eva.13647">published</a> dataset on Chilkat River Chinook salmon (O. tshawytscha) in Southeast Alaska to estimate abundance using mark-recapture. This data set includes genetic data on sampled offspring and their assigned parent. First, let’s explore the data. From 682 offspring, 220 were assigned to at least one parent. There are 147 unique parent IDs.</p>
@@ -353,19 +355,25 @@ window.Quarto = {
 <section id="chapter-4-estimating-population-size-and-vital-rates" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-4-estimating-population-size-and-vital-rates">Chapter 4: Estimating Population Size and Vital Rates</h2>
 <p><u>1.</u> Suppose you are studying a jaguar population using camera traps, and you are interested in estimating the population size using the Lincoln-Petersen model. During the first period of camera trapping, you uniquely identify 14 jaguars. During the next sampling period, you identify 16 jaguars, 6 of which you had previously detected.</p>
-<p>a. What is the detection probability of jaguar at camera traps?</p>
-<p>b. Estimate jaguar abundance and variance in this population?</p>
-<p>c. Use your results from the previous question to calculate the 95% confidence intervals for your estimate of abundance.</p>
-<p>d. Why is it important to include detection probability in our abundance estimate, instead of just using the count of jaguars?</p>
+<ol type="a">
+<li><p>What is the detection probability of jaguar at camera traps?</p></li>
+<li><p>Estimate jaguar abundance and variance in this population?</p></li>
+<li><p>Use your results from the previous question to calculate the 95% confidence intervals for your estimate of abundance.</p></li>
+<li><p>Why is it important to include detection probability in our abundance estimate, instead of just using the count of jaguars?</p></li>
+</ol>
 <p><u>2.</u> What happens to your estimates of detection probability and abundance if wolverines chew off their tags and lose them during a capture-recapture study?</p>
 <p><u>3.</u> In a capture-recapture model of a quail population abundance with 3 samples, what is the probability of detection history 110 in each of the following scenarios:</p>
-<p>i. the probability of detection is assumed to be constant.</p>
-<p>ii. the probability of detection is assumed to vary between sample occasions.</p>
-<p>iii. the probability of the initial detection is assumed to be different from the probability of subsequent detections.</p>
+<ol type="i">
+<li><p>the probability of detection is assumed to be constant.</p></li>
+<li><p>the probability of detection is assumed to vary between sample occasions.</p></li>
+<li><p>the probability of the initial detection is assumed to be different from the probability of subsequent detections.</p></li>
+</ol>
 <p><u>4.</u> Suppose you are studying snowshoe hare survival, using the Kaplan-Meier method. At the beginning of the study (year 1), 33 hares were GPS-collared. When checked at year 2, you found 2 hares dead and lost the signal of 1 collared hare. You collared 5 new hares in year 2.</p>
-<p>a. What is the probability of surviving the first year?</p>
-<p>b. What is the probability of surviving the second year?</p>
-<p>c. By using this method to estimate survival, what assumptions are you making?</p>
+<ol type="a">
+<li><p>What is the probability of surviving the first year?</p></li>
+<li><p>What is the probability of surviving the second year?</p></li>
+<li><p>By using this method to estimate survival, what assumptions are you making?</p></li>
+</ol>
 <p>🌶️ The the Lincoln-Peterson method is used to estimate the abundance of a closed population using mark-recapture data. Using this method, animals do not need to be uniquely marked to estimate abundance. We learned that: <span class="math inline">\(\hat{N}\)</span> = <span class="math inline">\(\frac{n_1 n_2}{m_2}\)</span>, where <span class="math inline">\(n_1\)</span> is the number of animals caught and marked in the first sample, <span class="math inline">\(n_2\)</span> is the number of animals caught in the second sample, and <span class="math inline">\(m_2\)</span> is the number of animals caught in both samples.</p>
 <p>We could use R to estimate abundance using the Lincoln-Peterson estimator.</p>
 <p>First, let’s create three objects n1, n2, and m2 and store the sampling data. We captured 44 individuals on the first sample occasion, 32 individuals on the second sample occasion, and 15 individuals were captured in both sample occasions.</p>
@@ -422,10 +430,12 @@ window.Quarto = {
 <section id="chapter-5-exponential-or-geometric-change" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-5-exponential-or-geometric-change">Chapter 5: Exponential (or Geometric) Change</h2>
 <p><u>1.</u> Use the discrete population growth model to find the abundance of a population last year if the abundance is 2,000 this year and the geometric growth rate is 0.5.</p>
-<p>a. By what percentage is the population increasing or decreasing each year?</p>
-<p>b. Starting from the population size this year, what will the size of the population be if it continues to grow at the same rate for a total of 4 years?</p>
-<p>c. What is the population’s instantaneous growth rate if it takes 2 years to double in size?</p>
-<p>d. Based on the instantaneous growth rate, is this population stable, growing, or shrinking?</p>
+<ol type="a">
+<li><p>By what percentage is the population increasing or decreasing each year?</p></li>
+<li><p>Starting from the population size this year, what will the size of the population be if it continues to grow at the same rate for a total of 4 years?</p></li>
+<li><p>What is the population’s instantaneous growth rate if it takes 2 years to double in size?</p></li>
+<li><p>Based on the instantaneous growth rate, is this population stable, growing, or shrinking?</p></li>
+</ol>
 <p><u>2.</u> Why is the geometric mean a better descriptor of a fluctuating population’s long-term growth than the arithmetic mean?</p>
 <p><u>3.</u> A population of 10 individuals has an expected survival rate of 70%. Explain why the realized survival rate in any given year is unlikely to be exactly 70% due to demographic stochasticity.</p>
 <p>🌶️ One non-intuitive idea that emerged from Chapter 5 in the text is that (under many conditions) the average growth rate of a population might be much higher than the most likely population trajectory. That is, when conditions are variable, population dynamics are governed not by the arithmetic mean, but rather by the geometric mean. Let’s see how that plays out.</p>
@@ -492,12 +502,11 @@ window.Quarto = {
 <div style="background-color:beige;">
 <p>🔥<strong>Questions:</strong></p>
 <ol type="1">
-<li>With an initial abundance of 50 in year 2020, project abundance for years 2025 and 2027, assuming situations (a) and (b) and then visualize the two projections of population abundnace.</li>
-</ol>
-<!-- -->
+<li><p>With an initial abundance of 50 in year 2020, project abundance for years 2025 and 2027, assuming situations (a) and (b) and then visualize the two projections of population abundnace.</p>
 <ol type="a">
-<li>growth is deterministic (<span class="math inline">\(\lambda_y\)</span> = 1.05) over the years.</li>
-<li>growth is stochastic and fluctuates between 1.55 and 0.55 (<span class="math inline">\(\lambda_{2020}\)</span> = 1.05, <span class="math inline">\(\lambda_{2021}\)</span> = 0.55, <span class="math inline">\(\lambda_{2022}\)</span> = 1.05, <span class="math inline">\(\lambda_{2023}\)</span> = 0.55, etc).</li>
+<li><p>growth is deterministic (<span class="math inline">\(\lambda_y\)</span> = 1.05) over the years.</p></li>
+<li><p>growth is stochastic and fluctuates between 1.55 and 0.55 (<span class="math inline">\(\lambda_{2020}\)</span> = 1.05, <span class="math inline">\(\lambda_{2021}\)</span> = 0.55, <span class="math inline">\(\lambda_{2022}\)</span> = 1.05, <span class="math inline">\(\lambda_{2023}\)</span> = 0.55, etc).</p></li>
+</ol></li>
 </ol>
 </div>
 <p><br></p>
@@ -530,7 +539,13 @@ window.Quarto = {
 </section>
 <section id="chapter-7-density-dependent-population-change" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-7-density-dependent-population-change">Chapter 7: Density-Dependent Population Change</h2>
-<p><u>1.</u> Draw a graph showing how population size varies over time for a population following logistic growth. Label your axes appropriately and use this graph to answer the following questions. a. Where is the population growing the fastest? Circle that region and label it with “A”. b. Where is population growth limited by the number of individuals? Circle that region and label it with “B”. c.&nbsp;Where is the population limited by small per-capita growth rate? Circle that region and label it “C”. d.&nbsp;For the region of the graph you labelled “C,” what might be causing the low per-capita growth rate?</p>
+<p><u>1.</u> Draw a graph showing how population size varies over time for a population following logistic growth. Label your axes appropriately and use this graph to answer the following questions.</p>
+<ol type="a">
+<li><p>Where is the population growing the fastest? Circle that region and label it with “A”.</p></li>
+<li><p>Where is population growth limited by the number of individuals? Circle that region and label it with “B”.</p></li>
+<li><p>Where is the population limited by small per-capita growth rate? Circle that region and label it “C”.</p></li>
+<li><p>For the region of the graph you labelled “C,” what might be causing the low per-capita growth rate?</p></li>
+</ol>
 <p><u>2.</u> What is a strong Allee effect? Explain why a population might decline toward extinction even if $N &gt; 2$.</p>
 <p><u>3.</u> Draw two graphs showing how per capita mortality rate could vary with population size. If birth rate is constant in both graphs, indicate the carrying capacity, positive population growth and negative or positive density dependence on each graph.</p>
 <p>🌶️ Although we have emphasized that logistic growth is just one special form of negative density dependence, it turns out that wolves reintroduced into the northern rockies exhibit negative density dependence that can be reasonably modeled using logistic growth. Ever since wolves were introduced into Yellowstone and Central Idaho, the USFWS has kept a pretty good tab on total wolf numbers in the US Northern Rockies. For this exercise we will use these data from 1995-2015 (representing the total wolf count in Yellowstone, Central Idaho and NW Montana).</p>
@@ -698,10 +713,12 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <p><strong>🔥Questions:</strong></p>
 <ol type="1">
 <li><p>With different values of <span class="math inline">\(\rho_0\)</span> (between about 1 and 3) in the discrete logistic growth equation estimate abundance to achieve examples of:</p>
-<p>a. damped oscillations</p>
-<p>b. two-point stable limit cycles</p>
-<p>c. four-point stable limit cycles</p>
-<p>d. chaos</p></li>
+<ol type="a">
+<li><p>damped oscillations</p></li>
+<li><p>two-point stable limit cycles</p></li>
+<li><p>four-point stable limit cycles</p></li>
+<li><p>chaos</p></li>
+</ol></li>
 </ol>
 <!-- -->
 <ol start="2" type="1">
@@ -715,7 +732,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <p><u>1.</u> Calculate the survival probability of a population of mule deer with a 20% predation mortality rate and a 30% mortality rate from other causes when: a. predation mortality is fully additive b. predation mortality is fully compensatory</p>
 <p><u>2.</u> Suppose you’re a manager tasked with protection of a population of rare birds called deer grouse. There’s a native hawk species that hunts the deer grouse. Biologists recently discovered an invasive rodent species called the dusky mouse that eats the eggs of the deer grouse. The dusky mouse population is growing quickly. What do you need to consider before taking action to protect the deer grouse from the invasive dusky mouse?</p>
 <p><u>3.</u> If you’re an elk in Yellowstone National Park, what would your survival strategy be if you know that wolves hunt you in valley bottoms during the day and pumas hunt you in rocky terrain at night? Name a potential fitness cost of your strategy. What term describes the effect of the predators on your behavior?</p>
-<p><u>4.</u> Which panel in figure 8.2 matches the following predator-prey interaction where lynx populations in a boreal forest increase in abundance as snowshoe hare populations increase. The rate of that increase slows as the hare population gets bigger. Because the snowshoe hares are masters of camouflage, Lynx need to spend more time searching for hares to pursue when hare populations are low.</p>
+<p><u>4.</u> Which panel in figure 8.2 matches the following predator-prey interaction where lynx populations in a boreal forest increase in abundance as snowshoe hare populations increase. The rate of that increase slows as the hare population gets bigger. Because the snowshoe hares are masters of camouflage, lynx needs to spend more time searching for hares to pursue when hare populations are low.</p>
 <p><u>5.</u> Draw a graph of predation rate (% prey killed) against prey abundance. Indicate the area of positive or negative density dependence on this graph.</p>
 <p>🌶️Management of critically endangered species may pose considerable scientific and ethical dilemmas. Channel Islands are inhabited by an endemic, carnivore species, the island fox (Urocyon litteralis). These islands are also populated by introduced feral pigs (Sus scrofa). The presence of pigs (and the loss of bald eagles) enabled golden eagles (Aquila chrysaetos) to colonize the islands in early 1990’s. The eagles prey mainly on pigs and foxes are their secondary, alternative prey. Canine distemper became an issue in the late 1990s. The species was listed as endangered, and things looked bleak for island fox. Science-based conservation recommendations were badly needed, and time was short.</p>
 <p>The rate of predation by a predator population is determined by two attributes of the predator’s response to changes in prey density: functional response and numerical response. The numerical response is simply how predator number changes as prey abundance changes. The functional response relates a single predator’s prey consumption rate to prey population density.</p>
@@ -799,10 +816,13 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <h2 class="anchored" data-anchor-id="chapter-9-genetic-variation-and-fitness">Chapter 9: Genetic Variation and Fitness</h2>
 <p><u>1.</u> After how many generations of genetic drift in an isolated population does the inbreeding coefficient for a subpopulation relative to the total population reach 0.01 if the effective population size is 50?</p>
 <p><u>2.</u> What is the inbreeding coefficient for a subpopulation relative to the total population of an isolated species experiencing genetic drift after 2 generations if the effective population size is 50?</p>
-<p><u>3.</u> Suppose you are studying a subpopulation of bighorn sheep within a larger metapopulation. You estimate FST of 0.7. a. What does that tell you about genetic variation in the subpopulation? b. You also found that juvenile survival has decreased by 40% in the subpopulation, although you did not find a significant change in the mean population growth rate. What does this suggest about inbreeding depression in the subpopulation?</p>
+<p><u>3.</u> Suppose you are studying a subpopulation of bighorn sheep within a larger metapopulation. You estimate FST of 0.7.</p>
+<ol type="a">
+<li><p>What does that tell you about genetic variation in the subpopulation?</p></li>
+<li><p>You also found that juvenile survival has decreased by 40% in the subpopulation, although you did not find a significant change in the mean population growth rate. What does this suggest about inbreeding depression in the subpopulation?</p></li>
+</ol>
 <p><u>4.</u> Why did the founder effect not have a significant negative impact on the genetic variation of the Yellowstone wolf population after the first ten years if only 31 individuals were translocated to the park?</p>
-<p>🌶️Suppose individuals in a wildlife population are found to suffer a fatal genetic disorder that has a genetic basis, recessive inheritance, and shows up in 1 out of every 400 individuals.</p>
-<p>We’ll assume only 2 alleles and refer to the dominant (normal) allele as F, and to the fatal disorder disease allele as f.&nbsp;0.25 percent of the population suffer from the disease. What are the allele frequencies? What percent of the population is a non-affected “carrier” of the allele or a homozygous FF?</p>
+<p>🌶️Suppose individuals in a wildlife population are found to suffer a fatal genetic disorder that has a genetic basis, recessive inheritance, and shows up in 1 out of every 400 individuals. We’ll assume only 2 alleles and refer to the dominant (normal) allele as F, and to the fatal disorder disease allele as f.&nbsp;0.25 percent of the population suffer from the disease. What are the allele frequencies? What percent of the population is a non-affected “carrier” of the allele or a homozygous FF?</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>percent <span class="ot">&lt;-</span>   <span class="dv">1</span> <span class="sc">/</span> <span class="dv">400</span> <span class="sc">*</span> <span class="dv">100</span> </span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -825,7 +845,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>  <span class="fl">0.5</span>                                             <span class="co"># allele frequency</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span> <span class="sc">*</span> n[<span class="dv">1</span>], <span class="at">prob =</span> p) <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> n[<span class="dv">1</span>])     <span class="co"># allele frequency in the next generation </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5666667</code></pre>
+<pre><code>[1] 0.4833333</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1000</span>                                             <span class="co"># repeat sampling 1000 times</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
@@ -881,18 +901,17 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Population 1 (Nature reserve)</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fl">0.40</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>R1 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> b1 <span class="sc">-</span> d1  </span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Population 2 (Fragmented forest)</span></span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> <span class="fl">0.15</span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fl">0.20</span></span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>R2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> b2 <span class="sc">-</span> d2  </span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Population 3 (Solar Farm: ecological trap)</span></span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>b3 <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> <span class="fl">0.50</span></span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>R3 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> b3 <span class="sc">-</span> d3  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>R1 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> b1 <span class="sc">-</span> d1  </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Population 2 (Fragmented forest)</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> <span class="fl">0.15</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fl">0.20</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>R2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> b2 <span class="sc">-</span> d2  </span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Population 3 (Solar Farm: ecological trap)</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>b3 <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> <span class="fl">0.50</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>R3 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> b3 <span class="sc">-</span> d3  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <pre><code></code></pre>
 <p>Moving from population j to population i can be represented by <span class="math inline">\(D_{ij}\)</span> below.</p>
@@ -938,8 +957,10 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <h2 class="anchored" data-anchor-id="chapter-11-population-responses-to-stressors">Chapter 11: Population Responses to Stressors</h2>
 <p><u>1.</u> Define the three responses available to a population of Arctic foxes facing a warming climate and explain which of these options constitute resilience.</p>
 <p><u>2.</u> Snowshoe hares initiate their seasonal color molt based on photoperiod (day length), but snowmelt is occurring earlier due to climate change.</p>
-<p>a. Is this a form of plastic rescue?</p>
-<p>b. What is the consequence for survival?</p>
+<ol type="a">
+<li><p>Is this a form of plastic rescue?</p></li>
+<li><p>What is the consequence for survival?</p></li>
+</ol>
 <p><u>3.</u> Draw a hypothetical reaction norm graph depicting phenotypic plasticity for egg-laying dates in great tits against mean spring temperature. Label the axis that indicates the “Adjust” response.</p>
 <p>🌶️</p>
 <hr>
@@ -1028,17 +1049,21 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <section id="chapter-13-sustainable-harvest" class="level2">
 <h2 class="anchored" data-anchor-id="chapter-13-sustainable-harvest">Chapter 13: Sustainable Harvest</h2>
 <p><u>1.</u> You are studying greater sage-grouse, and you want to know if hunting mortality is compensatory or additive.</p>
-<p>a. If harvest were completely additive, what annual survival be?</p>
-<p>b. If harvest were completely compensatory, what would annual survival be?</p>
-<p>c. Say you estimate that the coefficient for hunting mortality is 0.25 (95% CI: 0.13-0.37). What does this suggest about the effect of hunting on annual survival?</p>
+<ol type="a">
+<li><p>If harvest were completely additive, what annual survival be?</p></li>
+<li><p>If harvest were completely compensatory, what would annual survival be?</p></li>
+<li><p>Say you estimate that the coefficient for hunting mortality is 0.25 (95% CI: 0.13-0.37). What does this suggest about the effect of hunting on annual survival?</p></li>
+</ol>
 <p><u>2.</u> Why is a fixed-quota harvest (taking exactly 40 animals/year) riskier than a fixed-effort harvest in an unpredictable environment.</p>
 <p><u>3.</u> Intense trophy hunting on bighorn sheep removes the fastest-growing rams with the largest horns.</p>
-<p>a. What is the likely evolutionary response?</p>
-<p>b. Why is this called a “debt”?</p>
+<ol type="a">
+<li><p>What is the likely evolutionary response?</p></li>
+<li><p>Why is this called a “debt”?</p></li>
+</ol>
 <p>🌶️ For the structured mule deer population with information below, draw a two-sex life cycle diagram and write out the matrix and projection model with harvest. We can tell sexes of adults only. Adult females and males are harvested at different rates. Vital rates measured in absence of harvest:</p>
 <ul>
 <li>birth rate, b</li>
-<li>survival of juvenile to adult sj</li>
+<li>survival of juvenile to adult, sj</li>
 <li>survival of adult females, sf</li>
 <li>survival of adult males, sm</li>
 <li>survival of babies until seen as juveniles, s0</li>
