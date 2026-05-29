@@ -61,8 +61,6 @@ b\. What would happen to our estimated standard error (SE) if we increased the s
 
 c\. What would happen to the standard deviation (SD) if the sample size increased? i.e., does the SD increase, decrease or stay the same?
 
-[2.]{.underline} In the context of endangered species monitoring (Table 2.1), describe Type I and Type II errors and identify their conservation consequences in this context.
-
 🌶️ Suppose a rare orchid population is found only in a specific forest tract slated for logging. To determine if this population should be protected under the Endangered Species Act (ESA), researchers conduct a study to see if it is genetically distinct from a common, widespread orchid species found throughout the state. Let's say the null hypothesis is: The rare orchid population is genetically identical to the common species (they are "homogeneous"). The Alternative Hypothesis is: The rare orchid population is a distinct subspecies. Because funding is limited and the flowering season is short, researchers only collect a small sample size of 10 orchids.
 
 In this context, conservation scientists and policy makers often face a 'burden of proof' dilemma. Why the traditional null- hypothesis significant testing may be fundamentally mismatched with the 'precautionary principle' required for species conservation.
