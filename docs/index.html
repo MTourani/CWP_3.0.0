@@ -225,7 +225,7 @@ window.Quarto = {
 <p><u>4.</u> Current extinction rates are estimated to be 10–30 times higher than the background rate. Using the 2 E/MSY baseline, calculate the current range of extinctions per million species per year.</p>
 <p>🌶️ The Living Planet Index (LPI) is a measure of the state of the global biodiversity trends, including vertebrate species from terrestrial, freshwater and marine habitats. The 2016 LPI reported a 58% average decline in wild vertebrate populations since 1970. In this report, a total of 14,152 populations across 3,706 species were included. Based on this report, population sizes of vertebrate species have, on average, dropped by more than half in little more than 40 years. The dataset spanning years between 1970 and 2012 is public.</p>
 <div style="background-color:beige;">
-<p><strong>Questions:</strong></p>
+<p><strong>🔥Questions:</strong></p>
 <ol type="1">
 <li><p>Write code to visualize data and provide data summaries to answer: are all studied wildlife populations in decline? Hint: Find out how many populations show at least 58% decline. What percentage of the studied populations are decreasing in each continent?</p></li>
 <li><p>Showcase a potential issue with the LPI. Hint: use data summaries and visualization in R to break down data, e.g., by taxa, realm, and continent. Bonus: Showcase a remedy to the issue.</p></li>
@@ -364,13 +364,13 @@ window.Quarto = {
     Exact binomial test
 
 data:  n_success and n_trial
-number of successes = 25, number of trials = 30, p-value = 0.0003249
+number of successes = 24, number of trials = 30, p-value = 0.001431
 alternative hypothesis: true probability of success is not equal to 0.5
 95 percent confidence interval:
- 0.6527883 0.9435783
+ 0.6143335 0.9228645
 sample estimates:
 probability of success 
-             0.8333333 </code></pre>
+                   0.8 </code></pre>
 </div>
 </div>
 <p>We can use the same likelihood as in maximum likelihood estimation to make inference using Bayesian estimation. The outcome of Bayesian inference is the Bayesian posterior distribution. Recall from equation 2.6, all we need is some prior information about the model parameters.</p>
@@ -427,7 +427,7 @@ probability of success
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior probability that the probability of breeding success is greater than 0.8</span></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(posterior[probs <span class="sc">&gt;</span> <span class="fl">0.8</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8288245</code></pre>
+<pre><code>[1] 0.6015308</code></pre>
 </div>
 </div>
 <p>As with the maximum likelihood estimation, we provide the uncertainty bounds of the Bayesian estimation as credible intervals. Although the interpretation of the intervals are not the same. A 95% credible interval is the interval that has 95% probability of containing the true value of the parameter. Whereas a 95% confidence interval indicates that 95% of the intervals constructed with repeated sampling will contain the true value.</p>
@@ -435,11 +435,11 @@ probability of success
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior percentiles - central 98% interval</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>probs[<span class="fu">max</span>(<span class="fu">which</span>(<span class="fu">cumsum</span>(posterior) <span class="sc">&lt;</span> <span class="fl">0.025</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.741</code></pre>
+<pre><code>[1] 0.7</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>probs[<span class="fu">max</span>(<span class="fu">which</span>(<span class="fu">cumsum</span>(posterior) <span class="sc">&lt;</span> <span class="fl">0.975</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.924</code></pre>
+<pre><code>[1] 0.899</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cumPost <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(posterior) <span class="sc">/</span> (<span class="fu">length</span>(posterior) <span class="sc">-</span><span class="dv">1</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -448,7 +448,7 @@ probability of success
 </div>
 <p>The posterior distributions are mathematically determined once the priors and the likelihood are set. However, the mathematical form of the posterior is sometimes very difficult to deal with. There are several methods to find the shape and other important properties of the posterior in real life examples in later chapters. To name a few, Markov Chain Monte Carlo (MCMC) Simulation, and Laplace approximation are two popular methods in biostatistics.</p>
 <div style="background-color:beige;">
-<p><strong>Questions:</strong></p>
+<p><strong>🔥Questions:</strong></p>
 <ol type="1">
 <li>We rejected the null hypothesis based on p-value &lt; 0.05. Use the binom.test() function to test alternative hypotheses about probability of breeding success.</li>
 <li>Bayesian posterior depends on prior width and the amount of data. Specify a different prior and change the number of trials to see the impact.</li>
@@ -531,7 +531,7 @@ probability of success
 </div>
 <p>Based on this analysis, the Chinook salmon abundance is between 4562 and 6192, with a mean estimate of 5377 individuals.</p>
 <div style="background-color:beige;">
-<p><strong>Question:</strong></p>
+<p><strong>🔥Question:</strong></p>
 <p>Generate new data using the probability distribution for m2, number of recaptures. How does the estimate of N change with different numbers of recaptures?</p>
 </div>
 <hr>
@@ -597,7 +597,7 @@ probability of success
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>uci</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="background-color:beige;">
-<p><strong>Question:</strong></p>
+<p><strong>🔥Question:</strong></p>
 <ol type="1">
 <li><p>Type in the Lincoln-Peterson estimator and report the estimated abundance of the first example population?</p></li>
 <li><p>Calculate the variance of the estimated abundance in R and report the variance.</p></li>
@@ -675,7 +675,7 @@ probability of success
 </div>
 <p>We saw in the text the two intuitive ways most commonly used to estimate average exponential trend: a) drawing a line through the log(abundance) data over time; b) taking simple averages of the consecutive series of r values. However, we also saw that these methods can give different, and possibly inappropriate, answers because they make fundamentally different assumptions about the processes that cause variation in population growth over time. The first approach assumes that all the variation in the abundances over time comes from observation error (OE). The second assumes that all the variation in the average growth rate arises from process noise (PN). Here we’ll get some hands-on practice with the EGOE and EGPN trend estimators and will analyze both sources of variation at once using a state-space model (EGSS).</p>
 <div style="background-color:beige;">
-<p><strong>Questions:</strong></p>
+<p>🔥<strong>Questions:</strong></p>
 <ol type="1">
 <li>With an initial abundance of 50 in year 2020, project abundance for years 2025 and 2027, assuming situations (a) and (b) and then visualize the two projections of population abundnace.</li>
 </ol>
@@ -880,7 +880,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 </div>
 <p>Environmental stochasticity could cause K to vary over time. Another mechanism that can cause a population to fluctuate around K has nothing to do with stochasticity. Even deterministically growing populations can overshoot K when there is a lag in the effect of the proximity of N to K on r. The magnitude of r and the time lag involved can both influence these dynamics.</p>
 <div style="background-color:beige;">
-<p><strong>Questions:</strong></p>
+<p><strong>🔥Questions:</strong></p>
 <ol type="1">
 <li><p>With different values of <span class="math inline">\(\rho_0\)</span> (between about 1 and 3) in the discrete logistic growth equation estimate abundance to achieve examples of:</p>
 <p>a. damped oscillations</p>
@@ -971,7 +971,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(n_eaten)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="background-color:beige;">
-<p><strong>Questions:</strong></p>
+<p><strong>🔥Questions:</strong></p>
 <ol type="1">
 <li>By comparing the predation rate and population size, are the changes stabilizing or destabilizing for the fox population?</li>
 <li>Use a function to describe the numerical response curve which changes positively with prey abundance. How does this change affect the predation rate? Find out if the predation rates are stabilizing or destabilizing the fox population.</li>
@@ -1010,7 +1010,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>  <span class="fl">0.5</span>                                             <span class="co"># allele frequency</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span> <span class="sc">*</span> n[<span class="dv">1</span>], <span class="at">prob =</span> p) <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> n[<span class="dv">1</span>])     <span class="co"># allele frequency in the next generation </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5666667</code></pre>
+<pre><code>[1] 0.5</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1000</span>                                             <span class="co"># repeat sampling 1000 times</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
@@ -1048,7 +1048,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(marmot_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="background-color:beige;">
-<p><strong>Questions:</strong></p>
+<p><strong>🔥Questions:</strong></p>
 <p>Calculate the total number of breeders with a population size of 100, and the resulting Nb/N ratio, for a case where breeding sex ratio (Nf / Nm) is: a) 50%; b) 25%; c) 10%. How does a skewed sex ratio affect the Nb/N ratio?</p>
 </div>
 <hr>
@@ -1199,7 +1199,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 </div>
 <p>We generated one sample and now we can put all the steps together and project the population 100 years forward.</p>
 <div style="background-color:beige;">
-<p><strong>Questions:</strong></p>
+<p><strong>🔥Questions:</strong></p>
 <ol type="1">
 <li><p>Simulate population size per year for 100 years.</p></li>
 <li><p>How do changes in fecundity affect the number of individuals in the second year?</p></li>
@@ -1222,12 +1222,12 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <p>b. Why is this called a “debt”?</p>
 <p>🌶️ For the structured mule deer population with information below, draw a two-sex life cycle diagram and write out the matrix and projection model with harvest. We can tell sexes of adults only. Adult females and males are harvested at different rates. Vital rates measured in absence of harvest:</p>
 <ul>
-<li><p>birth rate, b</p></li>
-<li><p>survival of juvenile to adult, $s_j$</p></li>
-<li><p>survival of adult females, $s_f$</p></li>
-<li><p>survival of adult males, $s_m$</p></li>
-<li><p>survival of babies until seen as juveniles, $s_0$</p></li>
-<li><p>proportion of those entering adult class that are males, p</p></li>
+<li>birth rate, b</li>
+<li>survival of juvenile to adult sj</li>
+<li>survival of adult females, sf</li>
+<li>survival of adult males, sm</li>
+<li>survival of babies until seen as juveniles, s0</li>
+<li>proportion of those entering adult class that are males, p</li>
 </ul>
 
 

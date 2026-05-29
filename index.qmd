@@ -17,7 +17,7 @@ title: "Conservation of Wildlife Populations Exercises, 3rd Edition"
 🌶️ The Living Planet Index (LPI) is a measure of the state of the global biodiversity trends, including vertebrate species from terrestrial, freshwater and marine habitats. The 2016 LPI reported a 58% average decline in wild vertebrate populations since 1970. In this report, a total of 14,152 populations across 3,706 species were included. Based on this report, population sizes of vertebrate species have, on average, dropped by more than half in little more than 40 years. The dataset spanning years between 1970 and 2012 is public.
 
 ::: {style="background-color:beige;"}
-**Questions:**
+**🔥Questions:**
 
 (1) Write code to visualize data and provide data summaries to answer: are all studied wildlife populations in decline? Hint: Find out how many populations show at least 58% decline. What percentage of the studied populations are decreasing in each continent?
 
@@ -252,7 +252,7 @@ uci <- probs[which.min(abs(cumPost - 0.975))]
 The posterior distributions are mathematically determined once the priors and the likelihood are set. However, the mathematical form of the posterior is sometimes very difficult to deal with. There are several methods to find the shape and other important properties of the posterior in real life examples in later chapters. To name a few, Markov Chain Monte Carlo (MCMC) Simulation, and Laplace approximation are two popular methods in biostatistics.
 
 ::: {style="background-color:beige;"}
-**Questions:**
+**🔥Questions:**
 
 1.  We rejected the null hypothesis based on p-value \< 0.05. Use the binom.test() function to test alternative hypotheses about probability of breeding success.
 2.  Bayesian posterior depends on prior width and the amount of data. Specify a different prior and change the number of trials to see the impact.
@@ -354,7 +354,7 @@ round(c(lci, uci), 0)
 Based on this analysis, the Chinook salmon abundance is between 4562 and 6192, with a mean estimate of 5377 individuals.
 
 ::: {style="background-color:beige;"}
-**Question:**
+**🔥Question:**
 
 Generate new data using the probability distribution for m2, number of recaptures. How does the estimate of N change with different numbers of recaptures?
 :::
@@ -457,7 +457,7 @@ uci
 ```
 
 ::: {style="background-color:beige;"}
-**Question:**
+**🔥Question:**
 
 (1) Type in the Lincoln-Peterson estimator and report the estimated abundance of the first example population?
 
@@ -548,7 +548,7 @@ sg_data$abundance[1] * (lambda_g ^ length(year))
 We saw in the text the two intuitive ways most commonly used to estimate average exponential trend: a) drawing a line through the log(abundance) data over time; b) taking simple averages of the consecutive series of r values. However, we also saw that these methods can give different, and possibly inappropriate, answers because they make fundamentally different assumptions about the processes that cause variation in population growth over time. The first approach assumes that all the variation in the abundances over time comes from observation error (OE). The second assumes that all the variation in the average growth rate arises from process noise (PN). Here we’ll get some hands-on practice with the EGOE and EGPN trend estimators and will analyze both sources of variation at once using a state-space model (EGSS).
 
 ::: {style="background-color:beige;"}
-**Questions:**
+🔥**Questions:**
 
 1.  With an initial abundance of 50 in year 2020, project abundance for years 2025 and 2027, assuming situations (a) and (b) and then visualize the two projections of population abundnace.
 
@@ -770,7 +770,7 @@ points( x   = 1 : length(wolf_data$N),
 Environmental stochasticity could cause K to vary over time. Another mechanism that can cause a population to fluctuate around K has nothing to do with stochasticity. Even deterministically growing populations can overshoot K when there is a lag in the effect of the proximity of N to K on r. The magnitude of r and the time lag involved can both influence these dynamics.
 
 ::: {style="background-color:beige;"}
-**Questions:**
+**🔥Questions:**
 
 1.  With different values of $\rho_0$ (between about 1 and 3) in the discrete logistic growth equation estimate abundance to achieve examples of:
 
@@ -875,7 +875,7 @@ print(n_eaten)
 ```
 
 ::: {style="background-color:beige;"}
-**Questions:**
+**🔥Questions:**
 
 1.  By comparing the predation rate and population size, are the changes stabilizing or destabilizing for the fox population?
 2.  Use a function to describe the numerical response curve which changes positively with prey abundance. How does this change affect the predation rate? Find out if the predation rates are stabilizing or destabilizing the fox population.
@@ -960,7 +960,7 @@ print(marmot_data)
 ```
 
 ::: {style="background-color:beige;"}
-**Questions:**
+**🔥Questions:**
 
 Calculate the total number of breeders with a population size of 100, and the resulting Nb/N ratio, for a case where breeding sex ratio (Nf / Nm) is: a) 50%; b) 25%; c) 10%. How does a skewed sex ratio affect the Nb/N ratio?
 :::
@@ -1166,7 +1166,7 @@ population[i+1, 1] <- newborns
 We generated one sample and now we can put all the steps together and project the population 100 years forward.
 
 ::: {style="background-color:beige;"}
-**Questions:**
+**🔥Questions:**
 
 (1) Simulate population size per year for 100 years.
 
@@ -1202,13 +1202,8 @@ b\. Why is this called a "debt"?
 🌶️ For the structured mule deer population with information below, draw a two-sex life cycle diagram and write out the matrix and projection model with harvest. We can tell sexes of adults only. Adult females and males are harvested at different rates. Vital rates measured in absence of harvest:
 
 -   birth rate, b
-
--   survival of juvenile to adult, \$s_j\$
-
--   survival of adult females, \$s_f\$
-
--   survival of adult males, \$s_m\$
-
--   survival of babies until seen as juveniles, \$s_0\$
-
+-   survival of juvenile to adult sj
+-   survival of adult females, sf
+-   survival of adult males, sm
+-   survival of babies until seen as juveniles, s0
 -   proportion of those entering adult class that are males, p
