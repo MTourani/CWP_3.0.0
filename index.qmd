@@ -34,6 +34,21 @@ Where to start? You can use program R to load, summarize, visualize, and analyze
 (3) In the script, define key variables, and load any additional packages into the R environment. When you write code, always type in the “script” window in Rstudio. You can execute commands using command-enter or control-enter in Rstudio.
 ```
 
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 1.Load required packages-----------------------------------------------
+library(utils)
+# 2.Load the data into R------------------------------------------------
+url_remote <-"https://raw.githubusercontent.com/"
+path_git <-"MTourani/WILD470_S2025/refs/heads/main/"
+file_name <-"LPI_LPR2016data_public.csv"
+data <- utils::read.csv(paste0(url_remote, path_git, file_name))
+# 3.Filter and clean the data--------------------------------------------
+nrow(data)
+ncol(data)
+colnames(data)
+
+```
+
 ------------------------------------------------------------------------
 
 ## Chapter 2: Gaining Reliable Knowledge
@@ -48,215 +63,16 @@ c\. What would happen to the standard deviation (SD) if the sample size increase
 
 [2.]{.underline} In the context of endangered species monitoring (Table 2.1), describe Type I and Type II errors and identify their conservation consequences in this context.
 
-🌶️ Gaining reliable knowledge in applied wildlife population ecology requires a rigourous and formal process coupling ideas (hypotheses) to reliable measured facts. In the spirit of “embracing the uncertainty”, in this exercise, we focus on three approaches for inference: maximum likelihood estimation, null hypothesis significant testing, and Bayesian estimation. Suppose we are tasked with monitoring griffon eggs (also spelled griffin or gryphon). We want to collect evidence on griffons breeding success. We visit 30 nests, and expect to find 20 nests with eggs. The data would look like the plot below.
+🌶️ Suppose a rare orchid population is found only in a specific forest tract slated for logging. To determine if this population should be protected under the Endangered Species Act (ESA), researchers conduct a study to see if it is genetically distinct from a common, widespread orchid species found throughout the state. Let's say the null hypothesis is: The rare orchid population is genetically identical to the common species (they are "homogeneous"). The Alternative Hypothesis is: The rare orchid population is a distinct subspecies. Because funding is limited and the flowering season is short, researchers only collect a small sample size of 10 orchids.
 
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-
-trials  <- 30
-success <- 20
-griffon <- sample(c(0, 1),
-                  trials,
-                  replace = TRUE,
-                  prob    = c((trials - success) / trials, success / trials))
-barplot(table(griffon),
-        col = ifelse(names(table(griffon)) == 0, "grey", "lightblue"),
-        ylab = "Frequency",
-        xlab = "Breeding success (1: success, 0: failure)")
-
-
-
-```
-
-From such data we can calculate the observed proportion of nests with and without eggs.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-
-proportion <- round(sum(griffon) / length(griffon), 2)
-1 - proportion
-
-```
-
-But this does not tell us much. To make generalisable statements about the breeding success, we need to complete some statistical analyses. We examine this data with a simple model that makes the following assumption: at every visit to a griffon nest, we have a probability of p to find eggs.
-
-First, we can use the dbinom() function to find the likelihood for different probabilities of a success. Then, we can find the probability with the maximum likelihood estimate.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-
-n_success  <- sum(griffon)
-n_trial    <- length(griffon)
-probs      <- seq(0, 1, 0.001)
-likelihood <- dbinom(x = n_success, size = n_trial, prob = probs)
-mle        <- probs[which.max(likelihood)]
-
-
-```
-
-Let's plot the likelihoods and show the probability with the maximum likelihood.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-  
-plot(probs,
-     likelihood,
-     type = "l",
-     lwd = 2,
-     xlab = "Probability of breeding success",
-     ylab = "Likelihood")
-
-abline(v = mle, col = "orange", lwd = 2, lty = 2)
-text(mle,
-     max(likelihood),
-     "Maximum Likelihood",
-     pos = 2,
-     srt = 90,
-     col = "orange")
-
-
-```
-
-We now have a maximum likelihood estimate for the probability of griffon breeding success. Although the maximum likelihood is the best estimate, this estimate is not enough to draw statistical conclusions. We need to calculate the uncertainty or confidence in our estimates. The 95% confidence intervals mean if we repeat the analysis many times and each time create a confidence interval, 95% of the confidence intervals would contain the true value. We can calculate the confidence intervals for the maximum likelihood estimate, by assuming the statistic follows a normal distribution.
-
-```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-
-phat <- n_success / n_trial 
-se   <- sqrt(phat * (1-phat) / n_trial) # standard error
-
-# calculate the lower and upper confidence intervals
-lci <- mle - 1.96 * se
-uci <- mle + 1.96 * se
-
-plot(probs,
-     likelihood,
-     type = "l",
-     lwd = 2,
-     xlab = "Probability of breeding success",
-     ylab = "Likelihood")
-
-
-abline(v = c(lci, uci), col = "lightblue", lwd = 3, lty = 2) # CI lines
-abline(v = mle, col = "orange", lwd = 2, lty = 2)
-
-text(mle,
-     max(likelihood),
-     "Maximum Likelihood",
-     pos = 2,
-     srt = 90,
-     col = "orange")
-
-text(lci,
-     max(likelihood),
-     "Lower CI",
-     pos = 2,
-     srt = 90,
-     col = "lightblue")
-
-text(uci,
-     max(likelihood),
-     "Upper CI",
-     pos = 2,
-     srt = 90,
-     col = "lightblue")
-
-
-```
-
-You see the 95% confidence intervals for probability of breeding success, with a maximum likelihood estimate of 0.7. If we were to repeat our sampling many times and each time create a confidence interval, on average the true value would be within the confidence interval 95% of the time. Here our uncertainty spans from 0.6 to 0.9. Probability values outside of this range are less likely, according to our model.
-
-We can also calculate a p-value: probability to see the observed or more extreme data given the null hypothesis. Here the equal probability of success and failure is the H0 and is rejected based on p-value \< 0.05.
-
-```{r, out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-
-stats::binom.test(x = n_success, #two sided 
-                  n = n_trial, 
-                  p = 0.5) # H0: equal success and failure probability of .5
-
-
-
-```
-
-We can use the same likelihood as in maximum likelihood estimation to make inference using Bayesian estimation. The outcome of Bayesian inference is the Bayesian posterior distribution. Recall from equation 2.6, all we need is some prior information about the model parameters.
-
-```{r, out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-
-prior     <- dbeta(probs, n_success - 1, (n_trial - n_success) - 1)
-posterior <- likelihood * prior / sum(likelihood * prior) * length(probs)
-
-```
-
-We can plot the Bayesian posterior distribution, prior and the likelihood.
-
-```{r, out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-
-distribution <- list( "posterior" = posterior, "prior" = prior, "likelihood" = likelihood)
-for (d in 1 : length(distribution)) {
-  
-  if(d == 1) {
-    plot(probs,
-         posterior,
-         type = "l",
-         lwd  = 2,
-         lty  = d,
-         col = "grey70",
-         xlab = "Probability of breeding sucsess",
-         ylab = "Posterior distribution")
-    
-  } else {
-    lines(probs,
-          distribution[[d]],
-          lwd = 2,
-          lty = d)
-  }
-}
-
-legend("topleft",
-       legend = c("Posterior", "Prior", "Likelihood"),
-       lty    = 1 : length(distribution),
-       col    = c("grey70", "black", "black"),
-       lwd    = 3)
-
-
-```
-
-Unlike the maximum likelihood estimate which is a point estimate, the Bayesian posterior is a distribution. Let's check out some of the properties of the posterior, such as the mean, variance, and standard deviation.
-
-```{r, out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-
-prior     <- prior / sum(prior)  # scales so that prior sums to 1
-posterior <- likelihood * prior / sum(likelihood * prior) 
-
-
-posterior_mean <- sum(probs * posterior)
-posterior_var  <- sum(probs ^ 2 * posterior) - posterior_mean ^ 2
-posterior_sd   <- sqrt(posterior_var)
-
-# posterior probability that the probability of breeding success is greater than 0.8
-sum(posterior[probs > 0.8])
-
-```
-
-As with the maximum likelihood estimation, we provide the uncertainty bounds of the Bayesian estimation as credible intervals. Although the interpretation of the intervals are not the same. A 95% credible interval is the interval that has 95% probability of containing the true value of the parameter. Whereas a 95% confidence interval indicates that 95% of the intervals constructed with repeated sampling will contain the true value.
-
-```{r, out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
-
-# posterior percentiles - central 98% interval
-probs[max(which(cumsum(posterior) < 0.025))]
-probs[max(which(cumsum(posterior) < 0.975))]
-
-
-cumPost <- cumsum(posterior) / (length(posterior) -1)
-
-lci <- probs[which.min(abs(cumPost - 0.025))]
-uci <- probs[which.min(abs(cumPost - 0.975))]
-
-```
-
-The posterior distributions are mathematically determined once the priors and the likelihood are set. However, the mathematical form of the posterior is sometimes very difficult to deal with. There are several methods to find the shape and other important properties of the posterior in real life examples in later chapters. To name a few, Markov Chain Monte Carlo (MCMC) Simulation, and Laplace approximation are two popular methods in biostatistics.
+In this context, conservation scientists and policy makers often face a 'burden of proof' dilemma. Why the traditional null- hypothesis significant testing may be fundamentally mismatched with the 'precautionary principle' required for species conservation.
 
 ::: {style="background-color:beige;"}
 **🔥Questions:**
 
-1.  We rejected the null hypothesis based on p-value \< 0.05. Use the binom.test() function to test alternative hypotheses about probability of breeding success.
-2.  Bayesian posterior depends on prior width and the amount of data. Specify a different prior and change the number of trials to see the impact.
-3.  Suppose we count the number of adult griffons that visit a feeding site during one day. Calculate likelihoods of possible values of griffon, assuming the count follows a Poisson distribution.
+1.  Explain the consequence of a Type II error (false negative) in a listing decision compared to a Type I error.
+2.  Critique the common practice of interpreting a non-significant p-value as evidence of population homogeneity.
+3.  Propose and describe one alternative statistical framework that could provide more transparency for judicial and administrative decision-making in conservation.
 :::
 
 ------------------------------------------------------------------------
