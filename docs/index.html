@@ -186,6 +186,7 @@ window.Quarto = {
   <li><a href="#chapter-6-structured-population-projection-models" id="toc-chapter-6-structured-population-projection-models" class="nav-link" data-scroll-target="#chapter-6-structured-population-projection-models">Chapter 6: Structured Population-Projection Models</a></li>
   <li><a href="#chapter-7-density-dependent-population-change" id="toc-chapter-7-density-dependent-population-change" class="nav-link" data-scroll-target="#chapter-7-density-dependent-population-change">Chapter 7: Density-Dependent Population Change</a></li>
   <li><a href="#chapter-8-predation-and-wildlife-populations" id="toc-chapter-8-predation-and-wildlife-populations" class="nav-link" data-scroll-target="#chapter-8-predation-and-wildlife-populations">Chapter 8: Predation and Wildlife Populations</a></li>
+  <li><a href="#chapter-9-genetic-variation-and-fitness" id="toc-chapter-9-genetic-variation-and-fitness" class="nav-link" data-scroll-target="#chapter-9-genetic-variation-and-fitness">Chapter 9: Genetic Variation and Fitness</a></li>
   <li><a href="#chapter-10-dynamics-of-multiple-populations" id="toc-chapter-10-dynamics-of-multiple-populations" class="nav-link" data-scroll-target="#chapter-10-dynamics-of-multiple-populations">Chapter 10: Dynamics of Multiple Populations</a></li>
   <li><a href="#chapter-11-population-responses-to-stressors" id="toc-chapter-11-population-responses-to-stressors" class="nav-link" data-scroll-target="#chapter-11-population-responses-to-stressors">Chapter 11: Population Responses to Stressors</a></li>
   <li><a href="#chapter-12-dynamics-of-small-and-declining-populations" id="toc-chapter-12-dynamics-of-small-and-declining-populations" class="nav-link" data-scroll-target="#chapter-12-dynamics-of-small-and-declining-populations">Chapter 12: Dynamics of Small and Declining Populations</a></li>
@@ -363,13 +364,13 @@ window.Quarto = {
     Exact binomial test
 
 data:  n_success and n_trial
-number of successes = 17, number of trials = 30, p-value = 0.5847
+number of successes = 25, number of trials = 30, p-value = 0.0003249
 alternative hypothesis: true probability of success is not equal to 0.5
 95 percent confidence interval:
- 0.3742735 0.7453925
+ 0.6527883 0.9435783
 sample estimates:
 probability of success 
-             0.5666667 </code></pre>
+             0.8333333 </code></pre>
 </div>
 </div>
 <p>We can use the same likelihood as in maximum likelihood estimation to make inference using Bayesian estimation. The outcome of Bayesian inference is the Bayesian posterior distribution. Recall from equation 2.6, all we need is some prior information about the model parameters.</p>
@@ -426,7 +427,7 @@ probability of success
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior probability that the probability of breeding success is greater than 0.8</span></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(posterior[probs <span class="sc">&gt;</span> <span class="fl">0.8</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.604971e-05</code></pre>
+<pre><code>[1] 0.8288245</code></pre>
 </div>
 </div>
 <p>As with the maximum likelihood estimation, we provide the uncertainty bounds of the Bayesian estimation as credible intervals. Although the interpretation of the intervals are not the same. A 95% credible interval is the interval that has 95% probability of containing the true value of the parameter. Whereas a 95% confidence interval indicates that 95% of the intervals constructed with repeated sampling will contain the true value.</p>
@@ -434,11 +435,11 @@ probability of success
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># posterior percentiles - central 98% interval</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>probs[<span class="fu">max</span>(<span class="fu">which</span>(<span class="fu">cumsum</span>(posterior) <span class="sc">&lt;</span> <span class="fl">0.025</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.44</code></pre>
+<pre><code>[1] 0.741</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>probs[<span class="fu">max</span>(<span class="fu">which</span>(<span class="fu">cumsum</span>(posterior) <span class="sc">&lt;</span> <span class="fl">0.975</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.692</code></pre>
+<pre><code>[1] 0.924</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cumPost <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(posterior) <span class="sc">/</span> (<span class="fu">length</span>(posterior) <span class="sc">-</span><span class="dv">1</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -674,7 +675,7 @@ probability of success
 </div>
 <p>We saw in the text the two intuitive ways most commonly used to estimate average exponential trend: a) drawing a line through the log(abundance) data over time; b) taking simple averages of the consecutive series of r values. However, we also saw that these methods can give different, and possibly inappropriate, answers because they make fundamentally different assumptions about the processes that cause variation in population growth over time. The first approach assumes that all the variation in the abundances over time comes from observation error (OE). The second assumes that all the variation in the average growth rate arises from process noise (PN). Here we’ll get some hands-on practice with the EGOE and EGPN trend estimators and will analyze both sources of variation at once using a state-space model (EGSS).</p>
 <div style="background-color:beige;">
-<p><strong>Practice:</strong></p>
+<p><strong>Questions:</strong></p>
 <ol type="1">
 <li>With an initial abundance of 50 in year 2020, project abundance for years 2025 and 2027, assuming situations (a) and (b) and then visualize the two projections of population abundnace.</li>
 </ol>
@@ -693,8 +694,8 @@ probability of success
 <p><u>2.</u> Each adult frog has a reproductive value 300 times higher than a pre-juvenile (Fig. 6.7). If you have limited funds for a translocation, which stage should you prioritize to jump-start population growth?</p>
 <p><u>3.</u> Using the loggerhead sea turtle example, explain why increasing hatchling survival alone was insufficient to stop the population decline.</p>
 <p><u>4.</u> Suppose you are tasked with studying a caribou population, and you want to know what the analytical sensitivity is for adult survival. Prior to calculating sensitivity, you estimated the asymptotic population growth rate as 1.053. You add 0.01 to adult survival and calculate the new growth rate as 1.064. What is the analytical sensitivity of adult survival?</p>
-<p><img src="images/lf_28.png" class="img-fluid" width="1000"></p>
-<p><img src="images/lf_30.png" class="img-fluid" width="1000"></p>
+<p><img src="images/lf_28.png" class="img-fluid" width="500"></p>
+<p><img src="images/lf_30.png" class="img-fluid" width="500"></p>
 <p>🌶️Above, you are presented two life cycle diagrams of two bird species. Please answer 10 questions below for each of the two diagrams.</p>
 <div style="background-color:beige;">
 <p><strong>Questions:</strong></p>
@@ -719,14 +720,14 @@ probability of success
 <p><u>3.</u> Draw two graphs showing how per capita mortality rate could vary with population size. If birth rate is constant in both graphs, indicate the carrying capacity, positive population growth and negative or positive density dependence on each graph.</p>
 <p>🌶️ Although we have emphasized that logistic growth is just one special form of negative density dependence, it turns out that wolves reintroduced into the northern rockies exhibit negative density dependence that can be reasonably modeled using logistic growth. Ever since wolves were introduced into Yellowstone and Central Idaho, the USFWS has kept a pretty good tab on total wolf numbers in the US Northern Rockies. For this exercise we will use these data from 1995-2015 (representing the total wolf count in Yellowstone, Central Idaho and NW Montana).</p>
 <p>In this exercise, we directly create an R object as data, and use the stats package in R. We define our model parameters, and set up a storage dataframe to store the population size data.</p>
-<p>We can store data in memory by assigning it to an “object” using the assignment operator &lt;-. For example, the code below would assign the object <span class="math inline">\(wolf_data\)</span> the population size values of 101 - 1881.</p>
+<p>We can store data in memory by assigning it to an “object” using the assignment operator &lt;-. For example, the code below would assign the object wolf_data the population size values of 101 - 1881.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>wolf_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">year =</span> <span class="dv">1995</span><span class="sc">:</span><span class="dv">2015</span>,</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">N    =</span> <span class="fu">c</span>(<span class="dv">101</span>, <span class="dv">152</span>, <span class="dv">213</span>, <span class="dv">275</span>, <span class="dv">322</span>, <span class="dv">437</span>, <span class="dv">563</span>, <span class="dv">663</span>,</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                                 <span class="dv">761</span>, <span class="dv">846</span>, <span class="dv">1020</span>, <span class="dv">1300</span>, <span class="dv">1513</span>, <span class="dv">1655</span>, <span class="dv">1733</span>,</span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="dv">1723</span>, <span class="dv">1804</span>, <span class="dv">1715</span>, <span class="dv">1691</span>, <span class="dv">1787</span>, <span class="dv">1881</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>You can inspect the dataframe <span class="math inline">\(wolfdata\)</span> and find out how many years of data is provided.</p>
+<p>You can inspect the dataframe wolf_data and find out how many years of data is provided.</p>
 <p>After 25 years the wolf population may have reached a relatively constant population size consistent with a carrying capacity (<span class="math inline">\(K\)</span>). Note that this number is probably determined more by human tolerance than by ‘natural’ density dependence factors like food availability, territoriality disease, etc. Still, ‘human tolerance’ carrying capacities are not uncommon, especially for large carnivores.</p>
 <p>You can use the plot() function to visualize how this wolf population changes with time. What are the x and y variables in this plot? Could you change the color, size, and shape of the points?</p>
 <div class="cell" data-layout-align="center">
@@ -970,7 +971,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(n_eaten)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="background-color:beige;">
-<p><strong>Practice:</strong></p>
+<p><strong>Questions:</strong></p>
 <ol type="1">
 <li>By comparing the predation rate and population size, are the changes stabilizing or destabilizing for the fox population?</li>
 <li>Use a function to describe the numerical response curve which changes positively with prey abundance. How does this change affect the predation rate? Find out if the predation rates are stabilizing or destabilizing the fox population.</li>
@@ -978,7 +979,9 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 </ol>
 </div>
 <hr>
-<p>## Chapter 9: Genetic Variation and Fitness</p>
+</section>
+<section id="chapter-9-genetic-variation-and-fitness" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-9-genetic-variation-and-fitness">Chapter 9: Genetic Variation and Fitness</h2>
 <p><u>1.</u> After how many generations of genetic drift in an isolated population does the inbreeding coefficient for a subpopulation relative to the total population reach 0.01 if the effective population size is 50?</p>
 <p><u>2.</u> What is the inbreeding coefficient for a subpopulation relative to the total population of an isolated species experiencing genetic drift after 2 generations if the effective population size is 50?</p>
 <p><u>3.</u> Suppose you are studying a subpopulation of bighorn sheep within a larger metapopulation. You estimate FST of 0.7. a. What does that tell you about genetic variation in the subpopulation? b. You also found that juvenile survival has decreased by 40% in the subpopulation, although you did not find a significant change in the mean population growth rate. What does this suggest about inbreeding depression in the subpopulation?</p>
@@ -1007,7 +1010,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>  <span class="fl">0.5</span>                                             <span class="co"># allele frequency</span></span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span> <span class="sc">*</span> n[<span class="dv">1</span>], <span class="at">prob =</span> p) <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> n[<span class="dv">1</span>])     <span class="co"># allele frequency in the next generation </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.55</code></pre>
+<pre><code>[1] 0.5666667</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1000</span>                                             <span class="co"># repeat sampling 1000 times</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
@@ -1016,14 +1019,13 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span> , <span class="dv">3</span>))</span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span> <span class="sc">:</span> <span class="fu">length</span>(n)) {</span>
-<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(freq[[i]],</span>
-<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">"N = "</span>, i),</span>
-<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Allele frequency"</span>,</span>
-<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">"Number of cases"</span>,</span>
-<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>))</span>
-<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span> <span class="sc">:</span> <span class="fu">length</span>(n)) {</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(freq[[i]],</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">"N = "</span>, i),</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Allele frequency"</span>,</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">"Number of cases"</span>,</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.8</span>))</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1046,7 +1048,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(marmot_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="background-color:beige;">
-<p><strong>Question:</strong></p>
+<p><strong>Questions:</strong></p>
 <p>Calculate the total number of breeders with a population size of 100, and the resulting Nb/N ratio, for a case where breeding sex ratio (Nf / Nm) is: a) 50%; b) 25%; c) 10%. How does a skewed sex ratio affect the Nb/N ratio?</p>
 </div>
 <hr>
@@ -1058,7 +1060,63 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <p><u>3.</u> You are tasked with translocating a population of Glurps from the planet Brahe to restore the Glurp population on the planet Lipperhey where they recently went extinct. What is the first thing that you need to find out before planning the translocation?</p>
 <p><u>4.</u> Based on the study described in Box 10.3 and your knowledge about a zoonotic pathogen (one that can be passed from animals to people) that exhibits density-dependent transmission among wild deer mice, write a hypothesis about where you might expect there to be the greatest risk of pathogen transmission to humans on a fragmented landscape after clearcut logging.</p>
 <p><u>5.</u> Distinguish between demographic rescue and genetic rescue in a small, isolated population of mountain pygmy possums.</p>
-<p>🌶️</p>
+<p>🌶️A metapopulation is defined as a population of populations connected by dispersal, where local units may undergo extinction and recolonization. To manage these systems, we can calculate the contribution metric <strong>(</strong>C<strong>)</strong> for each patch to see if it is a net contributor to the metapopulation (C&gt;1) or a net drain (C&lt;1). Suppose you are monitoring three populations of the Azur skimmer, a dragonfly that required a specific light cues to find breeding pools. You can use the <code>popbio</code> package to calculate the metapopulation growth rate and stable stage distribution.</p>
+<p>Population 1, occurs in a nature reserve. Population 2, occurs in a fragmented forest patch. Population 3 occurs in a solar far. First, we assign known vital rates to each parameter. Then, we calculate self-recruitment <span class="math inline">\(R_i\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Population 1 (Nature reserve)</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fl">0.40</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fl">0.25</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>R1 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> b1 <span class="sc">-</span> d1  </span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Population 2 (Fragmented forest)</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> <span class="fl">0.15</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fl">0.20</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>R2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> b2 <span class="sc">-</span> d2  </span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Population 3 (Solar Farm: ecological trap)</span></span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>b3 <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> <span class="fl">0.50</span></span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>R3 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">+</span> b3 <span class="sc">-</span> d3  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code></code></pre>
+<p>Moving from population j to population i can be represented by <span class="math inline">\(D_{ij}\)</span> below.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>D21 <span class="ot">&lt;-</span> <span class="fl">0.05</span>   <span class="co"># From Pop 1 to 2</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>D31 <span class="ot">&lt;-</span> <span class="fl">0.12</span>   <span class="co"># From Pop 1 to 3 </span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>D12 <span class="ot">&lt;-</span> <span class="fl">0.02</span>   <span class="co"># From Pop 2 to  1</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>D32 <span class="ot">&lt;-</span> <span class="fl">0.08</span>   <span class="co"># From Pop 2 to 3 </span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>D13 <span class="ot">&lt;-</span> <span class="fl">0.00</span>   <span class="co"># No one leaves Pop 3 </span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>D23 <span class="ot">&lt;-</span> <span class="fl">0.00</span>   <span class="co"># No one leaves Pop 3  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The dispersal rates show from population 1, 5% move to Population 2, and 12% are lured into the Pop 3 Trap. From population 2, 2% move to Population 1, and 8% are lured into the Pop 3 Trap. Finally, 0% leave population 3. Using the rates above, we can construct a matrix.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(R1,  D12, D13,</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>              D21, R2,  D23,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>              D31, D32, R3), </span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add names for clarity</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Pop1"</span>, <span class="st">"Pop2"</span>, <span class="st">"Pop3"</span>)</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Pop1"</span>, <span class="st">"Pop2"</span>, <span class="st">"Pop3"</span>)</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a><span class="co"># View the matrix</span></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Source-Sink Metapopulation Matrix (B):"</span>)</span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In a source–sink matrix model, the diagonal elements represent self-recruitment, while the off-diagonals represent the movement of individuals from one population to another. From this matrix, we can find the longterm population growth rate, and the stable stage distribution.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(popbio)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>popbio<span class="sc">::</span><span class="fu">lambda</span>(B)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>ssd <span class="ot">&lt;-</span> <span class="fu">stable.stage</span>(B)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div style="background-color:beige;">
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li>Based on the estimated metapopulation growth rate, is this metapopulation increasing, decreasing or stable?</li>
+<li>Find the longterm proportion of individuals in each patch.</li>
+</ol>
+</div>
 <hr>
 </section>
 <section id="chapter-11-population-responses-to-stressors" class="level2">
@@ -1076,7 +1134,80 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <p><u>1.</u> A population of heath hen experienced a disease outbreak, low egg fertility, and a skewed sex ratio for one decade and eventually went extinct. Which of these processes are examples of environmental, genetic, and demographic stochasticity?</p>
 <p><u>2.</u> You are part of a research group tasked with conducting a population viability analysis (PVA) for an endangered species of sea slug. This species is the only known source for a chemical compound used in a lifesaving drug. The compound cannot be synthesized in the lab and the sea slugs cannot be bred in captivity. Briefly discuss each of the four key considerations that you should make as you develop your PVA (1-3 sentences for each consideration).</p>
 <p><u>3.</u> Contrast a keystone species with a dominant species. Why might a minimum viable population be insufficient for a keystone species like a sea otter?</p>
-<p>🌶️</p>
+<p>🌶️A hypothetical kangaroo population is sampled pre-birth pulse. There are three stages in this population: juveniles, transients, and adults. This population is subject to birth and natural mortality. Through a population viability analysis, we would like to project the population 100 years forward. We can assign value 100 to the two object as below. We also define two objects to store the outputs later on.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. specify simulation paramters ----------------------------------------------</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>years    <span class="ot">&lt;-</span> <span class="dv">100</span>               <span class="co"># to project 100 years forward</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>statsize <span class="ot">&lt;-</span> <span class="fu">numeric</span>(years)    <span class="co"># population size over 100 years</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>statext  <span class="ot">&lt;-</span> <span class="fu">numeric</span>(years)    <span class="co"># extinction probability over 100 years</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>There are three stages in this population, as coded below.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Specify classes in the population -----------------------------------------</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>stage_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"juveniles"</span>, <span class="st">"transients"</span>, <span class="st">"adults"</span>)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>Nstages   <span class="ot">&lt;-</span> <span class="fu">length</span>(stage_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The population vital rates are estimated as below. Survival probabilities are similar for the neewborn and juveniles (sj = sc = 0.6). Survival of the transient individuals is higher (st = 0.7). Survival of adults from natural mortality is 0.5.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Specify demographic parameters --------------------------------------------</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>f  <span class="ot">=</span> <span class="dv">1</span>     </span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>sc <span class="ot">=</span> <span class="fl">0.6</span>   </span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>sj <span class="ot">=</span> <span class="fl">0.6</span>   </span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>st <span class="ot">=</span> <span class="fl">0.7</span></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>sa <span class="ot">=</span> <span class="fl">0.5</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To simulate a population, first, we construct a blank matrix with all zero values. Then, assign the stage names to rows and columns of the matrix.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. create a bland matrix -----------------------------------------------------</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>population <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> years,</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">ncol =</span> Nstages,</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> <span class="dv">0</span>)</span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(population) <span class="ot">&lt;-</span> stage_names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we specify the initial population size to start the projection. We can start from 100 adults in the population. As shown below, the initial population size of the juvenile and transient stages are set to zero.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Specify the initial population size ---------------------------------------</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>population[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span>       <span class="co"># juveniles</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>population[<span class="dv">1</span>,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">0</span>       <span class="co"># transients</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>population[<span class="dv">1</span>,<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">100</span>     <span class="co"># adults</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Fecundity is a rate parameter. We can model stochasticity in the reproduction rates through a random number generator that follows a Poison process with rate <span class="math inline">\(\lambda\)</span> (here is denoted by parameter <span class="math inline">\(f\)</span>). Whereas survival is an outcome of a binomial process with probability <span class="math inline">\(s\)</span>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># projection population from year 1 to 2, i is year 1    </span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rpois</span>(population[i <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">3</span>], f)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Because the population is sampled pre-birth pulse, the number of newborns in the population depends on survival of the new born until sampled as juvenile and the birth rate. How does the sum change if we change <span class="math inline">\(f\)</span> and <span class="math inline">\(sc\)</span>?</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Simulate reproduction -----------------------------------------------------</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>newborns <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">rpois</span>(population[i <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">3</span>], f))  </span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>newborns <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">rbinom</span>(newborns, <span class="dv">1</span>, sc))         </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can simulate the survival as an outcome of a Binomial process with stage-specific probabilities <span class="math inline">\(sj\)</span>, <span class="math inline">\(st\)</span>, and <span class="math inline">\(sa\)</span> shown below. The number of individuals in each stage in time <span class="math inline">\(t+1\)</span> equals the sum of the individuals that survive the previous year.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Simulate survival of each class -------------------------------------------</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="do">## population size next year</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>population[i <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">rbinom</span>(population[i,<span class="dv">1</span>], <span class="dv">1</span>, sj)) </span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>population[i <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">rbinom</span>(population[i,<span class="dv">2</span>], <span class="dv">1</span>, st))</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>population[i <span class="sc">+</span> <span class="dv">1</span>, <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">rbinom</span>(population[i,<span class="dv">3</span>], <span class="dv">1</span>, sa))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can account for the transition between life stages from one year to another as below. All survived newborns will be juveniles (<span class="math inline">\(population[i+1, 1]\)</span>). All survived juveniles will become transient individuals (<span class="math inline">\(population[i+1, 2]\)</span>). Finally, all survived transients become adults population[i+1, 3]. The number of adults will be the sum of adults in the previous year, and the transients that became adults this year.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. calculate transitions between stages --------------------------------------</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>population[i<span class="sc">+</span><span class="dv">1</span>, <span class="dv">3</span>] <span class="ot">&lt;-</span> population[i<span class="sc">+</span><span class="dv">1</span>, <span class="dv">3</span>] <span class="sc">+</span> population[i<span class="sc">+</span><span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>population[i<span class="sc">+</span><span class="dv">1</span>, <span class="dv">2</span>] <span class="ot">&lt;-</span> population[i<span class="sc">+</span><span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>population[i<span class="sc">+</span><span class="dv">1</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> newborns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We generated one sample and now we can put all the steps together and project the population 100 years forward.</p>
+<div style="background-color:beige;">
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li><p>Simulate population size per year for 100 years.</p></li>
+<li><p>How do changes in fecundity affect the number of individuals in the second year?</p></li>
+<li><p>How long does it take for this population to go extinct?</p></li>
+<li><p>What is the population size in year 50?</p></li>
+<li><p>What is the population extinction probability in year 50?</p></li>
+</ol>
+</div>
 <hr>
 </section>
 <section id="chapter-13-sustainable-harvest" class="level2">
@@ -1089,7 +1220,15 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <p><u>3.</u> Intense trophy hunting on bighorn sheep removes the fastest-growing rams with the largest horns.</p>
 <p>a. What is the likely evolutionary response?</p>
 <p>b. Why is this called a “debt”?</p>
-<p>🌶️</p>
+<p>🌶️ For the structured mule deer population with information below, draw a two-sex life cycle diagram and write out the matrix and projection model with harvest. We can tell sexes of adults only. Adult females and males are harvested at different rates. Vital rates measured in absence of harvest:</p>
+<ul>
+<li><p>birth rate, b</p></li>
+<li><p>survival of juvenile to adult, $s_j$</p></li>
+<li><p>survival of adult females, $s_f$</p></li>
+<li><p>survival of adult males, $s_m$</p></li>
+<li><p>survival of babies until seen as juveniles, $s_0$</p></li>
+<li><p>proportion of those entering adult class that are males, p</p></li>
+</ul>
 
 
 </section>

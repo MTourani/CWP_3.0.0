@@ -548,7 +548,7 @@ sg_data$abundance[1] * (lambda_g ^ length(year))
 We saw in the text the two intuitive ways most commonly used to estimate average exponential trend: a) drawing a line through the log(abundance) data over time; b) taking simple averages of the consecutive series of r values. However, we also saw that these methods can give different, and possibly inappropriate, answers because they make fundamentally different assumptions about the processes that cause variation in population growth over time. The first approach assumes that all the variation in the abundances over time comes from observation error (OE). The second assumes that all the variation in the average growth rate arises from process noise (PN). Here we’ll get some hands-on practice with the EGOE and EGPN trend estimators and will analyze both sources of variation at once using a state-space model (EGSS).
 
 ::: {style="background-color:beige;"}
-**Practice:**
+**Questions:**
 
 1.  With an initial abundance of 50 in year 2020, project abundance for years 2025 and 2027, assuming situations (a) and (b) and then visualize the two projections of population abundnace.
 
@@ -572,9 +572,9 @@ We saw in the text the two intuitive ways most commonly used to estimate average
 
 [4.]{.underline} Suppose you are tasked with studying a caribou population, and you want to know what the analytical sensitivity is for adult survival. Prior to calculating sensitivity, you estimated the asymptotic population growth rate as 1.053. You add 0.01 to adult survival and calculate the new growth rate as 1.064. What is the analytical sensitivity of adult survival?
 
-![](images/lf_28.png){width="1000"}
+![](images/lf_28.png){width="500"}
 
-![](images/lf_30.png){width="1000"}
+![](images/lf_30.png){width="500"}
 
 🌶️Above, you are presented two life cycle diagrams of two bird species. Please answer 10 questions below for each of the two diagrams.
 
@@ -614,7 +614,7 @@ We saw in the text the two intuitive ways most commonly used to estimate average
 
 In this exercise, we directly create an R object as data, and use the stats package in R. We define our model parameters, and set up a storage dataframe to store the population size data.
 
-We can store data in memory by assigning it to an “object” using the assignment operator \<-. For example, the code below would assign the object $wolf_data$ the population size values of 101 - 1881.
+We can store data in memory by assigning it to an “object” using the assignment operator \<-. For example, the code below would assign the object wolf_data the population size values of 101 - 1881.
 
 ```{r, out.width = "400px", fig.align = "center"}
 
@@ -625,7 +625,7 @@ wolf_data <- data.frame(year = 1995:2015,
 
 ```
 
-You can inspect the dataframe $wolfdata$ and find out how many years of data is provided.
+You can inspect the dataframe wolf_data and find out how many years of data is provided.
 
 After 25 years the wolf population may have reached a relatively constant population size consistent with a carrying capacity ($K$). Note that this number is probably determined more by human tolerance than by ‘natural’ density dependence factors like food availability, territoriality disease, etc. Still, ‘human tolerance’ carrying capacities are not uncommon, especially for large carnivores.
 
@@ -875,7 +875,7 @@ print(n_eaten)
 ```
 
 ::: {style="background-color:beige;"}
-**Practice:**
+**Questions:**
 
 1.  By comparing the predation rate and population size, are the changes stabilizing or destabilizing for the fox population?
 2.  Use a function to describe the numerical response curve which changes positively with prey abundance. How does this change affect the predation rate? Find out if the predation rates are stabilizing or destabilizing the fox population.
@@ -884,7 +884,7 @@ print(n_eaten)
 
 ------------------------------------------------------------------------
 
-\## Chapter 9: Genetic Variation and Fitness
+## Chapter 9: Genetic Variation and Fitness
 
 [1.]{.underline} After how many generations of genetic drift in an isolated population does the inbreeding coefficient for a subpopulation relative to the total population reach 0.01 if the effective population size is 50?
 
@@ -932,7 +932,6 @@ for (i in 1 : length(n)) {
 }
 
 par(mfrow = c(1 , 3))
-
 for (i in 1 : length(n)) {
   hist(freq[[i]],
        main = paste0("N = ", i),
@@ -961,7 +960,7 @@ print(marmot_data)
 ```
 
 ::: {style="background-color:beige;"}
-**Question:**
+**Questions:**
 
 Calculate the total number of breeders with a population size of 100, and the resulting Nb/N ratio, for a case where breeding sex ratio (Nf / Nm) is: a) 50%; b) 25%; c) 10%. How does a skewed sex ratio affect the Nb/N ratio?
 :::
@@ -980,7 +979,76 @@ Calculate the total number of breeders with a population size of 100, and the re
 
 [5.]{.underline} Distinguish between demographic rescue and genetic rescue in a small, isolated population of mountain pygmy possums.
 
-🌶️
+🌶️A metapopulation is defined as a population of populations connected by dispersal, where local units may undergo extinction and recolonization. To manage these systems, we can calculate the contribution metric **(**C**)** for each patch to see if it is a net contributor to the metapopulation (C\>1) or a net drain (C\<1). Suppose you are monitoring three populations of the Azur skimmer, a dragonfly that required a specific light cues to find breeding pools. You can use the `popbio` package to calculate the metapopulation growth rate and stable stage distribution.
+
+Population 1, occurs in a nature reserve. Population 2, occurs in a fragmented forest patch. Population 3 occurs in a solar far. First, we assign known vital rates to each parameter. Then, we calculate self-recruitment $R_i$.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center"}
+# Population 1 (Nature reserve)
+b1 <- 0.40
+d1 <- 0.25
+
+R1 <- 1 + b1 - d1  
+
+# Population 2 (Fragmented forest)
+b2 <- 0.15
+d2 <- 0.20
+R2 <- 1 + b2 - d2  
+
+# Population 3 (Solar Farm: ecological trap)
+b3 <- 0.05
+d3 <- 0.50
+R3 <- 1 + b3 - d3  
+
+```
+
+```         
+```
+
+Moving from population j to population i can be represented by $D_{ij}$ below.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center"}
+D21 <- 0.05   # From Pop 1 to 2
+D31 <- 0.12   # From Pop 1 to 3 
+D12 <- 0.02   # From Pop 2 to  1
+D32 <- 0.08   # From Pop 2 to 3 
+D13 <- 0.00   # No one leaves Pop 3 
+D23 <- 0.00   # No one leaves Pop 3  
+```
+
+The dispersal rates show from population 1, 5% move to Population 2, and 12% are lured into the Pop 3 Trap. From population 2, 2% move to Population 1, and 8% are lured into the Pop 3 Trap. Finally, 0% leave population 3. Using the rates above, we can construct a matrix.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center"}
+B <- matrix(c(R1,  D12, D13,
+              D21, R2,  D23,
+              D31, D32, R3), 
+            nrow = 3, ncol = 3, byrow = TRUE)
+
+# Add names for clarity
+colnames(B) <- c("Pop1", "Pop2", "Pop3")
+rownames(B) <- c("Pop1", "Pop2", "Pop3")
+
+# View the matrix
+print("Source-Sink Metapopulation Matrix (B):")
+print(B)
+
+```
+
+In a source–sink matrix model, the diagonal elements represent self-recruitment, while the off-diagonals represent the movement of individuals from one population to another. From this matrix, we can find the longterm population growth rate, and the stable stage distribution.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center"}
+library(popbio)
+popbio::lambda(B)
+ssd <- stable.stage(B)
+
+```
+
+::: {style="background-color:beige;"}
+**Questions:**
+
+1.  Based on the estimated metapopulation growth rate, is this metapopulation increasing, decreasing or stable?
+2.  Find the longterm proportion of individuals in each patch.
+:::
 
 ------------------------------------------------------------------------
 
@@ -1008,7 +1076,108 @@ b\. What is the consequence for survival?
 
 [3.]{.underline} Contrast a keystone species with a dominant species. Why might a minimum viable population be insufficient for a keystone species like a sea otter?
 
-🌶️
+🌶️A hypothetical kangaroo population is sampled pre-birth pulse. There are three stages in this population: juveniles, transients, and adults. This population is subject to birth and natural mortality. Through a population viability analysis, we would like to project the population 100 years forward. We can assign value 100 to the two object as below. We also define two objects to store the outputs later on.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 1. specify simulation paramters ----------------------------------------------
+years    <- 100               # to project 100 years forward
+statsize <- numeric(years)    # population size over 100 years
+statext  <- numeric(years)    # extinction probability over 100 years
+
+```
+
+There are three stages in this population, as coded below.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 2. Specify classes in the population -----------------------------------------
+stage_names <- c("juveniles", "transients", "adults")
+Nstages   <- length(stage_names)
+```
+
+The population vital rates are estimated as below. Survival probabilities are similar for the neewborn and juveniles (sj = sc = 0.6). Survival of the transient individuals is higher (st = 0.7). Survival of adults from natural mortality is 0.5.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 3. Specify demographic parameters --------------------------------------------
+f  = 1     
+sc = 0.6   
+sj = 0.6   
+st = 0.7
+sa = 0.5 
+
+```
+
+To simulate a population, first, we construct a blank matrix with all zero values. Then, assign the stage names to rows and columns of the matrix.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 4. create a bland matrix -----------------------------------------------------
+population <- matrix(nrow = years,
+                     ncol = Nstages,
+                     data = 0)
+colnames(population) <- stage_names
+  
+```
+
+Next, we specify the initial population size to start the projection. We can start from 100 adults in the population. As shown below, the initial population size of the juvenile and transient stages are set to zero.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 5. Specify the initial population size ---------------------------------------
+population[1,1] <- 0       # juveniles
+population[1,2] <- 0       # transients
+population[1,3] <- 100     # adults
+
+```
+
+Fecundity is a rate parameter. We can model stochasticity in the reproduction rates through a random number generator that follows a Poison process with rate $\lambda$ (here is denoted by parameter $f$). Whereas survival is an outcome of a binomial process with probability $s$.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+i <- 1   # projection population from year 1 to 2, i is year 1    
+rpois(population[i + 1, 3], f)  
+
+```
+
+Because the population is sampled pre-birth pulse, the number of newborns in the population depends on survival of the new born until sampled as juvenile and the birth rate. How does the sum change if we change $f$ and $sc$?
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 6. Simulate reproduction -----------------------------------------------------
+newborns <- sum(rpois(population[i + 1, 3], f))  
+newborns <- sum(rbinom(newborns, 1, sc))         
+
+```
+
+We can simulate the survival as an outcome of a Binomial process with stage-specific probabilities $sj$, $st$, and $sa$ shown below. The number of individuals in each stage in time $t+1$ equals the sum of the individuals that survive the previous year.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 7. Simulate survival of each class -------------------------------------------
+## population size next year
+population[i + 1, 1] <- sum(rbinom(population[i,1], 1, sj)) 
+population[i + 1, 2] <- sum(rbinom(population[i,2], 1, st))
+population[i + 1, 3] <- sum(rbinom(population[i,3], 1, sa))
+```
+
+We can account for the transition between life stages from one year to another as below. All survived newborns will be juveniles ($population[i+1, 1]$). All survived juveniles will become transient individuals ($population[i+1, 2]$). Finally, all survived transients become adults population\[i+1, 3\]. The number of adults will be the sum of adults in the previous year, and the transients that became adults this year.
+
+```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
+# 8. calculate transitions between stages --------------------------------------
+population[i+1, 3] <- population[i+1, 3] + population[i+1, 2]
+population[i+1, 2] <- population[i+1, 1]
+population[i+1, 1] <- newborns
+```
+
+We generated one sample and now we can put all the steps together and project the population 100 years forward.
+
+::: {style="background-color:beige;"}
+**Questions:**
+
+(1) Simulate population size per year for 100 years.
+
+(2) How do changes in fecundity affect the number of individuals in the second year?
+
+(3) How long does it take for this population to go extinct?
+
+(4) What is the population size in year 50?
+
+(5) What is the population extinction probability in year 50?
+:::
 
 ------------------------------------------------------------------------
 
@@ -1030,4 +1199,16 @@ a\. What is the likely evolutionary response?
 
 b\. Why is this called a "debt"?
 
-🌶️
+🌶️ For the structured mule deer population with information below, draw a two-sex life cycle diagram and write out the matrix and projection model with harvest. We can tell sexes of adults only. Adult females and males are harvested at different rates. Vital rates measured in absence of harvest:
+
+-   birth rate, b
+
+-   survival of juvenile to adult, \$s_j\$
+
+-   survival of adult females, \$s_f\$
+
+-   survival of adult males, \$s_m\$
+
+-   survival of babies until seen as juveniles, \$s_0\$
+
+-   proportion of those entering adult class that are males, p
