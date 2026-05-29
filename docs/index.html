@@ -845,7 +845,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>  <span class="fl">0.5</span>                                             <span class="co"># allele frequency</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span> <span class="sc">*</span> n[<span class="dv">1</span>], <span class="at">prob =</span> p) <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> n[<span class="dv">1</span>])     <span class="co"># allele frequency in the next generation </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4166667</code></pre>
+<pre><code>[1] 0.5166667</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1000</span>                                             <span class="co"># repeat sampling 1000 times</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
