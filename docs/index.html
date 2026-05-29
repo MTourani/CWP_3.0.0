@@ -277,7 +277,7 @@ window.Quarto = {
 <p><u>2.</u> A population of beetles has two alleles for color. The dominant allele is $A$ and the recessive allele is $a$. In a sample of 1,000 beetles, 160 display the recessive phenotype. Assuming the population is in Hardy–Weinberg equilibrium, what are the frequencies of the $A$ and $a$ alleles, and what proportion of the population is expected to be heterozygous? (Show your work)</p>
 <p><u>3.</u> Explain why mtDNA is often more useful than nuclear DNA for species identification from small or degraded samples like a single hair found in the woods.</p>
 <p><u>4.</u> Looking at the example of forensic application using microsatellite DNA in Figure 3.2, which deer, a, b, or c, did the antler tissue sample came from?</p>
-<p>🌶️ Many populations of Pacific salmon (Oncorhynchus spp.) from southern California to northern Washington are listed for protection under the US Endangered Species Act 1973 (ESA). Here we use a <a href="https://onlinelibrary.wiley.com/doi/10.1111/eva.13647">published</a> dataset on Chilkat River Chinook salmon (O. tshawytscha) in Southeast Alaska to estimate abundance using close-kin mark-recapture and parentage analysis. This data set includes genetic data on sampled offspring and their assigned parent. First, let’s explore the data. From 682 offspring, 220 were assigned to at least one parent. There are 147 unique parent IDs.</p>
+<p>🌶️ Many populations of Pacific salmon (Oncorhynchus spp.) from southern California to northern Washington are listed for protection under the US Endangered Species Act 1973 (ESA). Here we use a <a href="https://onlinelibrary.wiley.com/doi/10.1111/eva.13647">published</a> dataset on Chilkat River Chinook salmon (O. tshawytscha) in Southeast Alaska to estimate abundance using mark-recapture. This data set includes genetic data on sampled offspring and their assigned parent. First, let’s explore the data. From 682 offspring, 220 were assigned to at least one parent. There are 147 unique parent IDs.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>salmon <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/swrosenbaum/tGMR_simulations/main/Data/ParentPair.csv"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -413,8 +413,8 @@ window.Quarto = {
 <div style="background-color:beige;">
 <p><strong>🔥Question:</strong></p>
 <ol type="1">
-<li><p>Type in the Lincoln-Peterson estimator and report the estimated abundance of the first example population?</p></li>
-<li><p>Calculate the variance of the estimated abundance in R and report the variance.</p></li>
+<li>Type in the Lincoln-Peterson estimator and report the estimated abundance of the first example population?</li>
+<li>Calculate the variance of the estimated abundance in R and report the variance.</li>
 </ol>
 </div>
 <hr>
@@ -445,17 +445,18 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="dv">2012</span><span class="sc">:</span><span class="dv">2021</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>abundance <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">52</span>, <span class="dv">43</span>, <span class="dv">90</span>, <span class="dv">125</span>, <span class="dv">72</span>, <span class="dv">128</span>, <span class="dv">97</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">65</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>sg_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">length</span>(year), <span class="at">ncol =</span> <span class="dv">3</span>))</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sg_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"abundance"</span>, <span class="st">"lambda_y"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>sg_data<span class="sc">$</span>year <span class="ot">&lt;-</span> year</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>sg_data<span class="sc">$</span>abundance <span class="ot">&lt;-</span> abundance</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sg_data<span class="sc">$</span>year)) {</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  sg_data<span class="sc">$</span>lambda_y[i] <span class="ot">&lt;-</span> sg_data<span class="sc">$</span>abundance[i <span class="sc">+</span> <span class="dv">1</span>] <span class="sc">/</span> sg_data<span class="sc">$</span>abundance[i]</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sg_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>sg_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">length</span>(year),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">ncol =</span> <span class="dv">3</span>))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(sg_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"abundance"</span>, <span class="st">"lambda_y"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>sg_data<span class="sc">$</span>year <span class="ot">&lt;-</span> year</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>sg_data<span class="sc">$</span>abundance <span class="ot">&lt;-</span> abundance</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(sg_data<span class="sc">$</span>year)) {</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  sg_data<span class="sc">$</span>lambda_y[i] <span class="ot">&lt;-</span> sg_data<span class="sc">$</span>abundance[i <span class="sc">+</span> <span class="dv">1</span>] <span class="sc">/</span> sg_data<span class="sc">$</span>abundance[i]</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sg_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   year abundance  lambda_y
 1  2012        52 0.8269231
@@ -824,7 +825,7 @@ F-statistic: 62.09 on 1 and 18 DF,  p-value: 3.039e-07</code></pre>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span>  <span class="fl">0.5</span>                                             <span class="co"># allele frequency</span></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> <span class="dv">2</span> <span class="sc">*</span> n[<span class="dv">1</span>], <span class="at">prob =</span> p) <span class="sc">/</span> (<span class="dv">2</span> <span class="sc">*</span> n[<span class="dv">1</span>])     <span class="co"># allele frequency in the next generation </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4333333</code></pre>
+<pre><code>[1] 0.5666667</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1000</span>                                             <span class="co"># repeat sampling 1000 times</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>freq <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>

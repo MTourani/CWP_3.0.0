@@ -85,7 +85,7 @@ In this context, conservation scientists and policy makers often face a 'burden 
 
 [4.]{.underline} Looking at the example of forensic application using microsatellite DNA in Figure 3.2, which deer, a, b, or c, did the antler tissue sample came from?
 
-🌶️ Many populations of Pacific salmon (Oncorhynchus spp.) from southern California to northern Washington are listed for protection under the US Endangered Species Act 1973 (ESA). Here we use a [published](https://onlinelibrary.wiley.com/doi/10.1111/eva.13647) dataset on Chilkat River Chinook salmon (O. tshawytscha) in Southeast Alaska to estimate abundance using close-kin mark-recapture and parentage analysis. This data set includes genetic data on sampled offspring and their assigned parent. First, let's explore the data. From 682 offspring, 220 were assigned to at least one parent. There are 147 unique parent IDs.
+🌶️ Many populations of Pacific salmon (Oncorhynchus spp.) from southern California to northern Washington are listed for protection under the US Endangered Species Act 1973 (ESA). Here we use a [published](https://onlinelibrary.wiley.com/doi/10.1111/eva.13647) dataset on Chilkat River Chinook salmon (O. tshawytscha) in Southeast Alaska to estimate abundance using mark-recapture. This data set includes genetic data on sampled offspring and their assigned parent. First, let's explore the data. From 682 offspring, 220 were assigned to at least one parent. There are 147 unique parent IDs.
 
 ```{r, results = "hide", out.width = "600px", fig.align = "center", message = FALSE, warning = FALSE}
 
@@ -273,9 +273,8 @@ uci
 ::: {style="background-color:beige;"}
 **🔥Question:**
 
-(1) Type in the Lincoln-Peterson estimator and report the estimated abundance of the first example population?
-
-(2) Calculate the variance of the estimated abundance in R and report the variance.
+1.  Type in the Lincoln-Peterson estimator and report the estimated abundance of the first example population?
+2.  Calculate the variance of the estimated abundance in R and report the variance.
 :::
 
 ------------------------------------------------------------------------
@@ -320,7 +319,8 @@ If managers have monitored the sage grouse population over 10 years, we can use 
 year <- 2012:2021
 abundance <- c(52, 43, 90, 125, 72, 128, 97, 50, 50, 65)
 
-sg_data <- data.frame(matrix(nrow = length(year), ncol = 3))
+sg_data <- data.frame(matrix(nrow = length(year),
+                             ncol = 3))
 colnames(sg_data) <- c("year", "abundance", "lambda_y")
 
 sg_data$year <- year
